@@ -52,8 +52,6 @@
                 file="../Processing/SampleRateConvert.h"/>
         </GROUP>
         <GROUP id="{C8CAB2C0-92FC-E652-7850-38F13BA30C1A}" name="SoundFile">
-          <FILE id="iOkyjy" name="&#181;Law.c" compile="0" resource="0" file="../SoundFile/&#181;Law.c"/>
-          <FILE id="u8S0Qf" name="&#181;Law.h" compile="0" resource="0" file="../SoundFile/&#181;Law.h"/>
           <FILE id="z82HBR" name="ADPCM.c" compile="0" resource="0" file="../SoundFile/ADPCM.c"/>
           <FILE id="xk8JdZ" name="ADPCM.h" compile="0" resource="0" file="../SoundFile/ADPCM.h"/>
           <FILE id="WfJf9j" name="ADPCMDVI.c" compile="0" resource="0" file="../SoundFile/ADPCMDVI.c"/>
