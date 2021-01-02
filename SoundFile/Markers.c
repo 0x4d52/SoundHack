@@ -1,6 +1,6 @@
 /*
- *	SoundHackª
- *	Copyright ©1993 Tom Erbe - Mills College
+ *	SoundHackÂª
+ *	Copyright Â©1993 Tom Erbe - Mills College
  *
  *	Markers.c - a way of dealing with markers, loops, high and low notes and all the
  *	other sampler related info. This will include functions to read and write this 

@@ -1,6 +1,6 @@
 /* 
  *	SoundHack- soon to be many things to many people
- *	Copyright ©1994 Tom Erbe - California Institute of the Arts
+ *	Copyright Â©1994 Tom Erbe - California Institute of the Arts
  *
  *	SoundHack.c - starting point, toolbox initialization, event manager.
  */
@@ -495,7 +495,7 @@ void	HandleNullEvent(void)
 			if(GetPlayState())
 			{
 				UpdatePlay();
-				StringAppend("\pplay ¥ ", gPlayInfo.file->sfSpec.name, tmpStr);
+				StringAppend("\pplay Â¥ ", gPlayInfo.file->sfSpec.name, tmpStr);
 				UpdateProcessWindow("\p", "\p", tmpStr, -1.0);
 			}
 			else

@@ -103,7 +103,7 @@ short	CreateSoundFile(SoundInfoPtr *mySI, short dialog)
 			break;
 		case SF_FORMAT_8_MULAW:
 			(*mySI)->frameSize = 1;
-			StringCopy("\pCCITT G711 µLaw",(*mySI)->compName);
+			StringCopy("\pCCITT G711 ÂµLaw",(*mySI)->compName);
 			break;
 		case SF_FORMAT_8_ALAW:
 			(*mySI)->frameSize = 1;

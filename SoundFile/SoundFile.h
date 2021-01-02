@@ -643,7 +643,7 @@ typedef struct ScaleType
 	              			//      negative = reduction (1).
 	enum ScaleNames HType;  // Type of horizontal axis tick mark unit (0).          char    HString[34];   
 							// Horizontal axis tick units string:
-	         				//      µsec,msec,sec,samples ("sec").
+	         				//      Âµsec,msec,sec,samples ("sec").
 } ScaleType;
 
 typedef struct

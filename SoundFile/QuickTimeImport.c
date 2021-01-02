@@ -2,9 +2,9 @@
 	Sample code that demonstrates using the Movie Data Exhange import component
 	to read a music track from an Apple CD-300 CD-ROM drive.
 
-	9-02-1993 ¥ By Brigham Stevens
+	9-02-1993 Â¥ By Brigham Stevens
 
-	Copyright © 1993 Apple Computer, Inc.  All rights reserved
+	Copyright Â© 1993 Apple Computer, Inc.  All rights reserved
 	
 	Written in THINK C as part of QTShrimpy project, a giant application that does
 	lots of things with QuickTime.

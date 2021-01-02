@@ -193,7 +193,7 @@ HandleMutateDialogEvent(short itemHit)
 			}
 			break;
 		case M_FUNC_BUTTON:
-			HandleDrawFunctionDialog(1.0, 0.0, 1.0, "\p½:", inLength, FALSE);
+			HandleDrawFunctionDialog(1.0, 0.0, 1.0, "\pÂ½:", inLength, FALSE);
 			break;
 		case M_BPERSI_FIELD:
 			GetDialogItem(gMutateDialog, M_BPERSI_FIELD, &itemType, &itemHandle, &itemRect);

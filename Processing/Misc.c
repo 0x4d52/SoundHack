@@ -1,6 +1,6 @@
 /*
- *	SoundHackª
- *	Copyright ©1994 Tom Erbe
+ *	SoundHackÂª
+ *	Copyright Â©1994 Tom Erbe
  *
  *  SANE MUST BE REMOVED TO DO ANYTHING ON THE POWER PC!!!!!!
  *
