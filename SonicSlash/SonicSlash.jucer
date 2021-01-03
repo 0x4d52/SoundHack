@@ -1,9 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="V5WNel" name="SonicSlash" projectType="guiapp" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" version="0.0.1">
+              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" version="0.0.1"
+              headerPath="../../Source">
   <MAINGROUP id="iraBm6" name="SonicSlash">
     <GROUP id="{29970870-4461-FD5E-2322-FC7237A058EB}" name="Source">
+      <FILE id="LRMOYh" name="sonicslash_Convolve.cpp" compile="1" resource="0"
+            file="Source/sonicslash_Convolve.cpp"/>
+      <FILE id="AP58YZ" name="sonicslash_Convolve.h" compile="0" resource="0"
+            file="Source/sonicslash_Convolve.h"/>
+      <FILE id="YSNhxy" name="sonicslash_SoundFile.cpp" compile="1" resource="0"
+            file="Source/sonicslash_SoundFile.cpp"/>
+      <FILE id="XgFJkF" name="sonicslash_SoundFile.h" compile="0" resource="0"
+            file="Source/sonicslash_SoundFile.h"/>
+      <FILE id="Tjjl3o" name="sonicslash_common.h" compile="0" resource="0"
+            file="Source/sonicslash_common.h"/>
+      <GROUP id="{80242920-45FD-41ED-A0DD-BDC12769C5D6}" name="Legacy">
+        <GROUP id="{ECCC692E-3CDA-0703-EB14-6EB472AFEBED}" name="Math">
+          <FILE id="RswBGl" name="FFT.cpp" compile="1" resource="0" file="../Math/FFT.cpp"/>
+          <FILE id="hpx1xQ" name="FFT.h" compile="0" resource="0" file="../Math/FFT.h"/>
+          <FILE id="AcGkLr" name="Hypot.c" compile="0" resource="0" file="../Math/Hypot.c"/>
+          <FILE id="X4eF6Z" name="Hypot.h" compile="0" resource="0" file="../Math/Hypot.h"/>
+          <FILE id="tkFwKv" name="IEEE80.c" compile="0" resource="0" file="../Math/IEEE80.c"/>
+          <FILE id="IBd0uG" name="IEEE80.h" compile="0" resource="0" file="../Math/IEEE80.h"/>
+          <FILE id="HmEX4n" name="PhaseVocoderRoutines.cpp" compile="1" resource="0"
+                file="../Math/PhaseVocoderRoutines.cpp"/>
+          <FILE id="ekMfLj" name="PhaseVocoderRoutines.h" compile="0" resource="0"
+                file="../Math/PhaseVocoderRoutines.h"/>
+          <FILE id="L22amI" name="Windows.cpp" compile="1" resource="0" file="../Math/Windows.cpp"/>
+          <FILE id="fEDA5A" name="Windows.h" compile="0" resource="0" file="../Math/Windows.h"/>
+        </GROUP>
+        <GROUP id="{2DC2D988-9F65-29EB-8DF8-430A94370658}" name="Processing">
+          <FILE id="XjgODp" name="Analysis.c" compile="0" resource="0" file="../Processing/Analysis.c"/>
+          <FILE id="sFOEiD" name="Analysis.h" compile="0" resource="0" file="../Processing/Analysis.h"/>
+          <FILE id="i9B8UQ" name="Binaural.c" compile="0" resource="0" file="../Processing/Binaural.c"/>
+          <FILE id="ZmBcxZ" name="Binaural.h" compile="0" resource="0" file="../Processing/Binaural.h"/>
+          <FILE id="wf3lgU" name="Convolve.cpp" compile="0" resource="0" file="../Processing/Convolve.cpp"/>
+          <FILE id="n2DA79" name="Convolve.h" compile="0" resource="0" file="../Processing/Convolve.h"/>
+          <FILE id="aOaoJE" name="CopySoundFile.c" compile="0" resource="0" file="../Processing/CopySoundFile.c"/>
+          <FILE id="fVugoS" name="CopySoundFile.h" compile="0" resource="0" file="../Processing/CopySoundFile.h"/>
+          <FILE id="Vw4qqp" name="Dynamics.c" compile="0" resource="0" file="../Processing/Dynamics.c"/>
+          <FILE id="PWAkMe" name="Dynamics.h" compile="0" resource="0" file="../Processing/Dynamics.h"/>
+          <FILE id="KKYj6K" name="Extract.c" compile="0" resource="0" file="../Processing/Extract.c"/>
+          <FILE id="Lrx96W" name="Extract.h" compile="0" resource="0" file="../Processing/Extract.h"/>
+          <FILE id="pANCkO" name="Gain.c" compile="0" resource="0" file="../Processing/Gain.c"/>
+          <FILE id="YDnM8M" name="Gain.h" compile="0" resource="0" file="../Processing/Gain.h"/>
+          <FILE id="EIMWla" name="ImpulsesA.h" compile="0" resource="0" file="../Processing/ImpulsesA.h"/>
+          <FILE id="X6IumT" name="ImpulsesB.h" compile="0" resource="0" file="../Processing/ImpulsesB.h"/>
+          <FILE id="uuTmrx" name="ImpulsesC.h" compile="0" resource="0" file="../Processing/ImpulsesC.h"/>
+          <FILE id="GDlpgW" name="ImpulsesD.h" compile="0" resource="0" file="../Processing/ImpulsesD.h"/>
+          <FILE id="nM9vZe" name="Misc.c" compile="0" resource="0" file="../Processing/Misc.c"/>
+          <FILE id="wVXYAt" name="Misc.h" compile="0" resource="0" file="../Processing/Misc.h"/>
+          <FILE id="s7L8MV" name="Mutate.c" compile="0" resource="0" file="../Processing/Mutate.c"/>
+          <FILE id="ZFlXR2" name="Mutate.h" compile="0" resource="0" file="../Processing/Mutate.h"/>
+          <FILE id="K2jeBH" name="Normalization.c" compile="0" resource="0" file="../Processing/Normalization.c"/>
+          <FILE id="o300o6" name="Normalization.h" compile="0" resource="0" file="../Processing/Normalization.h"/>
+          <FILE id="yGidtL" name="PhaseVocoder.cpp" compile="0" resource="0"
+                file="../Processing/PhaseVocoder.cpp"/>
+          <FILE id="tdIyNu" name="PhaseVocoder.h" compile="0" resource="0" file="../Processing/PhaseVocoder.h"/>
+          <FILE id="QUoe6o" name="RingModulate.c" compile="0" resource="0" file="../Processing/RingModulate.c"/>
+          <FILE id="UkTZo3" name="RingModulate.h" compile="0" resource="0" file="../Processing/RingModulate.h"/>
+          <FILE id="Wtklcd" name="SampleRateConvert.c" compile="0" resource="0"
+                file="../Processing/SampleRateConvert.c"/>
+          <FILE id="WzBbWX" name="SampleRateConvert.h" compile="0" resource="0"
+                file="../Processing/SampleRateConvert.h"/>
+        </GROUP>
+        <GROUP id="{C8CAB2C0-92FC-E652-7850-38F13BA30C1A}" name="SoundFile">
+          <FILE id="z82HBR" name="ADPCM.c" compile="0" resource="0" file="../SoundFile/ADPCM.c"/>
+          <FILE id="xk8JdZ" name="ADPCM.h" compile="0" resource="0" file="../SoundFile/ADPCM.h"/>
+          <FILE id="WfJf9j" name="ADPCMDVI.c" compile="0" resource="0" file="../SoundFile/ADPCMDVI.c"/>
+          <FILE id="fYmv7i" name="ADPCMDVI.h" compile="0" resource="0" file="../SoundFile/ADPCMDVI.h"/>
+          <FILE id="UUkQyG" name="ADPCMIMA.c" compile="0" resource="0" file="../SoundFile/ADPCMIMA.c"/>
+          <FILE id="tddM2m" name="ADPCMIMA.h" compile="0" resource="0" file="../SoundFile/ADPCMIMA.h"/>
+          <FILE id="pYvKkq" name="AIFFPlay.c" compile="0" resource="0" file="../SoundFile/AIFFPlay.c"/>
+          <FILE id="mdVsKu" name="AIFFPlay.h" compile="0" resource="0" file="../SoundFile/AIFFPlay.h"/>
+          <FILE id="H6KT7h" name="ALaw.c" compile="0" resource="0" file="../SoundFile/ALaw.c"/>
+          <FILE id="cSjfcj" name="ALaw.h" compile="0" resource="0" file="../SoundFile/ALaw.h"/>
+          <FILE id="Uwzcu8" name="AppleCompression.c" compile="0" resource="0"
+                file="../SoundFile/AppleCompression.c"/>
+          <FILE id="Jb74Rt" name="AppleCompression.h" compile="0" resource="0"
+                file="../SoundFile/AppleCompression.h"/>
+          <FILE id="zGfiaC" name="AtomInfo.h" compile="0" resource="0" file="../SoundFile/AtomInfo.h"/>
+          <FILE id="g5HMd9" name="ByteSwap.c" compile="0" resource="0" file="../SoundFile/ByteSwap.c"/>
+          <FILE id="kitU0c" name="ByteSwap.h" compile="0" resource="0" file="../SoundFile/ByteSwap.h"/>
+          <FILE id="mGqfmq" name="CarbonSndPlayDB.c" compile="0" resource="0"
+                file="../SoundFile/CarbonSndPlayDB.c"/>
+          <FILE id="c23oHd" name="CarbonSndPlayDB.h" compile="0" resource="0"
+                file="../SoundFile/CarbonSndPlayDB.h"/>
+          <FILE id="wBNqjm" name="ChangeHeader.c" compile="0" resource="0" file="../SoundFile/ChangeHeader.c"/>
+          <FILE id="Nyjat4" name="ChangeHeader.h" compile="0" resource="0" file="../SoundFile/ChangeHeader.h"/>
+          <FILE id="eMq3ac" name="CloseSoundFile.c" compile="0" resource="0"
+                file="../SoundFile/CloseSoundFile.c"/>
+          <FILE id="QdkEGA" name="CloseSoundFile.h" compile="0" resource="0"
+                file="../SoundFile/CloseSoundFile.h"/>
+          <FILE id="dxskNY" name="CreateSoundFile.c" compile="0" resource="0"
+                file="../SoundFile/CreateSoundFile.c"/>
+          <FILE id="Beft0L" name="CreateSoundFile.h" compile="0" resource="0"
+                file="../SoundFile/CreateSoundFile.h"/>
+          <FILE id="nmrtoG" name="DBPlay.c" compile="0" resource="0" file="../SoundFile/DBPlay.c"/>
+          <FILE id="cVDZHc" name="DBPlay.h" compile="0" resource="0" file="../SoundFile/DBPlay.h"/>
+          <FILE id="hwjmH9" name="Markers.c" compile="0" resource="0" file="../SoundFile/Markers.c"/>
+          <FILE id="l9Bv9q" name="Markers.h" compile="0" resource="0" file="../SoundFile/Markers.h"/>
+          <FILE id="tGNhbB" name="MPEG.c" compile="0" resource="0" file="../SoundFile/MPEG.c"/>
+          <FILE id="JnjQGt" name="MPEG.h" compile="0" resource="0" file="../SoundFile/MPEG.h"/>
+          <FILE id="fAcqMY" name="MPEGTables.h" compile="0" resource="0" file="../SoundFile/MPEGTables.h"/>
+          <FILE id="MzvJ5y" name="muLaw.c" compile="0" resource="0" file="../SoundFile/muLaw.c"/>
+          <FILE id="stc3Q2" name="muLaw.h" compile="0" resource="0" file="../SoundFile/muLaw.h"/>
+          <FILE id="WkASyV" name="OpenSoundFile.c" compile="0" resource="0" file="../SoundFile/OpenSoundFile.c"/>
+          <FILE id="ZHftv0" name="OpenSoundFile.h" compile="0" resource="0" file="../SoundFile/OpenSoundFile.h"/>
+          <FILE id="QpAgQM" name="PAPlay.h" compile="0" resource="0" file="../SoundFile/PAPlay.h"/>
+          <FILE id="M8oi5L" name="Play.c" compile="0" resource="0" file="../SoundFile/Play.c"/>
+          <FILE id="amPo0F" name="Play.h" compile="0" resource="0" file="../SoundFile/Play.h"/>
+          <FILE id="IQGOoQ" name="QT2Play.h" compile="0" resource="0" file="../SoundFile/QT2Play.h"/>
+          <FILE id="dfrPBd" name="QTPlay.c" compile="0" resource="0" file="../SoundFile/QTPlay.c"/>
+          <FILE id="IrmOR9" name="QTPlay.h" compile="0" resource="0" file="../SoundFile/QTPlay.h"/>
+          <FILE id="sq64Md" name="QuickTimeImport.c" compile="0" resource="0"
+                file="../SoundFile/QuickTimeImport.c"/>
+          <FILE id="QSmGr6" name="QuickTimeImport.h" compile="0" resource="0"
+                file="../SoundFile/QuickTimeImport.h"/>
+          <FILE id="x4r7YE" name="ReadHeader.c" compile="0" resource="0" file="../SoundFile/ReadHeader.c"/>
+          <FILE id="MYmpkO" name="ReadHeader.h" compile="0" resource="0" file="../SoundFile/ReadHeader.h"/>
+          <FILE id="cpI9kL" name="Record.c" compile="0" resource="0" file="../SoundFile/Record.c"/>
+          <FILE id="LwvpYk" name="Record.h" compile="0" resource="0" file="../SoundFile/Record.h"/>
+          <FILE id="q06bDt" name="ShowSono.c" compile="0" resource="0" file="../SoundFile/ShowSono.c"/>
+          <FILE id="xf7b4R" name="ShowSono.h" compile="0" resource="0" file="../SoundFile/ShowSono.h"/>
+          <FILE id="onhX6e" name="ShowSpect.c" compile="0" resource="0" file="../SoundFile/ShowSpect.c"/>
+          <FILE id="LMDbLp" name="ShowSpect.h" compile="0" resource="0" file="../SoundFile/ShowSpect.h"/>
+          <FILE id="np4tgA" name="ShowWave.c" compile="0" resource="0" file="../SoundFile/ShowWave.c"/>
+          <FILE id="Rtyben" name="ShowWave.h" compile="0" resource="0" file="../SoundFile/ShowWave.h"/>
+          <FILE id="VSoy5h" name="SMPlay.c" compile="0" resource="0" file="../SoundFile/SMPlay.c"/>
+          <FILE id="X0Bl2h" name="SMPlay.h" compile="0" resource="0" file="../SoundFile/SMPlay.h"/>
+          <FILE id="Z037sY" name="SndResource.c" compile="0" resource="0" file="../SoundFile/SndResource.c"/>
+          <FILE id="rVbkdT" name="SndResource.h" compile="0" resource="0" file="../SoundFile/SndResource.h"/>
+          <FILE id="WmHco9" name="SoundFile.h" compile="0" resource="0" file="../SoundFile/SoundFile.h"/>
+          <FILE id="YlHKck" name="SoundFileIO.c" compile="0" resource="0" file="../SoundFile/SoundFileIO.c"/>
+          <FILE id="ybRwPc" name="SoundFileWindow.c" compile="0" resource="0"
+                file="../SoundFile/SoundFileWindow.c"/>
+          <FILE id="ZezfiJ" name="SoundViewWindow.c" compile="0" resource="0"
+                file="../SoundFile/SoundViewWindow.c"/>
+          <FILE id="i2EdnN" name="SoundViewWindow.h" compile="0" resource="0"
+                file="../SoundFile/SoundViewWindow.h"/>
+          <FILE id="c2eo1a" name="SpectFileIO.c" compile="0" resource="0" file="../SoundFile/SpectFileIO.c"/>
+          <FILE id="zUYuUy" name="SpectFileIO.h" compile="0" resource="0" file="../SoundFile/SpectFileIO.h"/>
+          <FILE id="LrNCKZ" name="SpectralHeader.h" compile="0" resource="0"
+                file="../SoundFile/SpectralHeader.h"/>
+          <FILE id="oraoAC" name="WriteHeader.c" compile="0" resource="0" file="../SoundFile/WriteHeader.c"/>
+          <FILE id="iS2Fxi" name="WriteHeader.h" compile="0" resource="0" file="../SoundFile/WriteHeader.h"/>
+        </GROUP>
+        <GROUP id="{7DB23440-4741-D8D8-8B2A-ED795716835B}" name="ToolBox">
+          <FILE id="akDVuw" name="CarbonGlue.c" compile="0" resource="0" file="../ToolBox/CarbonGlue.c"/>
+          <FILE id="urDLqw" name="CarbonGlue.h" compile="0" resource="0" file="../ToolBox/CarbonGlue.h"/>
+          <FILE id="CoE8m3" name="ClassicGlue.c" compile="0" resource="0" file="../ToolBox/ClassicGlue.c"/>
+          <FILE id="G7zSj7" name="Cursor.c" compile="0" resource="0" file="../ToolBox/Cursor.c"/>
+          <FILE id="dB0mHh" name="Cursors.c" compile="0" resource="0" file="../ToolBox/Cursors.c"/>
+          <FILE id="vfTrAQ" name="Cursors.h" compile="0" resource="0" file="../ToolBox/Cursors.h"/>
+          <FILE id="mFExgZ" name="Dialog.c" compile="0" resource="0" file="../ToolBox/Dialog.c"/>
+          <FILE id="h0MwrQ" name="Dialog.h" compile="0" resource="0" file="../ToolBox/Dialog.h"/>
+          <FILE id="BywsnI" name="DrawFunction.c" compile="0" resource="0" file="../ToolBox/DrawFunction.c"/>
+          <FILE id="sTZCbI" name="DrawFunction.h" compile="0" resource="0" file="../ToolBox/DrawFunction.h"/>
+          <FILE id="pnGghK" name="Macros.h" compile="0" resource="0" file="../ToolBox/Macros.h"/>
+          <FILE id="T5OVUY" name="Menu.h" compile="0" resource="0" file="../ToolBox/Menu.h"/>
+          <FILE id="u43wRP" name="MyAppleEvents.c" compile="0" resource="0" file="../ToolBox/MyAppleEvents.c"/>
+          <FILE id="SbeQKj" name="MyAppleEvents.h" compile="0" resource="0" file="../ToolBox/MyAppleEvents.h"/>
+          <FILE id="BM9ORK" name="Preferences.c" compile="0" resource="0" file="../ToolBox/Preferences.c"/>
+          <FILE id="dyRiQh" name="Preferences.h" compile="0" resource="0" file="../ToolBox/Preferences.h"/>
+          <FILE id="SjJdLu" name="SoundHack.c" compile="0" resource="0" file="../ToolBox/SoundHack.c"/>
+          <FILE id="NtNNtm" name="SoundHack.h" compile="0" resource="0" file="../ToolBox/SoundHack.h"/>
+          <FILE id="k7Tvtz" name="Version.h" compile="0" resource="0" file="../ToolBox/Version.h"/>
+        </GROUP>
+      </GROUP>
       <FILE id="KiWN2c" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="pJgz8z" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="rO10rX" name="MainComponent.cpp" compile="1" resource="0"

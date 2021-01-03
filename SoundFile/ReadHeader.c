@@ -1234,7 +1234,7 @@ short ReadMovieHeader(SoundInfo *mySI)
 	aPictHandle = GetTrackPict(theTrack, time);
 	if(aPictHandle == 0) 
 	{
-//		DrawErrorMessage("\pNot enough memory to read QuickTimeª movie");
+//		DrawErrorMessage("\pNot enough memory to read QuickTimeÂª movie");
 		CloseMovieFile(mySI->rFileNum);
 		DisposeMovie(theMovie);
 		mySI->spectFrameSize = 0;

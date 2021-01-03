@@ -1,1 +1,1 @@
-short	CloseSoundFile(SoundInfo *mySI);
+short	CloseSoundFile(SoundInfo *mySI);

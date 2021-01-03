@@ -1,6 +1,6 @@
 /*
- *	SoundHackª
- *	Copyright ©1994 Tom Erbe - CalArts
+ *	SoundHackÂª
+ *	Copyright Â©1994 Tom Erbe - CalArts
  *
  *	SoundFileIO.c - functions to read and write blocks of sound to any packmode of
  *	monaural or sterephonic soundfile. The blocks are in floating point representation

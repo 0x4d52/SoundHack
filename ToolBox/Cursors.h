@@ -1,1 +1,3 @@
-void	SpinWart(void);void	ShowSmiley(void);void	InitCursors(void);
+void	SpinWart(void);
+void	ShowSmiley(void);
+void	InitCursors(void);
