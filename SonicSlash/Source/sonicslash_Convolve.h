@@ -18,6 +18,7 @@ private:
     bool isStateValid();
     void initSineTable();
     void phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[]);
+    void simpleSpectralGate (float polarSpectrum[]);
 
     //==========================================================================
     

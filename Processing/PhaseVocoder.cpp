@@ -1311,69 +1311,69 @@ PvocBlock(void)
 //    }
 //}
 
-void
-SimpleSpectralGate(float polarSpectrum[])
-{
-    long bandNumber, ampIndex;
-    float maxAmplitude, maskAmplitude;
+//void
+//SimpleSpectralGate(float polarSpectrum[])
+//{
+//    long bandNumber, ampIndex;
+//    float maxAmplitude, maskAmplitude;
+//
+//    maxAmplitude = 0.0;
+//
+///* Find maximum amplitude */
+//    for(bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
+//    {
+//        ampIndex = bandNumber<<1;
+//        if(polarSpectrum[ampIndex] > maxAmplitude)
+//            maxAmplitude = polarSpectrum[ampIndex];
+//    }
+//    maskAmplitude = gPI.maskRatio * maxAmplitude;
+//    for(bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
+//    {
+//        ampIndex = bandNumber<<1;
+//        /* Set for Ducking */
+//        if(polarSpectrum[ampIndex] < maskAmplitude)
+//            polarSpectrum[ampIndex] = 0.0;
+//        else if(polarSpectrum[ampIndex] < gPI.minAmplitude)
+//            polarSpectrum[ampIndex] = 0.0;
+//    }
+//}
 
-    maxAmplitude = 0.0;
-        
-/* Find maximum amplitude */
-    for(bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
-    {
-        ampIndex = bandNumber<<1;
-        if(polarSpectrum[ampIndex] > maxAmplitude)
-            maxAmplitude = polarSpectrum[ampIndex];
-    }
-    maskAmplitude = gPI.maskRatio * maxAmplitude;
-    for(bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
-    {
-        ampIndex = bandNumber<<1;
-        /* Set for Ducking */
-        if(polarSpectrum[ampIndex] < maskAmplitude)
-            polarSpectrum[ampIndex] = 0.0;
-        else if(polarSpectrum[ampIndex] < gPI.minAmplitude)
-            polarSpectrum[ampIndex] = 0.0;
-    }
-}
-
-void
-DeAllocPvocMem(void)
-{
-    RemovePtr((Ptr)analysisWindow);
-    RemovePtr((Ptr)synthesisWindow);
-    RemovePtr((Ptr)inputL);
-    RemovePtr((Ptr)spectrum);
-    RemovePtr((Ptr)polarSpectrum);
-    RemovePtr((Ptr)displaySpectrum);
-    RemovePtr((Ptr)outputL);
-    RemovePtr((Ptr)lastPhaseInL);
-    RemovePtr((Ptr)lastPhaseOutL);
-    if(gPI.time == 0)
-    {
-        RemovePtr((Ptr)lastAmpL);
-        RemovePtr((Ptr)lastFreqL);
-        RemovePtr((Ptr)indexL);
-        RemovePtr((Ptr)sineTable);
-    }
-    
-    if(inSIPtr->nChans == STEREO)
-    {
-        RemovePtr((Ptr)inputR);
-        RemovePtr((Ptr)outputR);
-        RemovePtr((Ptr)lastPhaseInR);
-        RemovePtr((Ptr)lastPhaseOutR);
-        if(gPI.time == 0)
-        {
-            RemovePtr((Ptr)lastAmpR);
-            RemovePtr((Ptr)lastFreqR);
-            RemovePtr((Ptr)indexR);
-        }
-    }
-    analysisWindow = synthesisWindow = inputL = nil;
-    spectrum = polarSpectrum = displaySpectrum = outputL = lastPhaseInL = nil;
-    lastPhaseOutL = lastAmpL = lastFreqL = indexL = sineTable = nil;
-     inputR = outputR = lastPhaseInR = lastPhaseOutR = lastAmpR = nil;
-     lastFreqR = indexR = nil;
-}
+//void
+//DeAllocPvocMem(void)
+//{
+//    RemovePtr((Ptr)analysisWindow);
+//    RemovePtr((Ptr)synthesisWindow);
+//    RemovePtr((Ptr)inputL);
+//    RemovePtr((Ptr)spectrum);
+//    RemovePtr((Ptr)polarSpectrum);
+//    RemovePtr((Ptr)displaySpectrum);
+//    RemovePtr((Ptr)outputL);
+//    RemovePtr((Ptr)lastPhaseInL);
+//    RemovePtr((Ptr)lastPhaseOutL);
+//    if(gPI.time == 0)
+//    {
+//        RemovePtr((Ptr)lastAmpL);
+//        RemovePtr((Ptr)lastFreqL);
+//        RemovePtr((Ptr)indexL);
+//        RemovePtr((Ptr)sineTable);
+//    }
+//    
+//    if(inSIPtr->nChans == STEREO)
+//    {
+//        RemovePtr((Ptr)inputR);
+//        RemovePtr((Ptr)outputR);
+//        RemovePtr((Ptr)lastPhaseInR);
+//        RemovePtr((Ptr)lastPhaseOutR);
+//        if(gPI.time == 0)
+//        {
+//            RemovePtr((Ptr)lastAmpR);
+//            RemovePtr((Ptr)lastFreqR);
+//            RemovePtr((Ptr)indexR);
+//        }
+//    }
+//    analysisWindow = synthesisWindow = inputL = nil;
+//    spectrum = polarSpectrum = displaySpectrum = outputL = lastPhaseInL = nil;
+//    lastPhaseOutL = lastAmpL = lastFreqL = indexL = sineTable = nil;
+//     inputR = outputR = lastPhaseInR = lastPhaseOutR = lastAmpR = nil;
+//     lastFreqR = indexR = nil;
+//}

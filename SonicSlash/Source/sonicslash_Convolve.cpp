@@ -237,6 +237,34 @@ void Convolve::phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], flo
     }
 }
 
+void Convolve::simpleSpectralGate (float polarSpectrum[])
+{
+    float maxAmplitude = 0.0;
+    
+    /* Find maximum amplitude */
+    
+    for (long bandNumber = 0; bandNumber <= halfPoints; ++bandNumber)
+    {
+        const long ampIndex = bandNumber << 1;
+        
+        if (polarSpectrum[ampIndex] > maxAmplitude)
+            maxAmplitude = polarSpectrum[ampIndex];
+    }
+    
+    const float maskAmplitude = maskRatio * maxAmplitude;
+    
+    for (long bandNumber = 0; bandNumber <= halfPoints; ++bandNumber)
+    {
+        const long ampIndex = bandNumber << 1;
+       
+        /* Set for Ducking */
+        
+        if (polarSpectrum[ampIndex] < maskAmplitude)
+            polarSpectrum[ampIndex] = 0.0f;
+        else if (polarSpectrum[ampIndex] < minAmplitude)
+            polarSpectrum[ampIndex] = 0.0f;
+    }
+}
 
     
 } // namespace sonicslash
