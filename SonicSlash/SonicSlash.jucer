@@ -19,7 +19,7 @@
           <FILE id="X4eF6Z" name="Hypot.h" compile="0" resource="0" file="../Math/Hypot.h"/>
           <FILE id="tkFwKv" name="IEEE80.c" compile="0" resource="0" file="../Math/IEEE80.c"/>
           <FILE id="IBd0uG" name="IEEE80.h" compile="0" resource="0" file="../Math/IEEE80.h"/>
-          <FILE id="HmEX4n" name="PhaseVocoderRoutines.cpp" compile="0" resource="0"
+          <FILE id="HmEX4n" name="PhaseVocoderRoutines.cpp" compile="1" resource="0"
                 file="../Math/PhaseVocoderRoutines.cpp"/>
           <FILE id="ekMfLj" name="PhaseVocoderRoutines.h" compile="0" resource="0"
                 file="../Math/PhaseVocoderRoutines.h"/>
@@ -51,7 +51,7 @@
           <FILE id="ZFlXR2" name="Mutate.h" compile="0" resource="0" file="../Processing/Mutate.h"/>
           <FILE id="K2jeBH" name="Normalization.c" compile="0" resource="0" file="../Processing/Normalization.c"/>
           <FILE id="o300o6" name="Normalization.h" compile="0" resource="0" file="../Processing/Normalization.h"/>
-          <FILE id="yGidtL" name="PhaseVocoder.cpp" compile="0" resource="0"
+          <FILE id="yGidtL" name="PhaseVocoder.cpp" compile="1" resource="0"
                 file="../Processing/PhaseVocoder.cpp"/>
           <FILE id="tdIyNu" name="PhaseVocoder.h" compile="0" resource="0" file="../Processing/PhaseVocoder.h"/>
           <FILE id="QUoe6o" name="RingModulate.c" compile="0" resource="0" file="../Processing/RingModulate.c"/>

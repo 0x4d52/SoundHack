@@ -12,6 +12,9 @@
 namespace sonicslash {
 namespace legacy {
 namespace PhaseVocoderRoutines {
+    
+using namespace SoundFile;
+using namespace PhaseVocoder;
 
 /* Scale analysis and synthesis windows */
 short
@@ -269,7 +272,7 @@ AddSynth(float polarSpectrum[], float output[], float lastAmp[], float lastFreq[
  */
     for ( bandNumber = 0; bandNumber < numberPartials; bandNumber++ )
     {
-		register float amplitude, ampIncrement, frequency, freqIncrement, address;
+        float amplitude, ampIncrement, frequency, freqIncrement, address;
 		
 		ampIndex = bandNumber<<1;
 		freqIndex = ampIndex + 1;

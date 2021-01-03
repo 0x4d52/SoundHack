@@ -69,3 +69,7 @@ struct PvocInfo
 //void    OverlapAdd(float input[], float synthesisWindow[], float output[], long currentTime, long points, long windowSize);
 //long    ShiftOut(SoundInfo *mySI, float leftBlock[], float rightBlock[], long currentTime, long interpolation, long windowSize);
 
+} // namespace PhaseVocoder
+} // namespace legacy
+} // namespace sonicslash
+
