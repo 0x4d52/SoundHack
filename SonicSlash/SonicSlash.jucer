@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="V5WNel" name="SonicSlash" projectType="guiapp" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" version="0.0.1">
+              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" version="0.0.1"
+              headerPath="../../Source">
   <MAINGROUP id="iraBm6" name="SonicSlash">
     <GROUP id="{29970870-4461-FD5E-2322-FC7237A058EB}" name="Source">
+      <FILE id="Tjjl3o" name="sonicslash_common.h" compile="0" resource="0"
+            file="Source/sonicslash_common.h"/>
       <GROUP id="{80242920-45FD-41ED-A0DD-BDC12769C5D6}" name="Legacy">
         <GROUP id="{ECCC692E-3CDA-0703-EB14-6EB472AFEBED}" name="Math">
-          <FILE id="RswBGl" name="FFT.c" compile="0" resource="0" file="../Math/FFT.c"/>
+          <FILE id="RswBGl" name="FFT.cpp" compile="1" resource="0" file="../Math/FFT.cpp"/>
           <FILE id="hpx1xQ" name="FFT.h" compile="0" resource="0" file="../Math/FFT.h"/>
           <FILE id="AcGkLr" name="Hypot.c" compile="0" resource="0" file="../Math/Hypot.c"/>
           <FILE id="X4eF6Z" name="Hypot.h" compile="0" resource="0" file="../Math/Hypot.h"/>
