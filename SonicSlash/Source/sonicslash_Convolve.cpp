@@ -166,6 +166,77 @@ void Convolve::initSineTable()
     for (int n = 0; n < numSamples; ++n)
         setBufferSample (sineTable, n, 0.5f * std::cos (n * twoPi / numSamples));
 }
+    
+void Convolve::phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])
+{
+    float amplitude, phase; // seem unused!?
+    
+    const float phasePerBand = ((float) decimation * twoPi) / (float) points;
+    
+    for (long bandNumber = 0; bandNumber <= halfPoints; ++bandNumber)
+    {
+        const long ampIndex = bandNumber << 1;
+        const long phaseIndex = ampIndex + 1;
+        
+        float phaseDifference = 0.0f;
+        
+        // take difference between the current phase value and previous value for each channel
+        
+        if (polarSpectrum[ampIndex] == 0.0f)
+        {
+            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber];
+        }
+        else
+        {
+            if (phaseLocking) // NB it seems from the legacy code phaseLocking is always false!?
+            {
+                float maxAmplitude = 0.0f;
+                
+                // set low band info
+                
+                if (bandNumber > 1)
+                {
+                    maxAmplitude = polarSpectrum[ampIndex - 2];
+                    phaseDifference = (polarSpectrum[phaseIndex - 2] - lastPhaseIn[bandNumber - 1]) - phasePerBand;
+                }
+                
+                if (polarSpectrum[ampIndex] > maxAmplitude)
+                {
+                    maxAmplitude = polarSpectrum[ampIndex];
+                    phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
+                }
+                
+                if (bandNumber != halfPoints)
+                    if (polarSpectrum[ampIndex + 2] > maxAmplitude)
+                        phaseDifference = (polarSpectrum[phaseIndex + 2] - lastPhaseIn[bandNumber + 1]) + phasePerBand;
+            }
+            else
+            {
+                phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
+            }
+            
+            lastPhaseIn[bandNumber] = polarSpectrum[phaseIndex];
+            
+            // unwrap phase differences
+
+            phaseDifference *= scaleFactor;
+        
+            // create new phase from interpolate/decimate ratio
+
+            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber] + phaseDifference;
+        
+            while (polarSpectrum[phaseIndex] > Pi)
+                polarSpectrum[phaseIndex] -= twoPi;
+        
+            while (polarSpectrum[phaseIndex] < -Pi)
+                polarSpectrum[phaseIndex] += twoPi;
+        
+            phase = lastPhaseOut[bandNumber] = polarSpectrum[phaseIndex];
+            amplitude = polarSpectrum[ampIndex];
+        }
+    }
+}
+
 
     
 } // namespace sonicslash

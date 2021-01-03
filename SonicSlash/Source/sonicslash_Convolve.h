@@ -17,6 +17,7 @@ private:
     bool allocateBuffers();
     bool isStateValid();
     void initSineTable();
+    void phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[]);
 
     //==========================================================================
     

@@ -1235,81 +1235,81 @@ PvocBlock(void)
 //
 //}
 
-void
-PhaseInterpolate(float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])
-{
-    long bandNumber, phaseIndex, ampIndex, phaseLockBand, phaseLockPhase, phaseLockAmp;
-    float phaseDifference;
-    float maxAmplitude;
-    float amplitude, phase;
-
-    float phasePerBand;
-    phasePerBand = ((float)gPI.decimation * twoPi)/(float)gPI.points;
-    for (bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
-    {
-        ampIndex = bandNumber<<1;
-        phaseIndex = ampIndex + 1;
-/*
- * take difference between the current phase value and previous value for each channel
- */
-        if (polarSpectrum[ampIndex] == 0.0)
-        {
-            phaseDifference = 0.0;
-            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber];
-        }
-        else
-        {
-            if(gPI.phaseLocking)
-            {
-                maxAmplitude = 0.0;
-                // set low band info
-                if(bandNumber > 1)
-                {
-                    maxAmplitude = polarSpectrum[ampIndex - 2];
-                    phaseDifference = (polarSpectrum[phaseIndex - 2] - lastPhaseIn[bandNumber - 1]) - phasePerBand;
-                }
-                if(polarSpectrum[ampIndex] > maxAmplitude)
-                {
-                    maxAmplitude = polarSpectrum[ampIndex];
-                    phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
-                }
-                if(bandNumber != gPI.halfPoints)
-                {
-                    if(polarSpectrum[ampIndex + 2] > maxAmplitude)
-                    {
-                        phaseDifference = (polarSpectrum[phaseIndex + 2] - lastPhaseIn[bandNumber + 1]) + phasePerBand;
-                    }
-                }
-            }
-            else
-            {
-                phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
-            }
-
-            lastPhaseIn[bandNumber] = polarSpectrum[phaseIndex];
-
-/*
- * unwrap phase differences
- */
-
-//            while (phaseDifference > Pi)
-//                phaseDifference -= twoPi;
-//            while (phaseDifference < -Pi)
-//                phaseDifference += twoPi;
-            phaseDifference *= gPI.scaleFactor;
-/*
- * create new phase from interpolate/decimate ratio
- */
-            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber] + phaseDifference;
-            while (polarSpectrum[phaseIndex] > Pi)
-                polarSpectrum[phaseIndex] -= twoPi;
-            while (polarSpectrum[phaseIndex] < -Pi)
-                polarSpectrum[phaseIndex] += twoPi;
-            phase = lastPhaseOut[bandNumber] = polarSpectrum[phaseIndex];
-            amplitude = polarSpectrum[ampIndex];
-        }
-    }
-}
+//void
+//PhaseInterpolate(float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])
+//{
+//    long bandNumber, phaseIndex, ampIndex, phaseLockBand, phaseLockPhase, phaseLockAmp;
+//    float phaseDifference;
+//    float maxAmplitude;
+//    float amplitude, phase;
+//
+//    float phasePerBand;
+//    phasePerBand = ((float)gPI.decimation * twoPi)/(float)gPI.points;
+//    for (bandNumber = 0; bandNumber <= gPI.halfPoints; bandNumber++)
+//    {
+//        ampIndex = bandNumber<<1;
+//        phaseIndex = ampIndex + 1;
+///*
+// * take difference between the current phase value and previous value for each channel
+// */
+//        if (polarSpectrum[ampIndex] == 0.0)
+//        {
+//            phaseDifference = 0.0;
+//            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber];
+//        }
+//        else
+//        {
+//            if(gPI.phaseLocking)
+//            {
+//                maxAmplitude = 0.0;
+//                // set low band info
+//                if(bandNumber > 1)
+//                {
+//                    maxAmplitude = polarSpectrum[ampIndex - 2];
+//                    phaseDifference = (polarSpectrum[phaseIndex - 2] - lastPhaseIn[bandNumber - 1]) - phasePerBand;
+//                }
+//                if(polarSpectrum[ampIndex] > maxAmplitude)
+//                {
+//                    maxAmplitude = polarSpectrum[ampIndex];
+//                    phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
+//                }
+//                if(bandNumber != gPI.halfPoints)
+//                {
+//                    if(polarSpectrum[ampIndex + 2] > maxAmplitude)
+//                    {
+//                        phaseDifference = (polarSpectrum[phaseIndex + 2] - lastPhaseIn[bandNumber + 1]) + phasePerBand;
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                phaseDifference = polarSpectrum[phaseIndex] - lastPhaseIn[bandNumber];
+//            }
+//
+//            lastPhaseIn[bandNumber] = polarSpectrum[phaseIndex];
+//
+///*
+// * unwrap phase differences
+// */
+//
+////            while (phaseDifference > Pi)
+////                phaseDifference -= twoPi;
+////            while (phaseDifference < -Pi)
+////                phaseDifference += twoPi;
+//            phaseDifference *= gPI.scaleFactor;
+///*
+// * create new phase from interpolate/decimate ratio
+// */
+//            polarSpectrum[phaseIndex] = lastPhaseOut[bandNumber] + phaseDifference;
+//            while (polarSpectrum[phaseIndex] > Pi)
+//                polarSpectrum[phaseIndex] -= twoPi;
+//            while (polarSpectrum[phaseIndex] < -Pi)
+//                polarSpectrum[phaseIndex] += twoPi;
+//            phase = lastPhaseOut[bandNumber] = polarSpectrum[phaseIndex];
+//            amplitude = polarSpectrum[ampIndex];
+//        }
+//    }
+//}
 
 void
 SimpleSpectralGate(float polarSpectrum[])
