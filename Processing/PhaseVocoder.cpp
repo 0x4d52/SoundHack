@@ -40,10 +40,10 @@ extern struct
 }    gPreferences;
 
 long    gInPointer, gOutPointer, gInPosition = 0;
-float     *analysisWindow, *synthesisWindow, *inputL, *inputR, *spectrum,
-    *polarSpectrum, *displaySpectrum, *outputL, *outputR, *lastPhaseInL,
-    *lastPhaseInR, *lastPhaseOutL, *lastPhaseOutR, *lastAmpL, *lastAmpR,
-    *lastFreqL, *lastFreqR, *indexL, *indexR, *sineTable;
+//float     *analysisWindow, *synthesisWindow, *inputL, *inputR, *spectrum,
+//    *polarSpectrum, *displaySpectrum, *outputL, *outputR, *lastPhaseInL,
+//    *lastPhaseInR, *lastPhaseOutL, *lastPhaseOutR, *lastAmpL, *lastAmpR,
+//    *lastFreqL, *lastFreqR, *indexL, *indexR, *sineTable;
 PvocInfo     gPI;
 
 void
@@ -1163,77 +1163,77 @@ PvocBlock(void)
 }
 
 
-float FindBestRatio(void)
-{
-    float    testScale, percentError = 2.0, newScaleFactor;
-    long    maxInterpolate, maxDecimate;
-
-    
-    if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
-    {
-        if(gPI.time)
-            gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
-        else
-        {
-            gPI.interpolation = gPI.decimation;
-            gPI.scaleFactor = 1.0;
-        }
-        return(gPI.scaleFactor);
-    }
-
-    maxInterpolate = maxDecimate = gPI.windowSize/8;
-    if(!gPI.time)
-    {
-        gPI.decimation = gPI.interpolation = maxInterpolate;
-//        gPI.scaleFactor = 1.0;
-        return(gPI.scaleFactor);
-    }
-    if(gPI.scaleFactor>1.0)
-        for(gPI.interpolation = maxInterpolate; percentError > 1.01; gPI.interpolation--)
-        {
-            gPI.decimation = (long)((float)gPI.interpolation/gPI.scaleFactor);
-            testScale = ((float)gPI.interpolation/gPI.decimation);
-            if(testScale > gPI.scaleFactor)
-                percentError = testScale/gPI.scaleFactor;
-            else
-                percentError = gPI.scaleFactor/testScale;
-            if(percentError<1.004)
-            {
-                break;
-            }
-            if(gPI.interpolation == 1)
-            {
-                gPI.interpolation = maxInterpolate;
-                gPI.decimation = (long)((float)gPI.interpolation/gPI.scaleFactor);
-                newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
-                percentError = 1.0;
-            }
-        }
-    else
-        for(gPI.decimation = maxDecimate; percentError > 1.01; gPI.decimation--)
-        {
-            gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
-            testScale = ((float)gPI.interpolation/gPI.decimation);
-            if(testScale > gPI.scaleFactor)
-                percentError = testScale/gPI.scaleFactor;
-            else
-                percentError = gPI.scaleFactor/testScale;
-            if(percentError<1.004)
-            {
-                break;
-            }
-            if(gPI.decimation == 1)
-            {
-                gPI.decimation = maxDecimate;
-                gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
-                newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
-                percentError = 1.0;
-            }
-        }
-    newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
-    return(newScaleFactor);
-
-}
+//float FindBestRatio(void)
+//{
+//    float    testScale, percentError = 2.0, newScaleFactor;
+//    long    maxInterpolate, maxDecimate;
+//
+//
+//    if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
+//    {
+//        if(gPI.time)
+//            gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
+//        else
+//        {
+//            gPI.interpolation = gPI.decimation;
+//            gPI.scaleFactor = 1.0;
+//        }
+//        return(gPI.scaleFactor);
+//    }
+//
+//    maxInterpolate = maxDecimate = gPI.windowSize/8;
+//    if(!gPI.time)
+//    {
+//        gPI.decimation = gPI.interpolation = maxInterpolate;
+////        gPI.scaleFactor = 1.0;
+//        return(gPI.scaleFactor);
+//    }
+//    if(gPI.scaleFactor>1.0)
+//        for(gPI.interpolation = maxInterpolate; percentError > 1.01; gPI.interpolation--)
+//        {
+//            gPI.decimation = (long)((float)gPI.interpolation/gPI.scaleFactor);
+//            testScale = ((float)gPI.interpolation/gPI.decimation);
+//            if(testScale > gPI.scaleFactor)
+//                percentError = testScale/gPI.scaleFactor;
+//            else
+//                percentError = gPI.scaleFactor/testScale;
+//            if(percentError<1.004)
+//            {
+//                break;
+//            }
+//            if(gPI.interpolation == 1)
+//            {
+//                gPI.interpolation = maxInterpolate;
+//                gPI.decimation = (long)((float)gPI.interpolation/gPI.scaleFactor);
+//                newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
+//                percentError = 1.0;
+//            }
+//        }
+//    else
+//        for(gPI.decimation = maxDecimate; percentError > 1.01; gPI.decimation--)
+//        {
+//            gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
+//            testScale = ((float)gPI.interpolation/gPI.decimation);
+//            if(testScale > gPI.scaleFactor)
+//                percentError = testScale/gPI.scaleFactor;
+//            else
+//                percentError = gPI.scaleFactor/testScale;
+//            if(percentError<1.004)
+//            {
+//                break;
+//            }
+//            if(gPI.decimation == 1)
+//            {
+//                gPI.decimation = maxDecimate;
+//                gPI.interpolation = (long)(gPI.decimation * gPI.scaleFactor);
+//                newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
+//                percentError = 1.0;
+//            }
+//        }
+//    newScaleFactor = ((float)gPI.interpolation/gPI.decimation);
+//    return(newScaleFactor);
+//
+//}
 
 void
 PhaseInterpolate(float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])

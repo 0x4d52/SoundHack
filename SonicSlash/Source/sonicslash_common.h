@@ -4,6 +4,10 @@
 
 namespace sonicslash
 {
+    using Buffer = juce::AudioBuffer<float>;
+
+    inline void allocateBuffer (Buffer& b, int size) { b.setSize (1, size); }
+    inline void initBuffer (Buffer& b) { allocateBuffer (b, 0); }
     
 namespace legacy
 {

@@ -74,11 +74,36 @@ void Convolve::setBestRatio()
     scaleFactor = (float) interpolation / decimation;
 }
 
-//void Convolve::setBestRatio()
-//{
-//
-//    scaleFactor = getBestRatio();
-//}
+void Convolve::initBuffers()
+{
+    initBuffer (analysisWindow);
+    initBuffer (synthesisWindow);
+    initBuffer (inputL);
+    initBuffer (inputR);
+    initBuffer (spectrum);
+    initBuffer (polarSpectrum);
+    initBuffer (displaySpectrum);
+    initBuffer (outputL);
+    initBuffer (outputR);
+    initBuffer (lastPhaseInL);
+    initBuffer (lastPhaseInR);
+    initBuffer (lastPhaseOutL);
+    initBuffer (lastPhaseOutR);
+    initBuffer (lastAmpL);
+    initBuffer (lastAmpR);
+    initBuffer (lastFreqL);
+    initBuffer (lastFreqR);
+    initBuffer (indexL);
+    initBuffer (indexR);
+    initBuffer (sineTable);
+}
+    
+void Convolve::allocateBuffers()
+{
+    
+}
+
+
 
     
 } // namespace sonicslash
