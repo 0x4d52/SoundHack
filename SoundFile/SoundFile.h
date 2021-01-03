@@ -4,12 +4,12 @@
 
 #define WRITEBYTES			262144UL
 
-#define	QUAD				4
-#define	STEREO				2
-#define	MONO				1
-
-#define RIGHT				1
-#define LEFT				0
+//#define    QUAD                4
+//#define    STEREO                2
+//#define    MONO                1
+//
+//#define RIGHT                1
+//#define LEFT                0
 
 /* Soundfile Header Types */
 #define	AIFF	1
@@ -148,14 +148,14 @@ typedef struct
 typedef SoundInfo *SoundInfoPtr;
 
 /*Function prototypes for SoundFileIO.c*/
-void	AllocateSoundIOMemory(short channels, long frames);
-void 	SetSecondsPosition(SoundInfo *mySI, double seconds);
-void	SetOutputScale(long packMode);
-long	ReadQuadBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]);
-long	ReadStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
-long	ReadMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
-long	WriteStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
-long	WriteMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
+//void    AllocateSoundIOMemory(short channels, long frames);
+//void     SetSecondsPosition(SoundInfo *mySI, double seconds);
+//void    SetOutputScale(long packMode);
+//long    ReadQuadBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]);
+//long    ReadStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
+//long    ReadMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
+//long    WriteStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
+//long    WriteMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
 //void 	WriteBuffered(SoundInfo *mySI, long *numBytes, char * block);
 //void 	FlushWriteBuffer(SoundInfo *mySI);
 

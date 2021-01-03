@@ -5,6 +5,10 @@
               headerPath="../../Source">
   <MAINGROUP id="iraBm6" name="SonicSlash">
     <GROUP id="{29970870-4461-FD5E-2322-FC7237A058EB}" name="Source">
+      <FILE id="YSNhxy" name="sonicslash_SoundFile.cpp" compile="1" resource="0"
+            file="Source/sonicslash_SoundFile.cpp"/>
+      <FILE id="XgFJkF" name="sonicslash_SoundFile.h" compile="0" resource="0"
+            file="Source/sonicslash_SoundFile.h"/>
       <FILE id="Tjjl3o" name="sonicslash_common.h" compile="0" resource="0"
             file="Source/sonicslash_common.h"/>
       <GROUP id="{80242920-45FD-41ED-A0DD-BDC12769C5D6}" name="Legacy">
@@ -15,8 +19,10 @@
           <FILE id="X4eF6Z" name="Hypot.h" compile="0" resource="0" file="../Math/Hypot.h"/>
           <FILE id="tkFwKv" name="IEEE80.c" compile="0" resource="0" file="../Math/IEEE80.c"/>
           <FILE id="IBd0uG" name="IEEE80.h" compile="0" resource="0" file="../Math/IEEE80.h"/>
-          <FILE id="HmEX4n" name="PhaseVocoderRoutines.c" compile="0" resource="0"
-                file="../Math/PhaseVocoderRoutines.c"/>
+          <FILE id="HmEX4n" name="PhaseVocoderRoutines.cpp" compile="0" resource="0"
+                file="../Math/PhaseVocoderRoutines.cpp"/>
+          <FILE id="ekMfLj" name="PhaseVocoderRoutines.h" compile="0" resource="0"
+                file="../Math/PhaseVocoderRoutines.h"/>
           <FILE id="L22amI" name="Windows.cpp" compile="1" resource="0" file="../Math/Windows.cpp"/>
           <FILE id="fEDA5A" name="Windows.h" compile="0" resource="0" file="../Math/Windows.h"/>
         </GROUP>
@@ -45,7 +51,8 @@
           <FILE id="ZFlXR2" name="Mutate.h" compile="0" resource="0" file="../Processing/Mutate.h"/>
           <FILE id="K2jeBH" name="Normalization.c" compile="0" resource="0" file="../Processing/Normalization.c"/>
           <FILE id="o300o6" name="Normalization.h" compile="0" resource="0" file="../Processing/Normalization.h"/>
-          <FILE id="yGidtL" name="PhaseVocoder.c" compile="0" resource="0" file="../Processing/PhaseVocoder.c"/>
+          <FILE id="yGidtL" name="PhaseVocoder.cpp" compile="0" resource="0"
+                file="../Processing/PhaseVocoder.cpp"/>
           <FILE id="tdIyNu" name="PhaseVocoder.h" compile="0" resource="0" file="../Processing/PhaseVocoder.h"/>
           <FILE id="QUoe6o" name="RingModulate.c" compile="0" resource="0" file="../Processing/RingModulate.c"/>
           <FILE id="UkTZo3" name="RingModulate.h" compile="0" resource="0" file="../Processing/RingModulate.h"/>

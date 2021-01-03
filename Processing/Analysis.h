@@ -23,11 +23,11 @@
 #define SP_PROCESS_BUTTON	1
 
 // Analysis types
-#define	NO_ANALYSIS			0
-#define	CSOUND_ANALYSIS		1
-#define	SOUNDHACK_ANALYSIS	2
-#define SDIF_ANALYSIS		3
-#define	PICT_ANALYSIS		4
+//#define    NO_ANALYSIS            0
+//#define    CSOUND_ANALYSIS        1
+//#define    SOUNDHACK_ANALYSIS    2
+//#define SDIF_ANALYSIS        3
+//#define    PICT_ANALYSIS        4
 
 #define	RED_MENU			1
 #define GREEN_MENU			2
