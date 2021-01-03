@@ -2,6 +2,8 @@
 
 namespace sonicslash {
 
+using namespace legacy;
+    
 Convolve::Convolve()
 {
     
@@ -98,12 +100,72 @@ void Convolve::initBuffers()
     initBuffer (sineTable);
 }
     
-void Convolve::allocateBuffers()
+bool Convolve::isStateValid()
 {
+    if (inSIPtr == nullptr)
+        return false;
     
+    return true;
+}
+    
+bool Convolve::allocateBuffers()
+{
+    initBuffers();
+    
+    if (! isStateValid())
+    {
+        jassertfalse;
+        return false;
+    }
+    
+    allocateBuffer (analysisWindow, windowSize);
+    allocateBuffer (synthesisWindow, windowSize);
+    allocateBuffer (inputL, windowSize);
+    allocateBuffer (spectrum, points);
+    allocateBuffer (polarSpectrum, points * 2);
+    allocateBuffer (displaySpectrum, halfPoints + 1);
+    allocateBuffer (outputL, windowSize);
+    allocateBuffer (lastPhaseInL, halfPoints + 1);
+    allocateBuffer (lastPhaseOutL, halfPoints + 1);
+
+    if (! time)
+    {
+        allocateBuffer (lastAmpL, halfPoints + 1);
+        allocateBuffer (lastFreqL, halfPoints + 1);
+        allocateBuffer (indexL, halfPoints + 1);
+        allocateBuffer (sineTable, 8192);
+    }
+
+    if (inSIPtr->nChans == STEREO)
+    {
+        allocateBuffer (inputR, windowSize);
+        allocateBuffer (outputR, windowSize);
+        allocateBuffer (lastPhaseInR, halfPoints + 1);
+        allocateBuffer (lastPhaseOutR, halfPoints + 1);
+
+        if (! time)
+        {
+            allocateBuffer (lastAmpR, halfPoints + 1);
+            allocateBuffer (lastFreqR, halfPoints + 1);
+            allocateBuffer (indexR, halfPoints + 1);
+        }
+    }
+    
+    initSineTable();
+    
+    return true;
 }
 
+void Convolve::initSineTable()
+{
+    const int numSamples = sineTable.getNumSamples();
 
+    if (numSamples == 0)
+        return;
+    
+    for (int n = 0; n < numSamples; ++n)
+        setBufferSample (sineTable, n, 0.5f * std::cos (n * twoPi / numSamples));
+}
 
     
 } // namespace sonicslash

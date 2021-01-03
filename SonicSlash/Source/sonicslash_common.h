@@ -4,10 +4,26 @@
 
 namespace sonicslash
 {
-    using Buffer = juce::AudioBuffer<float>;
+    using BufferValueType = float;
+    using Buffer = juce::AudioBuffer<BufferValueType>;
 
-    inline void allocateBuffer (Buffer& b, int size) { b.setSize (1, size); }
+    template<typename SizeType>
+    inline void allocateBuffer (Buffer& b, SizeType size)
+    {
+        b.setSize (1, static_cast<int> (size));
+        
+        if (size > 0)
+            b.clear();
+    }
+    
     inline void initBuffer (Buffer& b) { allocateBuffer (b, 0); }
+    
+    template<typename IndexType, typename BufferValueType>
+    inline void setBufferSample (Buffer& b, IndexType index, BufferValueType value)
+    {
+        b.setSample (0, static_cast<int> (index), value);
+    }
+
     
 namespace legacy
 {

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../../Math/Windows.h"
+#include "sonicslash_SoundFile.h"
+#include <memory>
 
 namespace sonicslash {
     
@@ -12,9 +14,12 @@ public:
 private:
     void setBestRatio();
     void initBuffers();
-    void allocateBuffers();
+    bool allocateBuffers();
+    bool isStateValid();
+    void initSineTable();
 
     //==========================================================================
+    
     long points = { 4096 };
     long halfPoints = { 2048 };
     long windowSize;
@@ -26,7 +31,7 @@ private:
     double maskRatio;
     double minAmplitude = { 0.0 };
     short analysisType;
-    bool time; // bool?
+    bool time; // bool? seems so be but was short
     bool useFunction; // function is a 400 element float,.. for UI??
     
     Buffer analysisWindow;
@@ -49,6 +54,8 @@ private:
     Buffer indexL;
     Buffer indexR;
     Buffer sineTable;
+    
+    std::shared_ptr<SoundInfo> inSIPtr;
 };
     
 } // namespace sonicslash

@@ -812,106 +812,106 @@ InitPvocProcess(void)
 /*
  * allocate memory
  */
-    analysisWindow = synthesisWindow = inputL = nil;
-    spectrum = polarSpectrum = displaySpectrum = outputL = lastPhaseInL = nil;
-    lastPhaseOutL = lastAmpL = lastFreqL = indexL = sineTable = nil;
-     inputR = outputR = lastPhaseInR = lastPhaseOutR = lastAmpR = nil;
-     lastFreqR = indexR = nil;
+//    analysisWindow = synthesisWindow = inputL = nil;
+//    spectrum = polarSpectrum = displaySpectrum = outputL = lastPhaseInL = nil;
+//    lastPhaseOutL = lastAmpL = lastFreqL = indexL = sineTable = nil;
+//     inputR = outputR = lastPhaseInR = lastPhaseOutR = lastAmpR = nil;
+//     lastFreqR = indexR = nil;
+//
+//    analysisWindow = (float *)NewPtr(gPI.windowSize*sizeof(float));
+//    synthesisWindow = (float *)NewPtr(gPI.windowSize*sizeof(float));
+//    inputL = (float *)NewPtr(gPI.windowSize*sizeof(float));
+//    spectrum = (float *)NewPtr(gPI.points*sizeof(float));
+//    polarSpectrum = (float *)NewPtr((gPI.points+2)*sizeof(float));        /* analysis polarSpectrum */
+//    displaySpectrum = (float *)NewPtr((gPI.halfPoints+1)*sizeof(float));    /* For display of amplitude */
+//    outputL = (float *)NewPtr(gPI.windowSize*sizeof(float));
+//    lastPhaseInL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//    lastPhaseOutL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//    if(gPI.time == 0)
+//    {
+//        lastAmpL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//        lastFreqL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//        indexL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//        sineTable = (float *)NewPtr(8192 * sizeof(float));
+//        if(sineTable == 0)
+//        {
+//            DrawErrorMessage("\pNot enough memory for processing");
+//            DeAllocPvocMem();
+//            gProcessDisabled = gProcessEnabled = NO_PROCESS;
+//            MenuUpdate();
+//            outSIPtr = nil;
+//            return(-1);
+//        }
+//    }
 
-    analysisWindow = (float *)NewPtr(gPI.windowSize*sizeof(float));
-    synthesisWindow = (float *)NewPtr(gPI.windowSize*sizeof(float));
-    inputL = (float *)NewPtr(gPI.windowSize*sizeof(float));
-    spectrum = (float *)NewPtr(gPI.points*sizeof(float));
-    polarSpectrum = (float *)NewPtr((gPI.points+2)*sizeof(float));        /* analysis polarSpectrum */
-    displaySpectrum = (float *)NewPtr((gPI.halfPoints+1)*sizeof(float));    /* For display of amplitude */
-    outputL = (float *)NewPtr(gPI.windowSize*sizeof(float));
-    lastPhaseInL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-    lastPhaseOutL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-    if(gPI.time == 0)
-    {
-        lastAmpL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-        lastFreqL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-        indexL = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-        sineTable = (float *)NewPtr(8192 * sizeof(float));
-        if(sineTable == 0)
-        {
-            DrawErrorMessage("\pNot enough memory for processing");
-            DeAllocPvocMem();
-            gProcessDisabled = gProcessEnabled = NO_PROCESS;
-            MenuUpdate();
-            outSIPtr = nil;
-            return(-1);
-        }
-    }
+//    if(inSIPtr->nChans == STEREO)
+//    {
+//        inputR = (float *)NewPtr(gPI.windowSize*sizeof(float));    /* inputR buffer */
+//        outputR = (float *)NewPtr(gPI.windowSize*sizeof(float));    /* outputR buffer */
+//        lastPhaseInR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//        lastPhaseOutR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//        if(lastPhaseOutR == 0)
+//        {
+//            DrawErrorMessage("\pNot enough memory for processing");
+//            DeAllocPvocMem();
+//            gProcessDisabled = gProcessEnabled = NO_PROCESS;
+//            MenuUpdate();
+//            outSIPtr = nil;
+//            return(-1);
+//        }
+//        if(gPI.time == 0)
+//        {
+//            lastAmpR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//            lastFreqR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//            indexR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
+//            if(indexR == 0)
+//            {
+//                DrawErrorMessage("\pNot enough memory for processing");
+//                DeAllocPvocMem();
+//                gProcessDisabled = gProcessEnabled = NO_PROCESS;
+//                MenuUpdate();
+//                outSIPtr = nil;
+//                return(-1);
+//            }
+//        }
+//    }
 
-    if(inSIPtr->nChans == STEREO)
-    {
-        inputR = (float *)NewPtr(gPI.windowSize*sizeof(float));    /* inputR buffer */
-        outputR = (float *)NewPtr(gPI.windowSize*sizeof(float));    /* outputR buffer */
-        lastPhaseInR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-        lastPhaseOutR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-        if(lastPhaseOutR == 0)
-        {
-            DrawErrorMessage("\pNot enough memory for processing");
-            DeAllocPvocMem();
-            gProcessDisabled = gProcessEnabled = NO_PROCESS;
-            MenuUpdate();
-            outSIPtr = nil;
-            return(-1);
-        }
-        if(gPI.time == 0)
-        {
-            lastAmpR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-            lastFreqR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-            indexR = (float *)NewPtr((gPI.halfPoints+1) * sizeof(float));
-            if(indexR == 0)
-            {
-                DrawErrorMessage("\pNot enough memory for processing");
-                DeAllocPvocMem();
-                gProcessDisabled = gProcessEnabled = NO_PROCESS;
-                MenuUpdate();
-                outSIPtr = nil;
-                return(-1);
-            }
-        }
-    }
-
-    if(outputL == 0 || lastPhaseOutL == 0)
-    {
-        DrawErrorMessage("\pNot enough memory for processing");
-        DeAllocPvocMem();
-        gProcessDisabled = gProcessEnabled = NO_PROCESS;
-        MenuUpdate();
-        outSIPtr = nil;
-        return(-1);
-    }
-    ZeroFloatTable(lastPhaseInL, gPI.halfPoints+1);
-    ZeroFloatTable(lastPhaseOutL, gPI.halfPoints+1);
-    ZeroFloatTable(spectrum, gPI.points);
-    ZeroFloatTable(polarSpectrum, (gPI.points+2));
-    ZeroFloatTable(inputL, gPI.windowSize);
-    ZeroFloatTable(outputL, gPI.windowSize);
-    if(gPI.time == 0)
-    {
-        for ( n = 0; n < 8192L; n++ )
-            sineTable[n] = 0.5 * cos(n*twoPi/8192L);
-        ZeroFloatTable(lastAmpL, gPI.halfPoints+1);
-        ZeroFloatTable(lastFreqL, gPI.halfPoints+1);
-        ZeroFloatTable(indexL, gPI.halfPoints+1);
-    }
-    if(inSIPtr->nChans == STEREO)
-    {
-        ZeroFloatTable(lastPhaseInR, gPI.halfPoints+1);
-        ZeroFloatTable(lastPhaseOutR, gPI.halfPoints+1);
-        ZeroFloatTable(inputR, gPI.windowSize);
-        ZeroFloatTable(outputR, gPI.windowSize);
-        if(gPI.time == 0)
-        {
-            ZeroFloatTable(lastAmpR, gPI.halfPoints+1);
-            ZeroFloatTable(lastFreqR, gPI.halfPoints+1);
-            ZeroFloatTable(indexR, gPI.halfPoints+1);
-        }
-    }
+//    if(outputL == 0 || lastPhaseOutL == 0)
+//    {
+//        DrawErrorMessage("\pNot enough memory for processing");
+//        DeAllocPvocMem();
+//        gProcessDisabled = gProcessEnabled = NO_PROCESS;
+//        MenuUpdate();
+//        outSIPtr = nil;
+//        return(-1);
+//    }
+//    ZeroFloatTable(lastPhaseInL, gPI.halfPoints+1);
+//    ZeroFloatTable(lastPhaseOutL, gPI.halfPoints+1);
+//    ZeroFloatTable(spectrum, gPI.points);
+//    ZeroFloatTable(polarSpectrum, (gPI.points+2));
+//    ZeroFloatTable(inputL, gPI.windowSize);
+//    ZeroFloatTable(outputL, gPI.windowSize);
+//    if(gPI.time == 0)
+//    {
+//        for ( n = 0; n < 8192L; n++ )
+//            sineTable[n] = 0.5 * cos(n*twoPi/8192L);
+//        ZeroFloatTable(lastAmpL, gPI.halfPoints+1);
+//        ZeroFloatTable(lastFreqL, gPI.halfPoints+1);
+//        ZeroFloatTable(indexL, gPI.halfPoints+1);
+//    }
+//    if(inSIPtr->nChans == STEREO)
+//    {
+//        ZeroFloatTable(lastPhaseInR, gPI.halfPoints+1);
+//        ZeroFloatTable(lastPhaseOutR, gPI.halfPoints+1);
+//        ZeroFloatTable(inputR, gPI.windowSize);
+//        ZeroFloatTable(outputR, gPI.windowSize);
+//        if(gPI.time == 0)
+//        {
+//            ZeroFloatTable(lastAmpR, gPI.halfPoints+1);
+//            ZeroFloatTable(lastFreqR, gPI.halfPoints+1);
+//            ZeroFloatTable(indexR, gPI.halfPoints+1);
+//        }
+//    }
     FixToString(gPI.scaleFactor, tmpStr);
     if(gPI.time)
     {
