@@ -17,7 +17,7 @@
           <FILE id="IBd0uG" name="IEEE80.h" compile="0" resource="0" file="../Math/IEEE80.h"/>
           <FILE id="HmEX4n" name="PhaseVocoderRoutines.c" compile="0" resource="0"
                 file="../Math/PhaseVocoderRoutines.c"/>
-          <FILE id="gPtTw9" name="Windows.c" compile="0" resource="0" file="../Math/Windows.c"/>
+          <FILE id="L22amI" name="Windows.cpp" compile="1" resource="0" file="../Math/Windows.cpp"/>
           <FILE id="fEDA5A" name="Windows.h" compile="0" resource="0" file="../Math/Windows.h"/>
         </GROUP>
         <GROUP id="{2DC2D988-9F65-29EB-8DF8-430A94370658}" name="Processing">

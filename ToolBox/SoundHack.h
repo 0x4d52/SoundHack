@@ -74,13 +74,13 @@
 
 #define	ABOUT_PICT			129
 
-#define	HAMMING				1
-#define	KAISER				2
-#define	RAMP				3
-#define	RECTANGLE			4
-#define	SINC				5
-#define	TRIANGLE			6
-#define VONHANN				7
+//#define    HAMMING                1
+//#define    KAISER                2
+//#define    RAMP                3
+//#define    RECTANGLE            4
+//#define    SINC                5
+//#define    TRIANGLE            6
+//#define VONHANN                7
 
 #define INFOWIND	'sifw'
 #define VIEWWIND	'svww'

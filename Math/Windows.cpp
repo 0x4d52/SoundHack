@@ -1,17 +1,13 @@
-/* This is where all windowing routines will live */
-#if __MC68881__
-#define __FASTMATH__
-#define __HYBRIDMATH__
-#endif	/* __MC68881__ */
-#include <math.h>
-
-#include "SoundFile.h"
-#include "SoundHack.h"
-//#include <AppleEvents.h>
 #include "Windows.h"
 
-extern float		Pi, twoPi;
-
+namespace sonicslash {
+namespace legacy {
+namespace Windows {
+    
+//#include "SoundFile.h"
+//#include "SoundHack.h"
+////#include <AppleEvents.h>
+    
 void
 GetWindow(float window[], long size, long type)
 {
@@ -47,7 +43,6 @@ HammingWindow(float window[], long size)
 	long	index;
 	float	a = 0.54, b	= 0.46;
 	
-    twoPi = 8.*atan(1.0);
 	for (index = 0; index < size; index++)
 		window[index]= a - b*cos(twoPi*index/(size - 1));
 }
@@ -58,7 +53,6 @@ VonHannWindow(float window[], long size)
 	long	index;
 	float	a = 0.50, b	= 0.40;
 	
-    twoPi = 8.*atan(1.0);
 	for (index = 0; index < size; index++)
 		window[index]= a - b*cos(twoPi*index/(size - 1));
 }
@@ -92,7 +86,6 @@ SincWindow(float window[], long size)
 	float	halfSize;
 	
 	halfSize = (float)size/2.0;
- 	Pi = 4.*atan(1.0);
 	for (index = 0; index < size; index++)
 	{
 		if(halfSize == (float)index)
@@ -178,3 +171,8 @@ TriangleWindow(float window[], long size)
 			tmpFloat = tmpFloat - 1.0/(float)size;
 	}
 }
+    
+} // namespace Windows
+} // namespace legacy
+} // namespace sonicslash
+

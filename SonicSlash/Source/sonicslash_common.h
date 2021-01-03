@@ -12,6 +12,14 @@ namespace legacy
 
     static constexpr int TIME2FREQ = 1;
     static constexpr int FREQ2TIME = 0;
+    
+    static constexpr int HAMMING = 1;
+    static constexpr int KAISER = 2;
+    static constexpr int RAMP = 3;
+    static constexpr int RECTANGLE = 4;
+    static constexpr int SINC = 5;
+    static constexpr int TRIANGLE = 6;
+    static constexpr int VONHANN = 7;
         
 } // namesapce legacy
 } // namesapce sonicslash
