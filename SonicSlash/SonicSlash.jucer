@@ -31,7 +31,7 @@
           <FILE id="sFOEiD" name="Analysis.h" compile="0" resource="0" file="../Processing/Analysis.h"/>
           <FILE id="i9B8UQ" name="Binaural.c" compile="0" resource="0" file="../Processing/Binaural.c"/>
           <FILE id="ZmBcxZ" name="Binaural.h" compile="0" resource="0" file="../Processing/Binaural.h"/>
-          <FILE id="wf3lgU" name="Convolve.c" compile="0" resource="0" file="../Processing/Convolve.c"/>
+          <FILE id="wf3lgU" name="Convolve.cpp" compile="0" resource="0" file="../Processing/Convolve.cpp"/>
           <FILE id="n2DA79" name="Convolve.h" compile="0" resource="0" file="../Processing/Convolve.h"/>
           <FILE id="aOaoJE" name="CopySoundFile.c" compile="0" resource="0" file="../Processing/CopySoundFile.c"/>
           <FILE id="fVugoS" name="CopySoundFile.h" compile="0" resource="0" file="../Processing/CopySoundFile.h"/>

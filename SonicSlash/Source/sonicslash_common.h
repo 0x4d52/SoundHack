@@ -37,7 +37,21 @@ namespace legacy
     
     static constexpr int RIGHT = 1;
     static constexpr int LEFT = 0;
-
+    
+    // Convolve
+    static constexpr int F_FILTLENGTH_FIELD = 4;
+    static constexpr int F_MEMORY_FIELD = 7;
+    static constexpr int F_LOW_RADIO = 9;
+    static constexpr int F_MED_RADIO = 11;
+    static constexpr int F_HIGH_RADIO = 12;
+    static constexpr int F_WINDOW_MENU = 15;
+    static constexpr int F_RING_BOX = 14;
+    static constexpr int F_BRIGHTEN_BOX = 16;
+    static constexpr int F_MOVING_BOX = 13;
+    static constexpr int F_NORM_BOX = 8;
+    static constexpr int F_CANCEL_BUTTON = 2;
+    static constexpr int F_FILTOPEN_BUTTON = 5;
+    static constexpr int F_PROCESS_BUTTON = 1;
 
     // PLACEHOLDERS to get necessary code to compile..
     
