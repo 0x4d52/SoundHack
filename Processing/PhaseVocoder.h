@@ -1,7 +1,3 @@
-#ifdef mc68881
-#define __FASTMATH__
-#define __HYBRIDMATH__
-#endif	/* mc68881 */
 #pragma once
 
 #include "sonicslash_common.h"

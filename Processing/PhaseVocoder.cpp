@@ -1,8 +1,5 @@
-//#if __MC68881__
-//#define __FASTMATH__
-//#define __HYBRIDMATH__
-//#endif    /* __MC68881__ */
-//#include <math.h>
+#include "PhaseVocoder.h"
+
 ////#include <AppleEvents.h>
 //#include "SoundFile.h"
 //#include "CreateSoundFile.h"
@@ -21,7 +18,6 @@
 //#include "ShowSono.h"
 //#include "CarbonGlue.h"
 //
-//extern float        Pi, twoPi;
 //extern MenuHandle    gAppleMenu, gFileMenu, gEditMenu, gProcessMenu,
 //                    gControlMenu, gBandsMenu, gScaleMenu, gTypeMenu, 
 //                    gFormatMenu, gWindowMenu, gSigDispMenu, gSpectDispMenu, gSonoDispMenu;
