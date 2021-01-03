@@ -1357,7 +1357,7 @@ PvocBlock(void)
 //        RemovePtr((Ptr)indexL);
 //        RemovePtr((Ptr)sineTable);
 //    }
-//    
+//
 //    if(inSIPtr->nChans == STEREO)
 //    {
 //        RemovePtr((Ptr)inputR);

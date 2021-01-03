@@ -9,6 +9,46 @@ Convolve::Convolve()
     
 }
     
+void Convolve::setNumPoints (long points)
+{
+    
+}
+
+void Convolve::setWindowType (long windowType)
+{
+    
+}
+    
+void Convolve::setOverlap (float overlap)
+{
+    
+}
+
+void Convolve::setAnalysisRate (long samplesPerFFT)
+{
+    
+}
+
+void Convolve::setSynthesisRate (long samplesPerFFT)
+{
+    
+}
+
+void Convolve::setScaleValue (bool isRelative, bool isTime, float value)
+{
+    
+}
+
+void Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
+{
+    
+}
+
+void Convolve::setGating (bool enable, float minAmplitude, float thresholdUnderMax)
+{
+    
+}
+    
 void Convolve::setBestRatio()
 {
     long maxInterpolate = windowSize / 8;

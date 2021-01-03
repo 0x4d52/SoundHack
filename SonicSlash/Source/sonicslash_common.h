@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <array>
 
 namespace sonicslash
 {
@@ -24,6 +25,7 @@ namespace sonicslash
         b.setSample (0, static_cast<int> (index), value);
     }
 
+    using VariableFunction = std::array<float, 400>;
     
 namespace legacy
 {

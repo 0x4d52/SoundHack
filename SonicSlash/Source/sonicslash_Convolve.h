@@ -9,7 +9,16 @@ namespace sonicslash {
 class Convolve
 {
 public:
-    Convolve ();
+    Convolve();
+    
+    void setNumPoints (long points);
+    void setWindowType (long windowType);
+    void setOverlap (float overlap);
+    void setAnalysisRate (long samplesPerFFT);
+    void setSynthesisRate (long samplesPerFFT);
+    void setScaleValue (bool isRelative, bool isTime, float value);
+    void setScaleFunction (bool isRelative, bool isTime, VariableFunction function);
+    void setGating (bool enable, float minAmplitude, float thresholdUnderMax);
     
 private:
     void setBestRatio();
