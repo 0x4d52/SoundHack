@@ -4,7 +4,6 @@ namespace sonicslash {
 namespace legacy {
 namespace FFT {
 
-
 static float gOmegaPiImag[31];
 static float gOmegaPiReal[31];
 
