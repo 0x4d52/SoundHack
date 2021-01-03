@@ -9,42 +9,74 @@ Convolve::Convolve()
     
 }
     
-void Convolve::setNumPoints (long points)
+bool Convolve::setNumPoints (long points)
+{
+    if (inSIPtr == nullptr)
+        return false;
+    
+    if (inSIPtr->sRate < 1000.0)
+        return false;
+    
+    if (inSIPtr->frameSize <= 0.0)
+        return false;
+
+    if (inSIPtr->nChans <= 0)
+        return false;
+    
+    if (inSIPtr->numBytes <= 0)
+        return false;
+
+    const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
+
+    points = static_cast<long> (juce::jlimit (8, 4096, juce::nextPowerOfTwo (static_cast<int> (points))));
+    
+    frequency = inSIPtr->sRate / points;
+    windowSize = (long) (points * overlap);
+
+    setBestRatio();
+    
+    if (time)
+    {
+        if (relative)
+            relativeScale = scaleFactor * inLength;
+        else
+            relativeScale = scaleFactor;
+    }
+        
+    return true;
+}
+
+bool Convolve::setWindowType (long windowType)
+{
+    
+}
+    
+bool Convolve::setOverlap (float overlap)
 {
     
 }
 
-void Convolve::setWindowType (long windowType)
-{
-    
-}
-    
-void Convolve::setOverlap (float overlap)
+bool Convolve::setAnalysisRate (long samplesPerFFT)
 {
     
 }
 
-void Convolve::setAnalysisRate (long samplesPerFFT)
+bool Convolve::setSynthesisRate (long samplesPerFFT)
 {
     
 }
 
-void Convolve::setSynthesisRate (long samplesPerFFT)
+bool Convolve::setScaleValue (bool isRelative, bool isTime, float value)
 {
     
 }
 
-void Convolve::setScaleValue (bool isRelative, bool isTime, float value)
+bool Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
 {
     
 }
 
-void Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
-{
-    
-}
-
-void Convolve::setGating (bool enable, float minAmplitude, float thresholdUnderMax)
+bool Convolve::setGating (bool enable, float minAmplitude, float thresholdUnderMax)
 {
     
 }

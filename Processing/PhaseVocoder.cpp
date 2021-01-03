@@ -123,50 +123,50 @@ HandlePvocDialogEvent(short itemHit)
     switch(itemHit)
     {
         case P_BANDS_MENU:
-            GetDialogItem(gPvocDialog, P_BANDS_MENU, &itemType, &itemHandle, &itemRect);
-            choice = GetControlValue((ControlHandle)itemHandle);
-            gPI.points = 2<<(13 - choice);
-            tmpFloat = inSIPtr->sRate/gPI.points;
-            FixToString(tmpFloat, tmpStr);
-            GetDialogItem(gPvocDialog, P_FREQ_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            GetDialogItem(gPvocDialog,P_OVERLAP_MENU, &itemType, &itemHandle, &itemRect);
-            choice = GetControlValue((ControlHandle)itemHandle);
-            switch(choice)
-            {
-                case 1:
-                    gPI.windowSize = (long)(gPI.points * 4.0);
-                    break;
-                case 2:
-                    gPI.windowSize = (long)(gPI.points * 2.0);
-                    break;
-                case 3:
-                    gPI.windowSize = gPI.points;
-                    break;
-                case 4:
-                    gPI.windowSize = (long)(gPI.points * 0.5);
-                    break;
-            }
-            gPI.scaleFactor = FindBestRatio();
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            break;
+//            GetDialogItem(gPvocDialog, P_BANDS_MENU, &itemType, &itemHandle, &itemRect);
+//            choice = GetControlValue((ControlHandle)itemHandle);
+//            gPI.points = 2<<(13 - choice);
+//            tmpFloat = inSIPtr->sRate/gPI.points;
+//            FixToString(tmpFloat, tmpStr);
+//            GetDialogItem(gPvocDialog, P_FREQ_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            GetDialogItem(gPvocDialog,P_OVERLAP_MENU, &itemType, &itemHandle, &itemRect);
+//            choice = GetControlValue((ControlHandle)itemHandle);
+//            switch(choice)
+//            {
+//                case 1:
+//                    gPI.windowSize = (long)(gPI.points * 4.0);
+//                    break;
+//                case 2:
+//                    gPI.windowSize = (long)(gPI.points * 2.0);
+//                    break;
+//                case 3:
+//                    gPI.windowSize = gPI.points;
+//                    break;
+//                case 4:
+//                    gPI.windowSize = (long)(gPI.points * 0.5);
+//                    break;
+//            }
+//            gPI.scaleFactor = FindBestRatio();
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            break;
         case P_WINDOW_MENU:
             GetDialogItem(gPvocDialog,P_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
             gPI.windowType = GetControlValue((ControlHandle)itemHandle);

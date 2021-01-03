@@ -11,14 +11,14 @@ class Convolve
 public:
     Convolve();
     
-    void setNumPoints (long points);
-    void setWindowType (long windowType);
-    void setOverlap (float overlap);
-    void setAnalysisRate (long samplesPerFFT);
-    void setSynthesisRate (long samplesPerFFT);
-    void setScaleValue (bool isRelative, bool isTime, float value);
-    void setScaleFunction (bool isRelative, bool isTime, VariableFunction function);
-    void setGating (bool enable, float minAmplitude, float thresholdUnderMax);
+    bool setNumPoints (long points);
+    bool setWindowType (long windowType);
+    bool setOverlap (float overlap);
+    bool setAnalysisRate (long samplesPerFFT);
+    bool setSynthesisRate (long samplesPerFFT);
+    bool setScaleValue (bool isRelative, bool isTime, float value);
+    bool setScaleFunction (bool isRelative, bool isTime, VariableFunction function);
+    bool setGating (bool enable, float minAmplitude, float thresholdUnderMax);
     
 private:
     void setBestRatio();
@@ -31,6 +31,11 @@ private:
 
     //==========================================================================
     
+    float overlap = { 1.0f };
+    float frequency = { 44100.0f / 4096 };
+    bool relative = { false };
+    float relativeScale = { 1.0f };
+    
     long points = { 4096 };
     long halfPoints = { 2048 };
     long windowSize;
@@ -42,7 +47,7 @@ private:
     double maskRatio;
     double minAmplitude = { 0.0 };
     short analysisType;
-    bool time; // bool? seems so be but was short
+    bool time = { true };
     bool useFunction; // function is a 400 element float,.. for UI??
     
     Buffer analysisWindow;
