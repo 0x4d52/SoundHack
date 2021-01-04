@@ -4,6 +4,15 @@ namespace sonicslash {
 
 using namespace legacy;
     
+static float roundOverlapToValidValue (float overlap)
+{
+    if (overlap < 0.75f) return 0.5f;
+    if (overlap < 1.5f)  return 1.0f;
+    if (overlap < 3.0f)  return 2.0f;
+
+    return 4.0f;
+}
+    
 Convolve::Convolve()
 {
     
@@ -17,32 +26,13 @@ bool Convolve::setNumPoints (long points)
     if (inSIPtr->sRate < 1000.0)
         return false;
     
-    if (inSIPtr->frameSize <= 0.0)
-        return false;
-
-    if (inSIPtr->nChans <= 0)
-        return false;
-    
-    if (inSIPtr->numBytes <= 0)
-        return false;
-
-    const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
-
     points = static_cast<long> (juce::jlimit (8, 4096, juce::nextPowerOfTwo (static_cast<int> (points))));
     
     frequency = inSIPtr->sRate / points;
-    windowSize = (long) (points * overlap);
-
-    setBestRatio();
     
-    if (time)
-    {
-        if (relative)
-            relativeScale = scaleFactor * inLength;
-        else
-            relativeScale = scaleFactor;
-    }
-        
+    if (! setOverlap (overlap))
+        return false;
+            
     return true;
 }
 
@@ -52,9 +42,35 @@ bool Convolve::setWindowType (long type)
     return true;
 }
     
-bool Convolve::setOverlap (float overlap)
+bool Convolve::setOverlap (float value)
 {
+    if (inSIPtr->sRate < 1000.0)
+        return false;
     
+    if (inSIPtr->frameSize <= 0.0)
+        return false;
+    
+    if (inSIPtr->nChans <= 0)
+        return false;
+    
+    if (inSIPtr->numBytes <= 0)
+        return false;
+    
+    const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
+
+    overlap = roundOverlapToValidValue (value);
+    windowSize = (long) (points * overlap);
+    setBestRatio();
+
+    if (time)
+    {
+        if (relative)
+            relativeScale = scaleFactor * inLength;
+        else
+            relativeScale = scaleFactor;
+    }
+    
+    return true;
 }
 
 bool Convolve::setAnalysisRate (long samplesPerFFT)
