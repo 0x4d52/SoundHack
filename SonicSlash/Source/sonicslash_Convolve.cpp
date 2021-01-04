@@ -46,9 +46,10 @@ bool Convolve::setNumPoints (long points)
     return true;
 }
 
-bool Convolve::setWindowType (long windowType)
+bool Convolve::setWindowType (long type)
 {
-    
+    windowType = juce::jlimit (WINDOWTYPE_MIN, WINDOWTYPE_MAX, type);
+    return true;
 }
     
 bool Convolve::setOverlap (float overlap)

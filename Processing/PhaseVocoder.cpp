@@ -168,9 +168,9 @@ HandlePvocDialogEvent(short itemHit)
 //            SetDialogItemText(itemHandle, tmpStr);
 //            break;
         case P_WINDOW_MENU:
-            GetDialogItem(gPvocDialog,P_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
-            gPI.windowType = GetControlValue((ControlHandle)itemHandle);
-            break;
+//            GetDialogItem(gPvocDialog,P_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
+//            gPI.windowType = GetControlValue((ControlHandle)itemHandle);
+//            break;
         case P_OVERLAP_MENU:
             GetDialogItem(gPvocDialog,P_OVERLAP_MENU, &itemType, &itemHandle, &itemRect);
             choice = GetControlValue((ControlHandle)itemHandle);
