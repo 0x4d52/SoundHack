@@ -15,7 +15,7 @@ static float roundOverlapToValidValue (float overlap)
     
 Convolve::Convolve()
 {
-    
+    scaleFunction.fill (1.0f);
 }
     
 bool Convolve::setNumPoints (long points)
@@ -44,30 +44,34 @@ bool Convolve::setWindowType (long type)
     
 bool Convolve::updateRelativeScale()
 {
-    if (! time)
-        return true;
-        
     if (! relative)
     {
         relativeScale = scaleFactor;
         return true;
     }
 
-    if (inSIPtr->sRate < 1000.0)
-        return false;
-    
-    if (inSIPtr->frameSize <= 0.0)
-        return false;
-    
-    if (inSIPtr->nChans <= 0)
-        return false;
-    
-    if (inSIPtr->numBytes <= 0)
-        return false;
-    
-    const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
+    if (time)
+    {
+        if (inSIPtr->sRate < 1000.0)
+            return false;
+        
+        if (inSIPtr->frameSize <= 0.0)
+            return false;
+        
+        if (inSIPtr->nChans <= 0)
+            return false;
+        
+        if (inSIPtr->numBytes <= 0)
+            return false;
+        
+        const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
 
-    relativeScale = scaleFactor * inLength;
+        relativeScale = scaleFactor * inLength;
+        return true;
+    }
+    
+    // pitch
+    relativeScale = std::exp2 (scaleFactor / 12.0f);
     return true;
 }
     
@@ -116,12 +120,23 @@ bool Convolve::setSynthesisRate (long samplesPerFFT)
 
 bool Convolve::setScaleValue (bool isRelative, bool isTime, float value)
 {
+    relative = isRelative;
+    time = isTime;
+    relativeScale = scaleFactor = value;
     
+    if (time)
+        setBestRatio(); // NB!! in the legacy code the equivalent call exceptionally doesn't re-assign the scaleFactor (ours always does)
+
+    return updateRelativeScale();
 }
 
 bool Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
 {
+    if (! setScaleValue (isRelative, isTime, isTime ? 1.0f : 0.0f))
+        return false;
     
+    scaleFunction = function;
+    return true;
 }
 
 bool Convolve::setGating (bool enable, float minAmplitudeLinear, float thresholdUnderMaxLinear)

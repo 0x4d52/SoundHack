@@ -50,7 +50,9 @@ private:
     double minAmplitude = { 0.0 };
     short analysisType;
     bool time = { true };
-    bool useFunction; // function is a 400 element float,.. for UI??
+    bool useFunction = { false };
+    
+    VariableFunction scaleFunction;
     
     Buffer analysisWindow;
     Buffer synthesisWindow;

@@ -268,168 +268,168 @@ HandlePvocDialogEvent(short itemHit)
 //            SetDialogItemText(itemHandle, tmpStr);
 //            break;
         case P_SCALE_FIELD:
-            GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle, tmpStr);
-            if(altScale)
-            {
-                StringToFix(tmpStr, &tmpFloat);
-                if(gPI.time)
-                    gPI.scaleFactor = tmpFloat/inLength;
-                else
-                    gPI.scaleFactor = EExp2(tmpFloat/12.0);
-            }
-            else
-                StringToFix(tmpStr,&gPI.scaleFactor);
-            if(gPI.time)
-            {
-                FindBestRatio();
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-                NumToString(gPI.decimation, tmpStr);
-                GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-                NumToString(gPI.interpolation, tmpStr);
-                GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
+//            GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle, tmpStr);
+//            if(altScale)
+//            {
+//                StringToFix(tmpStr, &tmpFloat);
+//                if(gPI.time)
+//                    gPI.scaleFactor = tmpFloat/inLength;
+//                else
+//                    gPI.scaleFactor = EExp2(tmpFloat/12.0);
+//            }
+//            else
+//                StringToFix(tmpStr,&gPI.scaleFactor);
+//            if(gPI.time)
+//            {
+//                FindBestRatio();
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//                NumToString(gPI.decimation, tmpStr);
+//                GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//                NumToString(gPI.interpolation, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
             break;
         case P_SCALE_MENU:
-            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
-            scaleChoice = GetControlValue((ControlHandle)itemHandle);
-            altScale = scaleChoice - 1;
-            if(!altScale)
-            {
-                FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            else
-            {
-                if(gPI.time)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                    GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                    SetDialogItemText(itemHandle, tmpStr);
-                }
-                else
-                {
-                    tmpFloat = 12.0 * LLog2(gPI.scaleFactor);
-                    FixToString(tmpFloat, tmpStr);
-                    GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                    SetDialogItemText(itemHandle, tmpStr);
-                }
-            }
-            gPI.scaleFactor = FindBestRatio();
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
+//            scaleChoice = GetControlValue((ControlHandle)itemHandle);
+//            altScale = scaleChoice - 1;
+//            if(!altScale)
+//            {
+//                FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            else
+//            {
+//                if(gPI.time)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                    GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                    SetDialogItemText(itemHandle, tmpStr);
+//                }
+//                else
+//                {
+//                    tmpFloat = 12.0 * LLog2(gPI.scaleFactor);
+//                    FixToString(tmpFloat, tmpStr);
+//                    GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                    SetDialogItemText(itemHandle, tmpStr);
+//                }
+//            }
+//            gPI.scaleFactor = FindBestRatio();
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
             break;
         case P_TIME_RADIO:
-            GetDialogItem(gPvocDialog, P_TIME_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,ON);
-            GetDialogItem(gPvocDialog, P_PITCH_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            for(i = 0; i < 400; i++)
-                gFunction[i] = 1.0;
-            if(altScale)
-            {
-                tmpFloat = gPI.scaleFactor * inLength;
-                HMSTimeString(tmpFloat, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            gPI.time = TRUE;
-            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
-            SetMenuItemText(gScaleMenu, 2, "\pLength Desired:");
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            HiliteControl((ControlHandle)itemHandle,0);        
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            HiliteControl((ControlHandle)itemHandle,0);
-            gPI.scaleFactor = FindBestRatio();
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            DrawDialog(gPvocDialog);
+//            GetDialogItem(gPvocDialog, P_TIME_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,ON);
+//            GetDialogItem(gPvocDialog, P_PITCH_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            for(i = 0; i < 400; i++)
+//                gFunction[i] = 1.0;
+//            if(altScale)
+//            {
+//                tmpFloat = gPI.scaleFactor * inLength;
+//                HMSTimeString(tmpFloat, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            gPI.time = TRUE;
+//            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
+//            SetMenuItemText(gScaleMenu, 2, "\pLength Desired:");
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            HiliteControl((ControlHandle)itemHandle,0);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            HiliteControl((ControlHandle)itemHandle,0);
+//            gPI.scaleFactor = FindBestRatio();
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            DrawDialog(gPvocDialog);
             break;
         case P_PITCH_RADIO:
-            GetDialogItem(gPvocDialog, P_TIME_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            GetDialogItem(gPvocDialog, P_PITCH_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,ON);
-            for(i = 0; i < 400; i++)
-                gFunction[i] = 0.0;
-            if(altScale)
-            {
-                tmpFloat = 12.0 * LLog2(gPI.scaleFactor);
-                FixToString(tmpFloat, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            gPI.time = FALSE;
-            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
-            SetMenuItemText(gScaleMenu, 2, "\pSemitone Shift:");
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            HiliteControl((ControlHandle)itemHandle,255);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            HiliteControl((ControlHandle)itemHandle,255);
-            gPI.scaleFactor = FindBestRatio();
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            DrawDialog(gPvocDialog);
+//            GetDialogItem(gPvocDialog, P_TIME_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            GetDialogItem(gPvocDialog, P_PITCH_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,ON);
+//            for(i = 0; i < 400; i++)
+//                gFunction[i] = 0.0;
+//            if(altScale)
+//            {
+//                tmpFloat = 12.0 * LLog2(gPI.scaleFactor);
+//                FixToString(tmpFloat, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            gPI.time = FALSE;
+//            GetDialogItem(gPvocDialog, P_SCALE_MENU, &itemType, &itemHandle, &itemRect);
+//            SetMenuItemText(gScaleMenu, 2, "\pSemitone Shift:");
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            HiliteControl((ControlHandle)itemHandle,255);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            HiliteControl((ControlHandle)itemHandle,255);
+//            gPI.scaleFactor = FindBestRatio();
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            DrawDialog(gPvocDialog);
             break;
         case P_DRAW_BOX:
             GetDialogItem(gPvocDialog, P_DRAW_BOX, &itemType, &itemHandle, &itemRect);
