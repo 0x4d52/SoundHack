@@ -5,6 +5,10 @@
               headerPath="../../Source">
   <MAINGROUP id="iraBm6" name="SonicSlash">
     <GROUP id="{29970870-4461-FD5E-2322-FC7237A058EB}" name="Source">
+      <FILE id="GEv8le" name="sonicslash_Convolve.cpp" compile="1" resource="0"
+            file="Source/sonicslash_Convolve.cpp"/>
+      <FILE id="ITqa1i" name="sonicslash_Convolve.h" compile="0" resource="0"
+            file="Source/sonicslash_Convolve.h"/>
       <FILE id="LRMOYh" name="sonicslash_PhaseVocoder.cpp" compile="1" resource="0"
             file="Source/sonicslash_PhaseVocoder.cpp"/>
       <FILE id="AP58YZ" name="sonicslash_PhaseVocoder.h" compile="0" resource="0"
