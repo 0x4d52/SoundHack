@@ -28,6 +28,7 @@ private:
     void initSineTable();
     void phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[]);
     void simpleSpectralGate (float polarSpectrum[]);
+    bool updateRelativeScale();
 
     //==========================================================================
     
@@ -38,12 +39,12 @@ private:
     
     long points = { 4096 };
     long halfPoints = { 2048 };
-    long windowSize;
-    long decimation;
-    long interpolation;
+    long windowSize = { 2048 };
+    long decimation = { 128 };
+    long interpolation = { 128 };
     long windowType = { legacy::HAMMING };
     bool phaseLocking = { false }; // seems to be always false in legacy code?
-    double scaleFactor;
+    double scaleFactor = { 1.0 };
     double maskRatio;
     double minAmplitude = { 0.0 };
     short analysisType;

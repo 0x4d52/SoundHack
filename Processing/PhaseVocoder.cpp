@@ -210,63 +210,63 @@ HandlePvocDialogEvent(short itemHit)
 //            SetDialogItemText(itemHandle, tmpStr);
 //            break;
         case P_ANALYSIS_RATE_FIELD:
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle, tmpStr);
-            StringToNum(tmpStr, &gPI.decimation);
-            if(gPI.decimation > (gPI.windowSize >> 3))
-                gPI.decimation = gPI.windowSize >> 3;
-            if(gPI.time)
-                gPI.scaleFactor = ((float)gPI.interpolation/gPI.decimation);
-            else
-                gPI.interpolation = gPI.decimation;
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            break;
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle, tmpStr);
+//            StringToNum(tmpStr, &gPI.decimation);
+//            if(gPI.decimation > (gPI.windowSize >> 3))
+//                gPI.decimation = gPI.windowSize >> 3;
+//            if(gPI.time)
+//                gPI.scaleFactor = ((float)gPI.interpolation/gPI.decimation);
+//            else
+//                gPI.interpolation = gPI.decimation;
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            break;
         case P_SYNTHESIS_RATE_FIELD:
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle, tmpStr);
-            StringToNum(tmpStr, &gPI.interpolation);
-            if(gPI.interpolation > (gPI.windowSize >> 3))
-                gPI.interpolation = gPI.windowSize >> 3;
-            if(gPI.time)
-                gPI.scaleFactor = ((float)gPI.interpolation/gPI.decimation);
-            else
-                gPI.decimation = gPI.interpolation;
-            if(gPI.time)
-            {
-                if(altScale)
-                {
-                    tmpFloat = gPI.scaleFactor * inLength;
-                    FixToString(tmpFloat, tmpStr);
-                }
-                else
-                    FixToString(gPI.scaleFactor, tmpStr);
-                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            NumToString(gPI.decimation, tmpStr);
-            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            NumToString(gPI.interpolation, tmpStr);
-            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, tmpStr);
-            break;
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle, tmpStr);
+//            StringToNum(tmpStr, &gPI.interpolation);
+//            if(gPI.interpolation > (gPI.windowSize >> 3))
+//                gPI.interpolation = gPI.windowSize >> 3;
+//            if(gPI.time)
+//                gPI.scaleFactor = ((float)gPI.interpolation/gPI.decimation);
+//            else
+//                gPI.decimation = gPI.interpolation;
+//            if(gPI.time)
+//            {
+//                if(altScale)
+//                {
+//                    tmpFloat = gPI.scaleFactor * inLength;
+//                    FixToString(tmpFloat, tmpStr);
+//                }
+//                else
+//                    FixToString(gPI.scaleFactor, tmpStr);
+//                GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            NumToString(gPI.decimation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_ANALYSIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            NumToString(gPI.interpolation, tmpStr);
+//            GetDialogItem(gPvocDialog, P_SYNTHESIS_RATE_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, tmpStr);
+//            break;
         case P_SCALE_FIELD:
             GetDialogItem(gPvocDialog, P_SCALE_FIELD, &itemType, &itemHandle, &itemRect);
             GetDialogItemText(itemHandle, tmpStr);

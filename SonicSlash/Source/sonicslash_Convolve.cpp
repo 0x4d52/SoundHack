@@ -32,7 +32,7 @@ bool Convolve::setNumPoints (long points)
     
     if (! setOverlap (overlap))
         return false;
-            
+    
     return true;
 }
 
@@ -42,8 +42,17 @@ bool Convolve::setWindowType (long type)
     return true;
 }
     
-bool Convolve::setOverlap (float value)
+bool Convolve::updateRelativeScale()
 {
+    if (! time)
+        return true;
+        
+    if (! relative)
+    {
+        relativeScale = scaleFactor;
+        return true;
+    }
+
     if (inSIPtr->sRate < 1000.0)
         return false;
     
@@ -58,29 +67,51 @@ bool Convolve::setOverlap (float value)
     
     const double inLength = inSIPtr->numBytes / (inSIPtr->sRate * inSIPtr->nChans * inSIPtr->frameSize);
 
+    relativeScale = scaleFactor * inLength;
+    return true;
+}
+    
+bool Convolve::setOverlap (float value)
+{
     overlap = roundOverlapToValidValue (value);
     windowSize = (long) (points * overlap);
     setBestRatio();
 
-    if (time)
-    {
-        if (relative)
-            relativeScale = scaleFactor * inLength;
-        else
-            relativeScale = scaleFactor;
-    }
-    
-    return true;
+    return updateRelativeScale();
 }
 
 bool Convolve::setAnalysisRate (long samplesPerFFT)
 {
+    jassert (windowSize > 0);
+    decimation = juce::jmax (1L, samplesPerFFT);
     
+    if (decimation > (windowSize >> 3))
+        decimation = windowSize >> 3;
+    
+    if (time)
+        scaleFactor = (float) interpolation / decimation;
+    else
+        interpolation = decimation;
+    
+    return updateRelativeScale();
 }
 
 bool Convolve::setSynthesisRate (long samplesPerFFT)
 {
+    jassert (windowSize > 0);
+    jassert (decimation > 0);
+
+    interpolation = juce::jmax (1L, samplesPerFFT);
+
+    if (interpolation > (windowSize >> 3))
+        interpolation = windowSize >> 3;
     
+    if (time)
+        scaleFactor = (float) interpolation / decimation;
+    else
+        decimation = interpolation;
+    
+    return updateRelativeScale();
 }
 
 bool Convolve::setScaleValue (bool isRelative, bool isTime, float value)
