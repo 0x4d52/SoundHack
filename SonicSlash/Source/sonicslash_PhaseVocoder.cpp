@@ -1,4 +1,4 @@
-#include "sonicslash_Convolve.h"
+#include "sonicslash_PhaseVocoder.h"
 
 namespace sonicslash {
 
@@ -13,12 +13,12 @@ static float roundOverlapToValidValue (float overlap)
     return 4.0f;
 }
     
-Convolve::Convolve()
+PhaseVocoder::PhaseVocoder()
 {
     scaleFunction.fill (1.0f);
 }
     
-bool Convolve::setNumPoints (long points)
+bool PhaseVocoder::setNumPoints (long points)
 {
     if (inSIPtr == nullptr)
         return false;
@@ -36,13 +36,13 @@ bool Convolve::setNumPoints (long points)
     return true;
 }
 
-bool Convolve::setWindowType (long type)
+bool PhaseVocoder::setWindowType (long type)
 {
     windowType = juce::jlimit (WINDOWTYPE_MIN, WINDOWTYPE_MAX, type);
     return true;
 }
     
-bool Convolve::updateRelativeScale()
+bool PhaseVocoder::updateRelativeScale()
 {
     if (! relative)
     {
@@ -75,7 +75,7 @@ bool Convolve::updateRelativeScale()
     return true;
 }
     
-bool Convolve::setOverlap (float value)
+bool PhaseVocoder::setOverlap (float value)
 {
     overlap = roundOverlapToValidValue (value);
     windowSize = (long) (points * overlap);
@@ -84,7 +84,7 @@ bool Convolve::setOverlap (float value)
     return updateRelativeScale();
 }
 
-bool Convolve::setAnalysisRate (long samplesPerFFT)
+bool PhaseVocoder::setAnalysisRate (long samplesPerFFT)
 {
     jassert (windowSize > 0);
     decimation = juce::jmax (1L, samplesPerFFT);
@@ -100,7 +100,7 @@ bool Convolve::setAnalysisRate (long samplesPerFFT)
     return updateRelativeScale();
 }
 
-bool Convolve::setSynthesisRate (long samplesPerFFT)
+bool PhaseVocoder::setSynthesisRate (long samplesPerFFT)
 {
     jassert (windowSize > 0);
     jassert (decimation > 0);
@@ -118,7 +118,7 @@ bool Convolve::setSynthesisRate (long samplesPerFFT)
     return updateRelativeScale();
 }
 
-bool Convolve::setScaleValue (bool isRelative, bool isTime, float value)
+bool PhaseVocoder::setScaleValue (bool isRelative, bool isTime, float value)
 {
     relative = isRelative;
     time = isTime;
@@ -130,7 +130,7 @@ bool Convolve::setScaleValue (bool isRelative, bool isTime, float value)
     return updateRelativeScale();
 }
 
-bool Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
+bool PhaseVocoder::setScaleFunction (bool isRelative, bool isTime, VariableFunction function)
 {
     if (! setScaleValue (isRelative, isTime, isTime ? 1.0f : 0.0f))
         return false;
@@ -139,7 +139,7 @@ bool Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction 
     return true;
 }
 
-bool Convolve::setGating (bool enable, float minAmplitudeLinear, float thresholdUnderMaxLinear)
+bool PhaseVocoder::setGating (bool enable, float minAmplitudeLinear, float thresholdUnderMaxLinear)
 {
     // thresholdUnderMax appears to be the legacy P_RATIO_FIELD ?
     // legacy UI values were in dB, internal values are linear
@@ -159,7 +159,7 @@ bool Convolve::setGating (bool enable, float minAmplitudeLinear, float threshold
     return true;
 }
     
-void Convolve::setBestRatio()
+void PhaseVocoder::setBestRatio()
 {
     long maxInterpolate = windowSize / 8;
     
@@ -226,7 +226,7 @@ void Convolve::setBestRatio()
     scaleFactor = (float) interpolation / decimation;
 }
 
-void Convolve::initBuffers()
+void PhaseVocoder::initBuffers()
 {
     initBuffer (analysisWindow);
     initBuffer (synthesisWindow);
@@ -250,7 +250,7 @@ void Convolve::initBuffers()
     initBuffer (sineTable);
 }
     
-bool Convolve::isStateValid()
+bool PhaseVocoder::isStateValid()
 {
     if (inSIPtr == nullptr)
         return false;
@@ -258,7 +258,7 @@ bool Convolve::isStateValid()
     return true;
 }
     
-bool Convolve::allocateBuffers()
+bool PhaseVocoder::allocateBuffers()
 {
     initBuffers();
     
@@ -306,7 +306,7 @@ bool Convolve::allocateBuffers()
     return true;
 }
 
-void Convolve::initSineTable()
+void PhaseVocoder::initSineTable()
 {
     const int numSamples = sineTable.getNumSamples();
 
@@ -317,7 +317,7 @@ void Convolve::initSineTable()
         setBufferSample (sineTable, n, 0.5f * std::cos (n * twoPi / numSamples));
 }
     
-void Convolve::phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])
+void PhaseVocoder::phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], float lastPhaseOut[])
 {
     float amplitude, phase; // seem unused!?
     
@@ -387,7 +387,7 @@ void Convolve::phaseInterpolate (float polarSpectrum[], float lastPhaseIn[], flo
     }
 }
 
-void Convolve::simpleSpectralGate (float polarSpectrum[])
+void PhaseVocoder::simpleSpectralGate (float polarSpectrum[])
 {
     float maxAmplitude = 0.0;
     
