@@ -19,6 +19,12 @@ namespace sonicslash
     
     inline void initBuffer (Buffer& b) { allocateBuffer (b, 0); }
     
+    inline void setBufferToReferTo (Buffer& b1, Buffer& b2)
+    {
+        jassert (b2.getNumChannels() == 1);
+        b1.setDataToReferTo (b2.getArrayOfWritePointers(), 1, b2.getNumSamples());
+    }
+    
     template<typename IndexType, typename BufferValueType>
     inline void setBufferSample (Buffer& b, IndexType index, BufferValueType value)
     {
