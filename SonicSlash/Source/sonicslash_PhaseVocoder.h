@@ -37,6 +37,7 @@ private:
     bool relative = { false };
     float relativeScale = { 1.0f };
     bool gatingEnabled = { false };
+    bool normalise = { false };
     
     long points = { 4096 };
     long halfPoints = { 2048 };
