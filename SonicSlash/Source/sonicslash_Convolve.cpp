@@ -74,7 +74,27 @@ bool Convolve::convolveBlock()
 
 void Convolve::brightenFFT (float cartSpectrum[], long halfSizeFFT)
 {
-    
+    const float twoOverHalfFFT = 64.0f / halfSizeFFT;
+
+    for (long bandNumber = 0; bandNumber <= halfSizeFFT; ++bandNumber)
+    {
+        const long realIndex = bandNumber << 1;
+        const long imagIndex = realIndex + 1;
+        
+        if (bandNumber == 0)
+        {
+            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float) bandNumber * twoOverHalfFFT;
+        }
+        else if (bandNumber == halfSizeFFT)
+        {
+            cartSpectrum[1] = cartSpectrum[1] * (float) bandNumber * twoOverHalfFFT;
+        }
+        else
+        {
+            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float) bandNumber * twoOverHalfFFT;
+            cartSpectrum[imagIndex] = cartSpectrum[imagIndex] * (float) bandNumber * twoOverHalfFFT;
+        }
+    }
 }
 
     

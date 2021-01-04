@@ -750,41 +750,41 @@ ConvolveBlock(void)
 //    return(TRUE);
 //}
 
-void
-DeAllocConvMem(void)
-{
-	OSErr	error = 0;
-
-	if(gCI.windowImpulse)
-	{
-		RemovePtr((Ptr)Window);
-		error += MemError();
-	}
-		
-	RemovePtr((Ptr)displaySpectrum);
-	error += MemError();
-	RemovePtr((Ptr)impulseLeft);
-	error += MemError();
-	RemovePtr((Ptr)inputLeft);
-	error += MemError();
-	RemovePtr((Ptr)overlapLeft);
-	error += MemError();
-	if(filtSIPtr->nChans == STEREO)
-	{
-		RemovePtr((Ptr)impulseRight);
-		error += MemError();
-	}
-	if(gProcNChans == STEREO)
-	{
-		RemovePtr((Ptr)inputRight);
-		error += MemError();
-		RemovePtr((Ptr)overlapRight);
-		error += MemError();
-	}
-		
-	Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
-	impulseRight = inputRight = outputRight = overlapRight = nil;
-}
+//void
+//DeAllocConvMem(void)
+//{
+//    OSErr    error = 0;
+//
+//    if(gCI.windowImpulse)
+//    {
+//        RemovePtr((Ptr)Window);
+//        error += MemError();
+//    }
+//
+//    RemovePtr((Ptr)displaySpectrum);
+//    error += MemError();
+//    RemovePtr((Ptr)impulseLeft);
+//    error += MemError();
+//    RemovePtr((Ptr)inputLeft);
+//    error += MemError();
+//    RemovePtr((Ptr)overlapLeft);
+//    error += MemError();
+//    if(filtSIPtr->nChans == STEREO)
+//    {
+//        RemovePtr((Ptr)impulseRight);
+//        error += MemError();
+//    }
+//    if(gProcNChans == STEREO)
+//    {
+//        RemovePtr((Ptr)inputRight);
+//        error += MemError();
+//        RemovePtr((Ptr)overlapRight);
+//        error += MemError();
+//    }
+//
+//    Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
+//    impulseRight = inputRight = outputRight = overlapRight = nil;
+//}
 
 void
 BrightenFFT(float cartSpectrum[], long halfLengthFFT)
