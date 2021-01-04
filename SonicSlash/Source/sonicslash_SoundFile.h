@@ -7,16 +7,16 @@ namespace sonicslash {
 struct SoundInfo
 {
 //    FSSpec    sfSpec;            // name, parID and vRefNum
-//    double    sRate;            /* sample rate*/
+    double    sRate;            /* sample rate*/
 //    TimeScale timeScale;    /* if QT, its media timeScale */
 //    TimeValue timeValue;    /* if QT, the position */
 //    long    dataStart;        /* offset in data fork from begining of file (in bytes)*/
 //    long    dataEnd;        /* byte position of the last sample*/
-//    long    numBytes;        /* number of bytes of sound data */
+    long    numBytes;        /* number of bytes of sound data */
 //    long    packMode;        /* numeric format*/
 //    Str255    compName;        /* string description of compressed numeric formats */
     long    nChans;            /* number of channels */
-//    double    frameSize;        /* size of sample in bytes */
+    double    frameSize;        /* size of sample in bytes */
 //    long    sfType;            /* type of soundfile header */
 //    short    rFileNum;        /* resource file number */
 //    short    dFileNum;        /* data file number */
