@@ -461,45 +461,45 @@ HandlePvocDialogEvent(short itemHit)
             ClipRect(&dialogRect);
             break;
         case P_GATE_BOX:
-            GetDialogItem(gPvocDialog, P_GATE_BOX, &itemType, &itemHandle, &itemRect);
-            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
-            {
-                SetControlValue((ControlHandle)itemHandle,OFF);
-                HideDialogItem(gPvocDialog, P_MINAMP_TEXT);
-                HideDialogItem(gPvocDialog, P_RATIO_TEXT);
-                HideDialogItem(gPvocDialog, P_RATIO_FIELD);
-                HideDialogItem(gPvocDialog, P_MINAMP_FIELD);
-                gPI.minAmplitude = 0.0;
-                gPI.maskRatio = 0.0;
-            }
-            else
-            {
-                SetControlValue((ControlHandle)itemHandle,ON);
-                ShowDialogItem(gPvocDialog, P_MINAMP_TEXT);
-                ShowDialogItem(gPvocDialog, P_RATIO_TEXT);
-                ShowDialogItem(gPvocDialog, P_RATIO_FIELD);
-                ShowDialogItem(gPvocDialog, P_MINAMP_FIELD);
-                gPI.minAmplitude = 0.00001;
-                gPI.maskRatio = 0.001;
-                NumToString((long)(20.0 * log10(gPI.minAmplitude)), tmpStr);
-                GetDialogItem(gPvocDialog, P_MINAMP_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-                NumToString((long)(20.0 * log10(gPI.maskRatio)), tmpStr);
-                GetDialogItem(gPvocDialog, P_RATIO_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, tmpStr);
-            }
-            break;
+//            GetDialogItem(gPvocDialog, P_GATE_BOX, &itemType, &itemHandle, &itemRect);
+//            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
+//            {
+//                SetControlValue((ControlHandle)itemHandle,OFF);
+//                HideDialogItem(gPvocDialog, P_MINAMP_TEXT);
+//                HideDialogItem(gPvocDialog, P_RATIO_TEXT);
+//                HideDialogItem(gPvocDialog, P_RATIO_FIELD);
+//                HideDialogItem(gPvocDialog, P_MINAMP_FIELD);
+//                gPI.minAmplitude = 0.0;
+//                gPI.maskRatio = 0.0;
+//            }
+//            else
+//            {
+//                SetControlValue((ControlHandle)itemHandle,ON);
+//                ShowDialogItem(gPvocDialog, P_MINAMP_TEXT);
+//                ShowDialogItem(gPvocDialog, P_RATIO_TEXT);
+//                ShowDialogItem(gPvocDialog, P_RATIO_FIELD);
+//                ShowDialogItem(gPvocDialog, P_MINAMP_FIELD);
+//                gPI.minAmplitude = 0.00001;
+//                gPI.maskRatio = 0.001;
+//                NumToString((long)(20.0 * log10(gPI.minAmplitude)), tmpStr);
+//                GetDialogItem(gPvocDialog, P_MINAMP_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//                NumToString((long)(20.0 * log10(gPI.maskRatio)), tmpStr);
+//                GetDialogItem(gPvocDialog, P_RATIO_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, tmpStr);
+//            }
+//            break;
         case P_MINAMP_FIELD:
-            GetDialogItem(gPvocDialog, P_MINAMP_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle, tmpStr);
-            StringToFix(tmpStr, &tmpFloat);
-            gPI.minAmplitude = powf(10.0, tmpFloat/20.0);
+//            GetDialogItem(gPvocDialog, P_MINAMP_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle, tmpStr);
+//            StringToFix(tmpStr, &tmpFloat);
+//            gPI.minAmplitude = powf(10.0, tmpFloat/20.0);
             break;
         case P_RATIO_FIELD:
-            GetDialogItem(gPvocDialog, P_RATIO_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle, tmpStr);
-            StringToFix(tmpStr, &tmpFloat);
-            gPI.maskRatio = powf(10.0, tmpFloat/20.0);
+//            GetDialogItem(gPvocDialog, P_RATIO_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle, tmpStr);
+//            StringToFix(tmpStr, &tmpFloat);
+//            gPI.maskRatio = powf(10.0, tmpFloat/20.0);
             break;
         case P_CANCEL_BUTTON:
             inSIPtr = nil;

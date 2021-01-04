@@ -18,7 +18,7 @@ public:
     bool setSynthesisRate (long samplesPerFFT);
     bool setScaleValue (bool isRelative, bool isTime, float value);
     bool setScaleFunction (bool isRelative, bool isTime, VariableFunction function);
-    bool setGating (bool enable, float minAmplitude, float thresholdUnderMax);
+    bool setGating (bool enable, float minAmplitudeLinear = 0.0f, float thresholdUnderMaxLinear = 0.0f);
     
 private:
     void setBestRatio();
@@ -36,6 +36,7 @@ private:
     float frequency = { 44100.0f / 4096 };
     bool relative = { false };
     float relativeScale = { 1.0f };
+    bool gatingEnabled = { false };
     
     long points = { 4096 };
     long halfPoints = { 2048 };
@@ -45,7 +46,7 @@ private:
     long windowType = { legacy::HAMMING };
     bool phaseLocking = { false }; // seems to be always false in legacy code?
     double scaleFactor = { 1.0 };
-    double maskRatio;
+    double maskRatio = { 0.0 };
     double minAmplitude = { 0.0 };
     short analysisType;
     bool time = { true };

@@ -124,9 +124,24 @@ bool Convolve::setScaleFunction (bool isRelative, bool isTime, VariableFunction 
     
 }
 
-bool Convolve::setGating (bool enable, float minAmplitude, float thresholdUnderMax)
+bool Convolve::setGating (bool enable, float minAmplitudeLinear, float thresholdUnderMaxLinear)
 {
+    // thresholdUnderMax appears to be the legacy P_RATIO_FIELD ?
+    // legacy UI values were in dB, internal values are linear
     
+    if (! enable)
+    {
+        gatingEnabled = false;
+        minAmplitude = 0.0f;
+        maskRatio = 0.0f;
+        return true;
+    }
+    
+    gatingEnabled = true;
+    minAmplitude = juce::jmax (0.0f, minAmplitudeLinear);
+    maskRatio = juce::jmax (0.0f, thresholdUnderMaxLinear);
+
+    return true;
 }
     
 void Convolve::setBestRatio()
