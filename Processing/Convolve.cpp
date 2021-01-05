@@ -371,98 +371,98 @@ HandleFIRDialogEvent(short itemHit)
  *	Then open outSoundFile, set FIR_PROCESS and let ConvolveBlock() take care
  *	of the rest
  */
-short
-InitFIRProcess(void)
-{	
-	long 	n;
-	Str255	errStr, err2Str;
-	float	tmpFloat, filtLength, inLength;
-
-/*	Initialize variables and then blocks for convolution, gCI.sizeImpulse will have been
-	initialized already by HandleFIRDialog, gCI.sizeConvolution is twice as big minus one
-	as the impulse so that the full convolution is done (otherwise output is just as long as
-	input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for 
-	convenient calculation */
-	
-	gNumberBlocks = 0;
-	inLength = (float)inSIPtr->numBytes/(inSIPtr->nChans * inSIPtr->frameSize);
-	filtLength = (float)filtSIPtr->numBytes/(filtSIPtr->nChans * filtSIPtr->frameSize);
-	tmpFloat = (filtLength/inLength) * gCI.sizeImpulse;
-	gCI.incWin = (long)tmpFloat;
-
-/*	Create Soundfile for Output */
-	outSIPtr = nil;
-	outSIPtr = (SoundInfo *)NewPtr(sizeof(SoundInfo));
-	if(gPreferences.defaultType == 0)
-	{
-		if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
-		{
-			outSIPtr->sfType = AIFF;
-			outSIPtr->packMode = SF_FORMAT_16_LINEAR;
-		}
-		else
-		{
-			outSIPtr->sfType = inSIPtr->sfType;
-			outSIPtr->packMode = inSIPtr->packMode;
-		}
-	}
-	else
-	{
-		outSIPtr->sfType = gPreferences.defaultType;
-		outSIPtr->packMode = gPreferences.defaultFormat;
-	}
-	StringAppend(inSIPtr->sfSpec.name, "\p * ", errStr);
-	StringAppend(errStr, filtSIPtr->sfSpec.name, err2Str);
-	NameFile(err2Str, "\p", outSIPtr->sfSpec.name);
-
-	outSIPtr->sRate = inSIPtr->sRate;
-	outSIPtr->nChans = gProcNChans;
-	outSIPtr->numBytes = 0;
-	
-	if(CreateSoundFile(&outSIPtr, SOUND_CUST_DIALOG) == -1)
-	{
-		gProcessDisabled = NO_PROCESS;
-		gProcessEnabled = NO_PROCESS;
-		DisposePtr((Ptr)outSIPtr);
-		outSIPtr = nil;
-		MenuUpdate();
-		return(-1);
-	}
-	WriteHeader(outSIPtr);
-	UpdateInfoWindow(outSIPtr);
-	HandleUpdateEvent();
-
-	if(AllocConvMem() == -1)
-	{
-		gProcessDisabled = NO_PROCESS;
-		gProcessEnabled = NO_PROCESS;
-		MenuUpdate();
-		outSIPtr = nil;
-		return(-1);
-	}
-
-	UpdateProcessWindow("\p", "\p", "\psetting up impulse window", 0.0);
-	HandleUpdateEvent();
-	if(gCI.windowImpulse)
-		GetWindow(Window, gCI.sizeImpulse, gCI.windowType);
-
-/*	Initialize overlap	*/
-	for(n = 0; n <(gCI.sizeImpulse - 1); n++)
-		overlapLeft[n] = 0.0;
-	
-	if(gProcNChans == STEREO)
-	{
-		/*	Initialize overlap Right	*/
-		for(n = 0; n <(gCI.sizeImpulse - 1); n++)
-			overlapRight[n] = 0.0;
-	}
-	SetOutputScale(outSIPtr->packMode);
-	SetFPos(inSIPtr->dFileNum, fsFromStart, inSIPtr->dataStart);
-	gProcessEnabled = FIR_PROCESS;
-	gProcessDisabled = NO_PROCESS;
-	MenuUpdate();
-	return(TRUE);
-}
+//short
+//InitFIRProcess(void)
+//{    
+//    long     n;
+//    Str255    errStr, err2Str;
+//    float    tmpFloat, filtLength, inLength;
+//
+///*    Initialize variables and then blocks for convolution, gCI.sizeImpulse will have been
+//    initialized already by HandleFIRDialog, gCI.sizeConvolution is twice as big minus one
+//    as the impulse so that the full convolution is done (otherwise output is just as long as
+//    input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for 
+//    convenient calculation */
+//    
+//    gNumberBlocks = 0;
+//    inLength = (float)inSIPtr->numBytes/(inSIPtr->nChans * inSIPtr->frameSize);
+//    filtLength = (float)filtSIPtr->numBytes/(filtSIPtr->nChans * filtSIPtr->frameSize);
+//    tmpFloat = (filtLength/inLength) * gCI.sizeImpulse;
+//    gCI.incWin = (long)tmpFloat;
+//
+///*    Create Soundfile for Output */
+//    outSIPtr = nil;
+//    outSIPtr = (SoundInfo *)NewPtr(sizeof(SoundInfo));
+//    if(gPreferences.defaultType == 0)
+//    {
+//        if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
+//        {
+//            outSIPtr->sfType = AIFF;
+//            outSIPtr->packMode = SF_FORMAT_16_LINEAR;
+//        }
+//        else
+//        {
+//            outSIPtr->sfType = inSIPtr->sfType;
+//            outSIPtr->packMode = inSIPtr->packMode;
+//        }
+//    }
+//    else
+//    {
+//        outSIPtr->sfType = gPreferences.defaultType;
+//        outSIPtr->packMode = gPreferences.defaultFormat;
+//    }
+//    StringAppend(inSIPtr->sfSpec.name, "\p * ", errStr);
+//    StringAppend(errStr, filtSIPtr->sfSpec.name, err2Str);
+//    NameFile(err2Str, "\p", outSIPtr->sfSpec.name);
+//
+//    outSIPtr->sRate = inSIPtr->sRate;
+//    outSIPtr->nChans = gProcNChans;
+//    outSIPtr->numBytes = 0;
+//    
+//    if(CreateSoundFile(&outSIPtr, SOUND_CUST_DIALOG) == -1)
+//    {
+//        gProcessDisabled = NO_PROCESS;
+//        gProcessEnabled = NO_PROCESS;
+//        DisposePtr((Ptr)outSIPtr);
+//        outSIPtr = nil;
+//        MenuUpdate();
+//        return(-1);
+//    }
+//    WriteHeader(outSIPtr);
+//    UpdateInfoWindow(outSIPtr);
+//    HandleUpdateEvent();
+//
+//    if(AllocConvMem() == -1)
+//    {
+//        gProcessDisabled = NO_PROCESS;
+//        gProcessEnabled = NO_PROCESS;
+//        MenuUpdate();
+//        outSIPtr = nil;
+//        return(-1);
+//    }
+//
+//    UpdateProcessWindow("\p", "\p", "\psetting up impulse window", 0.0);
+//    HandleUpdateEvent();
+//    if(gCI.windowImpulse)
+//        GetWindow(Window, gCI.sizeImpulse, gCI.windowType);
+//
+///*    Initialize overlap    */
+//    for(n = 0; n <(gCI.sizeImpulse - 1); n++)
+//        overlapLeft[n] = 0.0;
+//    
+//    if(gProcNChans == STEREO)
+//    {
+//        /*    Initialize overlap Right    */
+//        for(n = 0; n <(gCI.sizeImpulse - 1); n++)
+//            overlapRight[n] = 0.0;
+//    }
+//    SetOutputScale(outSIPtr->packMode);
+//    SetFPos(inSIPtr->dFileNum, fsFromStart, inSIPtr->dataStart);
+//    gProcessEnabled = FIR_PROCESS;
+//    gProcessDisabled = NO_PROCESS;
+//    MenuUpdate();
+//    return(TRUE);
+//}
 
 short
 ConvolveBlock(void)
@@ -788,11 +788,11 @@ ConvolveBlock(void)
 
 //void
 //BrightenFFT(float cartSpectrum[], long halfLengthFFT)
-//{        
+//{
 //    long    realIndex, imagIndex;
 //    float    twoOverHalfFFT;
 //    long    bandNumber;
-//    
+//
 //    twoOverHalfFFT = 64.0/halfLengthFFT;
 ///*
 // * unravel RealFFT-format spectrum: note that halfLengthFFT+1 pairs of values are produced
@@ -813,5 +813,5 @@ ConvolveBlock(void)
 //        }
 //    }
 //}
-    
+
 
