@@ -29,8 +29,14 @@ bool Convolve::allocateBuffers()
     if (filtSIPtr == nullptr)
         return false;
     
+    if (ringMod && sizeConvolution <= 0)
+        return false;
+    
+    if (! ringMod && sizeImpulse <= 0)
+        return false;
+
     if (windowImpulse)
-        allocateBuffer (window, ringMod ? sizeConvolution : sizeFFT);
+        allocateBuffer (window, ringMod ? sizeConvolution : sizeImpulse);
 
     allocateBuffer (displaySpectrum, halfSizeFFT + 1);
     allocateBuffer (impulseLeft, sizeFFT);
@@ -66,11 +72,33 @@ bool Convolve::initFIRProcess()
 {
     numBlocks = 0;
     
-    if (inSIPtr == nullptr)
-        return false;
+    {
+        if (inSIPtr == nullptr)
+            return false;
+        
+        if (inSIPtr->numBytes <= 0)
+            return false;
+        
+        if (inSIPtr->nChans <= 0)
+            return false;
+        
+        if (inSIPtr->frameSize <= 0)
+            return false;
+    }
     
-    if (filtSIPtr == nullptr)
-        return false;
+    {
+        if (filtSIPtr == nullptr)
+            return false;
+        
+        if (filtSIPtr->numBytes <= 0)
+            return false;
+        
+        if (filtSIPtr->nChans <= 0)
+            return false;
+        
+        if (filtSIPtr->frameSize <= 0)
+            return false;
+    }
     
     if (outSIPtr == nullptr) // changed logic to assume the output is already created too
         return false;
@@ -80,7 +108,7 @@ bool Convolve::initFIRProcess()
     
     const float inLength = (float) inSIPtr->numBytes / (inSIPtr->nChans * inSIPtr->frameSize);
     const float filtLength = (float) filtSIPtr->numBytes / (filtSIPtr->nChans * filtSIPtr->frameSize);
-    incWin = (filtLength / inLength) * sizeImpulse; // was also * sizeof(float)
+    incWin = (filtLength / inLength) * sizeImpulse;
 
     if (windowImpulse)
         Windows::GetWindow (getBufferWrite (window), sizeImpulse, windowType);

@@ -22,8 +22,8 @@ private:
     long numChans = { 2 };
     long numBlocks = { 0 };
     
-    long sizeImpulse = { 0 }; // in samples?
-    long sizeConvolution = { 0 }; // seems to be already multiplied by sizeof(float) in legacy code???
+    long sizeImpulse = { 0 }; // in samples
+    long sizeConvolution = { 0 }; // in samples
     long sizeFFT = { 4096 };
     long halfSizeFFT = { 2048 };
     long incWin;
