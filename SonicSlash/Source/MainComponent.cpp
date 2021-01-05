@@ -1,6 +1,9 @@
 #include "MainComponent.h"
 
-//==============================================================================
+#include "sonicslash_SoundFile.h"
+
+namespace sonicslash {
+
 MainComponent::MainComponent()
 {
     setSize (600, 400);
@@ -27,3 +30,5 @@ void MainComponent::resized()
     // If you add any child components, this is where you should
     // update their positions.
 }
+
+} // namespace sonicslash
