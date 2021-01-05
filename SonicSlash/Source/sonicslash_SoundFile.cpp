@@ -2,18 +2,19 @@
 
 namespace sonicslash {
 
-// SoundInfo code?
+namespace legacy {
 
 namespace SoundFile {
 
 void AllocateSoundIOMemory(short channels, long frames) {}
-void SetSecondsPosition(SoundInfo *mySI, double seconds) {}
+void SetSecondsPosition(SoundInfoLegacy *mySI, double seconds) {}
 void SetOutputScale(long packMode) {}
-long ReadQuadBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]) { return 0; }
-long ReadStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]) { return 0; }
-long ReadMonoBlock(SoundInfo *mySI, long numSamples, float block[]) { return 0; }
-long WriteStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]) { return 0; }
-long WriteMonoBlock(SoundInfo *mySI, long numSamples, float block[]) { return 0; }
+long ReadQuadBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]) { return 0; }
+long ReadStereoBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[]) { return 0; }
+long ReadMonoBlock(SoundInfoLegacy *mySI, long numSamples, float block[]) { return 0; }
+long WriteStereoBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[]) { return 0; }
+long WriteMonoBlock(SoundInfoLegacy *mySI, long numSamples, float block[]) { return 0; }
     
 } // namespace SoundFile
+} // namespace legacy
 } // namespace sonicslash

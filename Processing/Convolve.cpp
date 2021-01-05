@@ -1,60 +1,56 @@
 #include "Convolve.h"
 
-namespace sonicslash {
-namespace legacy {
-namespace Convolve {
-
-//#include "SoundFile.h"
-//#include "OpenSoundFile.h"
-//#include "CloseSoundFile.h"
-////#include <AppleEvents.h>
-//#include "Binaural.h"
-//#include "Convolve.h"
-//#include "DrawFunction.h"
-//#include "Menu.h"
-//#include "Dialog.h"
-//#include "SoundHack.h"
-//#include "CreateSoundFile.h"
-//#include "WriteHeader.h"
-//#include "Misc.h"
-//#include "RingModulate.h"
-//#include "FFT.h"
-//#include "Windows.h"
-//#include "Normalization.h"
-//#include "ShowSpect.h"
-//#include "ShowSono.h"
-//#include "CarbonGlue.h"
+#include "SoundFile.h"
+#include "OpenSoundFile.h"
+#include "CloseSoundFile.h"
+//#include <AppleEvents.h>
+#include "Binaural.h"
+#include "Convolve.h"
+#include "DrawFunction.h"
+#include "Menu.h"
+#include "Dialog.h"
+#include "SoundHack.h"
+#include "CreateSoundFile.h"
+#include "WriteHeader.h"
+#include "Misc.h"
+#include "RingModulate.h"
+#include "FFT.h"
+#include "Windows.h"
+#include "Normalization.h"
+#include "ShowSpect.h"
+#include "ShowSono.h"
+#include "CarbonGlue.h"
 
 
 /* Globals */
 
-//extern MenuHandle    gAppleMenu, gFileMenu, gEditMenu, gProcessMenu, gControlMenu,
-//                    gWindowMenu, gSigDispMenu, gSonoDispMenu, gSpectDispMenu;
-//DialogPtr    gFIRDialog;
-//extern SoundInfoPtr    inSIPtr, filtSIPtr, outSIPtr, frontSIPtr;
-//extern short            gProcessEnabled, gProcessDisabled, gStopProcess;
-//extern long            gNumberBlocks;
-//extern float        Pi, twoPi;
-//extern Boolean        gNormalize;
-//extern float        *gFunction, *displaySpectrum;
-//extern FSSpec        nilFSSpec;
-//extern struct
-//{
-//    Str255    editorName;
-//    long    editorID;
-//    short    openPlay;
-//    short    procPlay;
-//    short    defaultType;
-//    short    defaultFormat;
-//}    gPreferences;
+extern MenuHandle    gAppleMenu, gFileMenu, gEditMenu, gProcessMenu, gControlMenu,
+                    gWindowMenu, gSigDispMenu, gSonoDispMenu, gSpectDispMenu;
+DialogPtr    gFIRDialog;
+extern SoundInfoPtr    inSIPtr, filtSIPtr, outSIPtr, frontSIPtr;
+extern short            gProcessEnabled, gProcessDisabled, gStopProcess;
+extern long            gNumberBlocks;
+extern float        Pi, twoPi;
+extern Boolean        gNormalize;
+extern float        *gFunction, *displaySpectrum;
+extern FSSpec        nilFSSpec;
+extern struct
+{
+    Str255    editorName;
+    long    editorID;
+    short    openPlay;
+    short    procPlay;
+    short    defaultType;
+    short    defaultFormat;
+}    gPreferences;
  
 static short gProcNChans;
 static float gScale, gScaleL, gScaleR, gScaleDivisor;
 
 static ConvolveInfo gCI;
 
-float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
-					*inputRight, *outputRight, *overlapRight, *Window;
+//float                 *impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
+//                    *inputRight, *outputRight, *overlapRight, *Window;
 //void
 //HandleFIRDialog(void)
 //{
@@ -160,12 +156,12 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //    ShowWindow(gFIRDialog);
 //    SelectWindow(gFIRDialog);
 //#endif
-//
-//}
 
-//void
-//HandleFIRDialogEvent(short itemHit)
-//{
+}
+
+void
+HandleFIRDialogEvent(short itemHit)
+{
 //    static double    sfLengthMax, sfLength, sfLengthNew;
 //    long    memory;
 //    short    itemType;
@@ -181,8 +177,8 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //    else
 //        okToOK = TRUE;
 //    switch(itemHit)
-//    {
-//        case F_FILTOPEN_BUTTON:
+    {
+        case F_FILTOPEN_BUTTON:
 //            if(OpenSoundFile(nilFSSpec, FALSE) != -1)
 //            {
 //                if(frontSIPtr == inSIPtr)
@@ -218,7 +214,7 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //                okToOK = TRUE;
 //            }
 //            break;
-//        case F_FILTLENGTH_FIELD:
+        case F_FILTLENGTH_FIELD:
 //            GetDialogItem(gFIRDialog,F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
 //            GetDialogItemText(itemHandle,sfLengthString);
 //            StringToFix(sfLengthString, &sfLengthNew);
@@ -315,15 +311,15 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //                HideDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
 //            }
 //            break;
-//        case F_WINDOW_MENU:
+        case F_WINDOW_MENU:
 //            GetDialogItem(gFIRDialog, F_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
 //            gCI.windowType = GetControlValue((ControlHandle)itemHandle);
 //            if(gCI.windowType != RECTANGLE)
 //                gCI.windowImpulse = TRUE;
 //            else
 //                gCI.windowImpulse = FALSE;
-//            break;
-//        case F_MOVING_BOX:
+            break;
+        case F_MOVING_BOX:
 //            GetDialogItem(gFIRDialog, F_MOVING_BOX, &itemType, &itemHandle, &itemRect);
 //            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
 //            {
@@ -335,7 +331,7 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //                gCI.moving = TRUE;
 //            }
 //            break;
-//        case F_CANCEL_BUTTON:
+        case F_CANCEL_BUTTON:
 //#if TARGET_API_MAC_CARBON == 1
 //            myWI = (WindInfoPtr)GetWRefCon(GetDialogWindow(gFIRDialog));
 //#else
@@ -348,7 +344,7 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //            inSIPtr = nil;
 //            MenuUpdate();
 //            break;
-//        case F_PROCESS_BUTTON:
+        case F_PROCESS_BUTTON:
 //            if(okToOK)
 //            {
 //#if TARGET_API_MAC_CARBON == 1
@@ -364,9 +360,9 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //                else
 //                    InitFIRProcess();
 //            }
-//            break;
-//    }
-//}
+            break;
+    }
+}
 
     
 /*
@@ -375,98 +371,98 @@ float 				*impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
  *	Then open outSoundFile, set FIR_PROCESS and let ConvolveBlock() take care
  *	of the rest
  */
-short
-InitFIRProcess(void)
-{	
-	long 	n;
-	Str255	errStr, err2Str;
-	float	tmpFloat, filtLength, inLength;
-
-/*	Initialize variables and then blocks for convolution, gCI.sizeImpulse will have been
-	initialized already by HandleFIRDialog, gCI.sizeConvolution is twice as big minus one
-	as the impulse so that the full convolution is done (otherwise output is just as long as
-	input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for 
-	convenient calculation */
-	
-	gNumberBlocks = 0;
-	inLength = (float)inSIPtr->numBytes/(inSIPtr->nChans * inSIPtr->frameSize);
-	filtLength = (float)filtSIPtr->numBytes/(filtSIPtr->nChans * filtSIPtr->frameSize);
-	tmpFloat = (filtLength/inLength) * gCI.sizeImpulse;
-	gCI.incWin = (long)tmpFloat;
-
-/*	Create Soundfile for Output */
-	outSIPtr = nil;
-	outSIPtr = (SoundInfo *)NewPtr(sizeof(SoundInfo));
-	if(gPreferences.defaultType == 0)
-	{
-		if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
-		{
-			outSIPtr->sfType = AIFF;
-			outSIPtr->packMode = SF_FORMAT_16_LINEAR;
-		}
-		else
-		{
-			outSIPtr->sfType = inSIPtr->sfType;
-			outSIPtr->packMode = inSIPtr->packMode;
-		}
-	}
-	else
-	{
-		outSIPtr->sfType = gPreferences.defaultType;
-		outSIPtr->packMode = gPreferences.defaultFormat;
-	}
-	StringAppend(inSIPtr->sfSpec.name, "\p * ", errStr);
-	StringAppend(errStr, filtSIPtr->sfSpec.name, err2Str);
-	NameFile(err2Str, "\p", outSIPtr->sfSpec.name);
-
-	outSIPtr->sRate = inSIPtr->sRate;
-	outSIPtr->nChans = gProcNChans;
-	outSIPtr->numBytes = 0;
-	
-	if(CreateSoundFile(&outSIPtr, SOUND_CUST_DIALOG) == -1)
-	{
-		gProcessDisabled = NO_PROCESS;
-		gProcessEnabled = NO_PROCESS;
-		DisposePtr((Ptr)outSIPtr);
-		outSIPtr = nil;
-		MenuUpdate();
-		return(-1);
-	}
-	WriteHeader(outSIPtr);
-	UpdateInfoWindow(outSIPtr);
-	HandleUpdateEvent();
-
-	if(AllocConvMem() == -1)
-	{
-		gProcessDisabled = NO_PROCESS;
-		gProcessEnabled = NO_PROCESS;
-		MenuUpdate();
-		outSIPtr = nil;
-		return(-1);
-	}
-
-	UpdateProcessWindow("\p", "\p", "\psetting up impulse window", 0.0);
-	HandleUpdateEvent();
-	if(gCI.windowImpulse)
-		GetWindow(Window, gCI.sizeImpulse, gCI.windowType);
-
-/*	Initialize overlap	*/
-	for(n = 0; n <(gCI.sizeImpulse - 1); n++)
-		overlapLeft[n] = 0.0;
-	
-	if(gProcNChans == STEREO)
-	{
-		/*	Initialize overlap Right	*/
-		for(n = 0; n <(gCI.sizeImpulse - 1); n++)
-			overlapRight[n] = 0.0;
-	}
-	SetOutputScale(outSIPtr->packMode);
-	SetFPos(inSIPtr->dFileNum, fsFromStart, inSIPtr->dataStart);
-	gProcessEnabled = FIR_PROCESS;
-	gProcessDisabled = NO_PROCESS;
-	MenuUpdate();
-	return(TRUE);
-}
+//short
+//InitFIRProcess(void)
+//{
+//    long     n;
+//    Str255    errStr, err2Str;
+//    float    tmpFloat, filtLength, inLength;
+//
+///*    Initialize variables and then blocks for convolution, gCI.sizeImpulse will have been
+//    initialized already by HandleFIRDialog, gCI.sizeConvolution is twice as big minus one
+//    as the impulse so that the full convolution is done (otherwise output is just as long as
+//    input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for
+//    convenient calculation */
+//
+//    gNumberBlocks = 0;
+//    inLength = (float)inSIPtr->numBytes/(inSIPtr->nChans * inSIPtr->frameSize);
+//    filtLength = (float)filtSIPtr->numBytes/(filtSIPtr->nChans * filtSIPtr->frameSize);
+//    tmpFloat = (filtLength/inLength) * gCI.sizeImpulse;
+//    gCI.incWin = (long)tmpFloat;
+//
+///*    Create Soundfile for Output */
+//    outSIPtr = nil;
+//    outSIPtr = (SoundInfo *)NewPtr(sizeof(SoundInfo));
+//    if(gPreferences.defaultType == 0)
+//    {
+//        if(inSIPtr->sfType == CS_PVOC || inSIPtr->sfType == PICT)
+//        {
+//            outSIPtr->sfType = AIFF;
+//            outSIPtr->packMode = SF_FORMAT_16_LINEAR;
+//        }
+//        else
+//        {
+//            outSIPtr->sfType = inSIPtr->sfType;
+//            outSIPtr->packMode = inSIPtr->packMode;
+//        }
+//    }
+//    else
+//    {
+//        outSIPtr->sfType = gPreferences.defaultType;
+//        outSIPtr->packMode = gPreferences.defaultFormat;
+//    }
+//    StringAppend(inSIPtr->sfSpec.name, "\p * ", errStr);
+//    StringAppend(errStr, filtSIPtr->sfSpec.name, err2Str);
+//    NameFile(err2Str, "\p", outSIPtr->sfSpec.name);
+//
+//    outSIPtr->sRate = inSIPtr->sRate;
+//    outSIPtr->nChans = gProcNChans;
+//    outSIPtr->numBytes = 0;
+//
+//    if(CreateSoundFile(&outSIPtr, SOUND_CUST_DIALOG) == -1)
+//    {
+//        gProcessDisabled = NO_PROCESS;
+//        gProcessEnabled = NO_PROCESS;
+//        DisposePtr((Ptr)outSIPtr);
+//        outSIPtr = nil;
+//        MenuUpdate();
+//        return(-1);
+//    }
+//    WriteHeader(outSIPtr);
+//    UpdateInfoWindow(outSIPtr);
+//    HandleUpdateEvent();
+//
+//    if(AllocConvMem() == -1)
+//    {
+//        gProcessDisabled = NO_PROCESS;
+//        gProcessEnabled = NO_PROCESS;
+//        MenuUpdate();
+//        outSIPtr = nil;
+//        return(-1);
+//    }
+//
+//    UpdateProcessWindow("\p", "\p", "\psetting up impulse window", 0.0);
+//    HandleUpdateEvent();
+//    if(gCI.windowImpulse)
+//        GetWindow(Window, gCI.sizeImpulse, gCI.windowType);
+//
+///*    Initialize overlap    */
+//    for(n = 0; n <(gCI.sizeImpulse - 1); n++)
+//        overlapLeft[n] = 0.0;
+//
+//    if(gProcNChans == STEREO)
+//    {
+//        /*    Initialize overlap Right    */
+//        for(n = 0; n <(gCI.sizeImpulse - 1); n++)
+//            overlapRight[n] = 0.0;
+//    }
+//    SetOutputScale(outSIPtr->packMode);
+//    SetFPos(inSIPtr->dFileNum, fsFromStart, inSIPtr->dataStart);
+//    gProcessEnabled = FIR_PROCESS;
+//    gProcessDisabled = NO_PROCESS;
+//    MenuUpdate();
+//    return(TRUE);
+//}
 
 short
 ConvolveBlock(void)
@@ -675,150 +671,147 @@ ConvolveBlock(void)
 }
 
 
-short
-AllocConvMem(void)
-{
-	long 	sizeImpulse, sizeOverlap, sizeInput, sizeWindow;
-	OSErr	error = 0;
-		
-/*
- * Allocate memory for impulse, input and output (input and output are two pointers
- * to the same data), for gCI.sizeFFT*sizeof(float), overlap holds the overlapped
- * segments, and is one sample smaller than impulse and soundBlock for
- * gCI.sizeImpulse*sizeof(short)
- */
-	
-	sizeImpulse = (long)((gCI.sizeFFT) * sizeof(float));
-	sizeInput = (long)((gCI.sizeFFT) * sizeof(float));
-	sizeOverlap = (long)((gCI.sizeFFT+2) * sizeof(float));
-	if(gCI.ringMod)
-	{
-		sizeWindow = (long)(gCI.sizeConvolution * sizeof(float));
-	}
-	else
-	{
-		sizeWindow = (long)(gCI.sizeImpulse * sizeof(float));
-	}
-	Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
-	impulseRight = inputRight = outputRight = overlapRight  = nil;
-	
-	if(gCI.windowImpulse)
-	{
-		Window = (float *)NewPtr(sizeWindow);
-		error += MemError();
-	}
-	displaySpectrum = (float *)NewPtr((gCI.halfSizeFFT+1)*sizeof(float));
-	error += MemError();
-	impulseLeft = (float *)NewPtr(sizeImpulse);
-	error += MemError();
-	inputLeft = outputLeft = (float *)NewPtr(sizeInput);
-	error += MemError();
-	overlapLeft = (float *)NewPtr(sizeOverlap);
-	error += MemError();
-	
-	if(filtSIPtr->nChans == STEREO)
-	{
-		impulseRight = (float *)NewPtr(sizeImpulse);
-		error += MemError();
-	}
-	else
-	{
-		impulseRight = impulseLeft;
-		error += MemError();
-	}
-	if(gProcNChans == STEREO)
-	{
-		inputRight = outputRight = (float *)NewPtr(sizeInput);
-		error += MemError();
-		overlapRight = (float *)NewPtr(sizeOverlap);
-		error += MemError();
-	} else
-	{
-		outputRight = inputRight = inputLeft;
-		error += MemError();
-		overlapRight = overlapLeft;
-	}
-	
-	if((overlapLeft && overlapRight && impulseLeft && impulseRight && inputLeft && inputRight) == 0)
-	{
-		DrawErrorMessage("\pNot enough memory for processing");
-		DeAllocConvMem();
-		return(-1);
-	}
-	if(error != 0)
-	{
-		DrawErrorMessage("\pMemory allocation error");
-		DeAllocConvMem();
-		return(-1);
-	}
-	return(TRUE);
-}
+//short
+//AllocConvMem(void)
+//{
+//    long     sizeImpulse, sizeOverlap, sizeInput, sizeWindow;
+//    OSErr    error = 0;
+//
+///*
+// * Allocate memory for impulse, input and output (input and output are two pointers
+// * to the same data), for gCI.sizeFFT*sizeof(float), overlap holds the overlapped
+// * segments, and is one sample smaller than impulse and soundBlock for
+// * gCI.sizeImpulse*sizeof(short)
+// */
+//
+//    sizeImpulse = (long)((gCI.sizeFFT) * sizeof(float));
+//    sizeInput = (long)((gCI.sizeFFT) * sizeof(float));
+//    sizeOverlap = (long)((gCI.sizeFFT+2) * sizeof(float));
+//    if(gCI.ringMod)
+//    {
+//        sizeWindow = (long)(gCI.sizeConvolution * sizeof(float));
+//    }
+//    else
+//    {
+//        sizeWindow = (long)(gCI.sizeImpulse * sizeof(float));
+//    }
+//    Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
+//    impulseRight = inputRight = outputRight = overlapRight  = nil;
+//
+//    if(gCI.windowImpulse)
+//    {
+//        Window = (float *)NewPtr(sizeWindow);
+//        error += MemError();
+//    }
+//    displaySpectrum = (float *)NewPtr((gCI.halfSizeFFT+1)*sizeof(float));
+//    error += MemError();
+//    impulseLeft = (float *)NewPtr(sizeImpulse);
+//    error += MemError();
+//    inputLeft = outputLeft = (float *)NewPtr(sizeInput);
+//    error += MemError();
+//    overlapLeft = (float *)NewPtr(sizeOverlap);
+//    error += MemError();
+//
+//    if(filtSIPtr->nChans == STEREO)
+//    {
+//        impulseRight = (float *)NewPtr(sizeImpulse);
+//        error += MemError();
+//    }
+//    else
+//    {
+//        impulseRight = impulseLeft;
+//        error += MemError();
+//    }
+//    if(gProcNChans == STEREO)
+//    {
+//        inputRight = outputRight = (float *)NewPtr(sizeInput);
+//        error += MemError();
+//        overlapRight = (float *)NewPtr(sizeOverlap);
+//        error += MemError();
+//    } else
+//    {
+//        outputRight = inputRight = inputLeft;
+//        error += MemError();
+//        overlapRight = overlapLeft;
+//    }
+//
+//    if((overlapLeft && overlapRight && impulseLeft && impulseRight && inputLeft && inputRight) == 0)
+//    {
+//        DrawErrorMessage("\pNot enough memory for processing");
+//        DeAllocConvMem();
+//        return(-1);
+//    }
+//    if(error != 0)
+//    {
+//        DrawErrorMessage("\pMemory allocation error");
+//        DeAllocConvMem();
+//        return(-1);
+//    }
+//    return(TRUE);
+//}
 
-void
-DeAllocConvMem(void)
-{
-	OSErr	error = 0;
+//void
+//DeAllocConvMem(void)
+//{
+//    OSErr    error = 0;
+//
+//    if(gCI.windowImpulse)
+//    {
+//        RemovePtr((Ptr)Window);
+//        error += MemError();
+//    }
+//
+//    RemovePtr((Ptr)displaySpectrum);
+//    error += MemError();
+//    RemovePtr((Ptr)impulseLeft);
+//    error += MemError();
+//    RemovePtr((Ptr)inputLeft);
+//    error += MemError();
+//    RemovePtr((Ptr)overlapLeft);
+//    error += MemError();
+//    if(filtSIPtr->nChans == STEREO)
+//    {
+//        RemovePtr((Ptr)impulseRight);
+//        error += MemError();
+//    }
+//    if(gProcNChans == STEREO)
+//    {
+//        RemovePtr((Ptr)inputRight);
+//        error += MemError();
+//        RemovePtr((Ptr)overlapRight);
+//        error += MemError();
+//    }
+//
+//    Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
+//    impulseRight = inputRight = outputRight = overlapRight = nil;
+//}
 
-	if(gCI.windowImpulse)
-	{
-		RemovePtr((Ptr)Window);
-		error += MemError();
-	}
-		
-	RemovePtr((Ptr)displaySpectrum);
-	error += MemError();
-	RemovePtr((Ptr)impulseLeft);
-	error += MemError();
-	RemovePtr((Ptr)inputLeft);
-	error += MemError();
-	RemovePtr((Ptr)overlapLeft);
-	error += MemError();
-	if(filtSIPtr->nChans == STEREO)
-	{
-		RemovePtr((Ptr)impulseRight);
-		error += MemError();
-	}
-	if(gProcNChans == STEREO)
-	{
-		RemovePtr((Ptr)inputRight);
-		error += MemError();
-		RemovePtr((Ptr)overlapRight);
-		error += MemError();
-	}
-		
-	Window = displaySpectrum = impulseLeft = inputLeft = outputLeft = overlapLeft = nil;
-	impulseRight = inputRight = outputRight = overlapRight = nil;
-}
+//void
+//BrightenFFT(float cartSpectrum[], long halfLengthFFT)
+//{
+//    long    realIndex, imagIndex;
+//    float    twoOverHalfFFT;
+//    long    bandNumber;
+//
+//    twoOverHalfFFT = 64.0/halfLengthFFT;
+///*
+// * unravel RealFFT-format spectrum: note that halfLengthFFT+1 pairs of values are produced
+// * & give it a 6dB per octave high pass at the sample rate
+// */
+//    for (bandNumber = 0; bandNumber <= halfLengthFFT; bandNumber++)
+//    {
+//        realIndex = bandNumber<<1;
+//        imagIndex = realIndex + 1;
+//        if(bandNumber == 0)
+//            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
+//        else if(bandNumber == halfLengthFFT)
+//            cartSpectrum[1] = cartSpectrum[1] * (float)bandNumber * twoOverHalfFFT;
+//        else
+//        {
+//            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
+//            cartSpectrum[imagIndex] = cartSpectrum[imagIndex] * (float)bandNumber * twoOverHalfFFT;
+//        }
+//    }
+//}
 
-void
-BrightenFFT(float cartSpectrum[], long halfLengthFFT)
-{		
-	long	realIndex, imagIndex;
-	float	twoOverHalfFFT;
-	long	bandNumber;
-	
-	twoOverHalfFFT = 64.0/halfLengthFFT;
-/*
- * unravel RealFFT-format spectrum: note that halfLengthFFT+1 pairs of values are produced
- * & give it a 6dB per octave high pass at the sample rate
- */
-    for (bandNumber = 0; bandNumber <= halfLengthFFT; bandNumber++)
-    {
-		realIndex = bandNumber<<1;
-		imagIndex = realIndex + 1;
-    	if(bandNumber == 0)
-    		cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
-    	else if(bandNumber == halfLengthFFT)
-    		cartSpectrum[1] = cartSpectrum[1] * (float)bandNumber * twoOverHalfFFT;
-    	else
-    	{
-			cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
-			cartSpectrum[imagIndex] = cartSpectrum[imagIndex] * (float)bandNumber * twoOverHalfFFT;
-		}
-    }
-}
-    
-} // namespace Convolve
-} // namespace legacy
-} // namespace sonicslash
 

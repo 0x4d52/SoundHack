@@ -4,7 +4,9 @@
 
 namespace sonicslash {
 
-struct SoundInfo
+namespace legacy {
+
+struct SoundInfoLegacy
 {
 //    FSSpec    sfSpec;            // name, parID and vRefNum
     double    sRate;            /* sample rate*/
@@ -45,13 +47,17 @@ struct SoundInfo
 namespace SoundFile {
     
 void AllocateSoundIOMemory(short channels, long frames);
-void SetSecondsPosition(SoundInfo *mySI, double seconds);
+void SetSecondsPosition(SoundInfoLegacy *mySI, double seconds);
 void SetOutputScale(long packMode);
-long ReadQuadBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]);
-long ReadStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
-long ReadMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
-long WriteStereoBlock(SoundInfo *mySI, long numSamples, float blockL[], float blockR[]);
-long WriteMonoBlock(SoundInfo *mySI, long numSamples, float block[]);
+long ReadQuadBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[], float block3[], float block4[]);
+long ReadStereoBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[]);
+long ReadMonoBlock(SoundInfoLegacy *mySI, long numSamples, float block[]);
+long WriteStereoBlock(SoundInfoLegacy *mySI, long numSamples, float blockL[], float blockR[]);
+long WriteMonoBlock(SoundInfoLegacy *mySI, long numSamples, float block[]);
     
 } // namespace SoundFile
+} // namespace legacy
+    
+using SoundInfoType = legacy::SoundInfoLegacy;
+    
 } // namespace sonicslash

@@ -19,10 +19,26 @@ namespace sonicslash
     
     inline void initBuffer (Buffer& b) { allocateBuffer (b, 0); }
     
+    inline void setBufferToReferTo (Buffer& b1, Buffer& b2)
+    {
+        jassert (b2.getNumChannels() == 1);
+        b1.setDataToReferTo (b2.getArrayOfWritePointers(), 1, b2.getNumSamples());
+    }
+    
     template<typename IndexType, typename BufferValueType>
     inline void setBufferSample (Buffer& b, IndexType index, BufferValueType value)
     {
         b.setSample (0, static_cast<int> (index), value);
+    }
+    
+    inline BufferValueType* getBufferWrite (Buffer& b)
+    {
+        return b.getWritePointer (0);
+    }
+    
+    inline const BufferValueType* getBufferRead (Buffer& b)
+    {
+        return b.getReadPointer (0);
     }
 
     using VariableFunction = std::array<float, 400>;

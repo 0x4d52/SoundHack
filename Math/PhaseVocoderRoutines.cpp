@@ -79,7 +79,7 @@ ScaleWindows(float analysisWindow[], float synthesisWindow[], PvocInfo myPI)
    sample
 */
 long
-ShiftIn(SoundInfo *mySI, float leftBlock[], float rightBlock[], long windowSize, long decimation, long *validSamples, long numberBlocks)
+ShiftIn(SoundInfoLegacy *mySI, float leftBlock[], float rightBlock[], long windowSize, long decimation, long *validSamples, long numberBlocks)
 {
     long 	index;
     long	numSamples;
@@ -362,7 +362,7 @@ OverlapAdd(float input[], float synthesisWindow[], float output[], long currentT
    padding with zeros after last sample
 */
 long
-ShiftOut(SoundInfo *mySI, float leftBlock[], float rightBlock[], long currentTime, long interpolation, long windowSize)
+ShiftOut(SoundInfoLegacy *mySI, float leftBlock[], float rightBlock[], long currentTime, long interpolation, long windowSize)
 {
 	long index;
 	long numSamples;
