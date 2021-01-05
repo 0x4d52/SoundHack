@@ -30,6 +30,16 @@ namespace sonicslash
     {
         b.setSample (0, static_cast<int> (index), value);
     }
+    
+    inline BufferValueType* getBufferWrite (Buffer& b)
+    {
+        return b.getWritePointer (0);
+    }
+    
+    inline const BufferValueType* getBufferRead (Buffer& b)
+    {
+        return b.getReadPointer (0);
+    }
 
     using VariableFunction = std::array<float, 400>;
     

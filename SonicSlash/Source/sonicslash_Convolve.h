@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../Math/Windows.h"
 #include "sonicslash_SoundFile.h"
 #include <memory>
 
@@ -19,13 +20,14 @@ private:
 
     //==========================================================================
     long numChans = { 2 };
+    long numBlocks = { 0 };
     
-    long sizeImpulse;
-    long sizeConvolution; // seems to be already multiplied by sizeof(float)
+    long sizeImpulse = { 0 }; // in samples?
+    long sizeConvolution = { 0 }; // seems to be already multiplied by sizeof(float) in legacy code???
     long sizeFFT = { 4096 };
     long halfSizeFFT = { 2048 };
     long incWin;
-    long windowType;
+    long windowType = { legacy::HAMMING };
     long binPosition;
     long binHeight;
     short moving;
@@ -45,7 +47,9 @@ private:
     Buffer window;
     Buffer displaySpectrum;
 
+    std::shared_ptr<SoundInfo> inSIPtr;
     std::shared_ptr<SoundInfo> filtSIPtr;
+    std::shared_ptr<SoundInfo> outSIPtr;
 };
 
 } // namespace sonicslash

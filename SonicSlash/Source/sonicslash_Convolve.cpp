@@ -64,7 +64,33 @@ bool Convolve::allocateBuffers()
 
 bool Convolve::initFIRProcess()
 {
+    numBlocks = 0;
     
+    if (inSIPtr == nullptr)
+        return false;
+    
+    if (filtSIPtr == nullptr)
+        return false;
+    
+    if (outSIPtr == nullptr) // changed logic to assume the output is already created too
+        return false;
+
+    if (sizeImpulse <= 0)
+        return false;
+    
+    const float inLength = (float) inSIPtr->numBytes / (inSIPtr->nChans * inSIPtr->frameSize);
+    const float filtLength = (float) filtSIPtr->numBytes / (filtSIPtr->nChans * filtSIPtr->frameSize);
+    incWin = (filtLength / inLength) * sizeImpulse; // was also * sizeof(float)
+
+    if (windowImpulse)
+        Windows::GetWindow (getBufferWrite (window), sizeImpulse, windowType);
+    
+    overlapLeft.clear();
+    overlapRight.clear();
+    
+//    SetOutputScale(outSIPtr->packMode); ??
+    
+    return true;
 }
 
 bool Convolve::convolveBlock()

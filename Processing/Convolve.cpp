@@ -786,32 +786,32 @@ ConvolveBlock(void)
 //    impulseRight = inputRight = outputRight = overlapRight = nil;
 //}
 
-void
-BrightenFFT(float cartSpectrum[], long halfLengthFFT)
-{		
-	long	realIndex, imagIndex;
-	float	twoOverHalfFFT;
-	long	bandNumber;
-	
-	twoOverHalfFFT = 64.0/halfLengthFFT;
-/*
- * unravel RealFFT-format spectrum: note that halfLengthFFT+1 pairs of values are produced
- * & give it a 6dB per octave high pass at the sample rate
- */
-    for (bandNumber = 0; bandNumber <= halfLengthFFT; bandNumber++)
-    {
-		realIndex = bandNumber<<1;
-		imagIndex = realIndex + 1;
-    	if(bandNumber == 0)
-    		cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
-    	else if(bandNumber == halfLengthFFT)
-    		cartSpectrum[1] = cartSpectrum[1] * (float)bandNumber * twoOverHalfFFT;
-    	else
-    	{
-			cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
-			cartSpectrum[imagIndex] = cartSpectrum[imagIndex] * (float)bandNumber * twoOverHalfFFT;
-		}
-    }
-}
+//void
+//BrightenFFT(float cartSpectrum[], long halfLengthFFT)
+//{        
+//    long    realIndex, imagIndex;
+//    float    twoOverHalfFFT;
+//    long    bandNumber;
+//    
+//    twoOverHalfFFT = 64.0/halfLengthFFT;
+///*
+// * unravel RealFFT-format spectrum: note that halfLengthFFT+1 pairs of values are produced
+// * & give it a 6dB per octave high pass at the sample rate
+// */
+//    for (bandNumber = 0; bandNumber <= halfLengthFFT; bandNumber++)
+//    {
+//        realIndex = bandNumber<<1;
+//        imagIndex = realIndex + 1;
+//        if(bandNumber == 0)
+//            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
+//        else if(bandNumber == halfLengthFFT)
+//            cartSpectrum[1] = cartSpectrum[1] * (float)bandNumber * twoOverHalfFFT;
+//        else
+//        {
+//            cartSpectrum[realIndex] = cartSpectrum[realIndex] * (float)bandNumber * twoOverHalfFFT;
+//            cartSpectrum[imagIndex] = cartSpectrum[imagIndex] * (float)bandNumber * twoOverHalfFFT;
+//        }
+//    }
+//}
     
 
