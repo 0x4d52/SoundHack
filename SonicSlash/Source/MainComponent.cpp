@@ -7,6 +7,14 @@ namespace sonicslash {
 MainComponent::MainComponent()
 {
     setSize (600, 400);
+    
+    File inputFile ("~/Desktop/sonicslash/beat.wav");
+    
+    if (! inputFile.existsAsFile())
+        return;
+    
+    SoundInfo inputInfo;
+    inputInfo.open (inputFile);
 }
 
 MainComponent::~MainComponent()
