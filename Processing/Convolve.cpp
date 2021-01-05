@@ -179,171 +179,171 @@ HandleFIRDialogEvent(short itemHit)
     switch(itemHit)
     {
         case F_FILTOPEN_BUTTON:
-            if(OpenSoundFile(nilFSSpec, FALSE) != -1)
-            {
-                if(frontSIPtr == inSIPtr)
-                {
-                    DrawErrorMessage("\pYou can't use the input as the impulse.");
-                    break;
-                }
-                filtSIPtr = frontSIPtr;
-                sfLengthMax = filtSIPtr->numBytes/(filtSIPtr->nChans*filtSIPtr->sRate*filtSIPtr->frameSize);
-                sfLength = sfLengthMax;
-                FixToString(sfLength, sfLengthString);
-                ShowDialogItem(gFIRDialog, F_FILTLENGTH_FIELD);
-                GetDialogItem(gFIRDialog, F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, sfLengthString);
-
-                gCI.sizeImpulse = (long)(sfLength * filtSIPtr->sRate);
-                gCI.sizeConvolution = 2 * gCI.sizeImpulse - 1;
-                for(gCI.sizeFFT = 1; gCI.sizeFFT < gCI.sizeConvolution;)
-                    gCI.sizeFFT <<= 1;
-                gCI.halfSizeFFT = gCI.sizeFFT >> 1;
-                if(inSIPtr->nChans == STEREO || filtSIPtr->nChans == STEREO)
-                    gProcNChans = STEREO;
-                else
-                    gProcNChans = MONO;
-                memory = (200000L + (3L * gProcNChans * (sizeof(float) * (gCI.sizeFFT
-                    + gCI.sizeImpulse))))/1024L;
-                NumToString(memory,memoryString);
-                GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle, memoryString);
-
-                GetDialogItem(gFIRDialog, F_PROCESS_BUTTON, &itemType, &itemHandle, &itemRect);
-                HiliteControl((ControlHandle)itemHandle, 0);
-                okToOK = TRUE;
-            }
-            break;
+//            if(OpenSoundFile(nilFSSpec, FALSE) != -1)
+//            {
+//                if(frontSIPtr == inSIPtr)
+//                {
+//                    DrawErrorMessage("\pYou can't use the input as the impulse.");
+//                    break;
+//                }
+//                filtSIPtr = frontSIPtr;
+//                sfLengthMax = filtSIPtr->numBytes/(filtSIPtr->nChans*filtSIPtr->sRate*filtSIPtr->frameSize);
+//                sfLength = sfLengthMax;
+//                FixToString(sfLength, sfLengthString);
+//                ShowDialogItem(gFIRDialog, F_FILTLENGTH_FIELD);
+//                GetDialogItem(gFIRDialog, F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, sfLengthString);
+//
+//                gCI.sizeImpulse = (long)(sfLength * filtSIPtr->sRate);
+//                gCI.sizeConvolution = 2 * gCI.sizeImpulse - 1;
+//                for(gCI.sizeFFT = 1; gCI.sizeFFT < gCI.sizeConvolution;)
+//                    gCI.sizeFFT <<= 1;
+//                gCI.halfSizeFFT = gCI.sizeFFT >> 1;
+//                if(inSIPtr->nChans == STEREO || filtSIPtr->nChans == STEREO)
+//                    gProcNChans = STEREO;
+//                else
+//                    gProcNChans = MONO;
+//                memory = (200000L + (3L * gProcNChans * (sizeof(float) * (gCI.sizeFFT
+//                    + gCI.sizeImpulse))))/1024L;
+//                NumToString(memory,memoryString);
+//                GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle, memoryString);
+//
+//                GetDialogItem(gFIRDialog, F_PROCESS_BUTTON, &itemType, &itemHandle, &itemRect);
+//                HiliteControl((ControlHandle)itemHandle, 0);
+//                okToOK = TRUE;
+//            }
+//            break;
         case F_FILTLENGTH_FIELD:
-            GetDialogItem(gFIRDialog,F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
-            GetDialogItemText(itemHandle,sfLengthString);
-            StringToFix(sfLengthString, &sfLengthNew);
-            if(sfLengthNew > sfLengthMax)
-            {
-                FixToString(sfLength, sfLengthString);
-                GetDialogItem(gFIRDialog,F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
-                SetDialogItemText(itemHandle,sfLengthString);
-            }
-            else
-                sfLength = sfLengthNew;
-            gCI.sizeImpulse = (long)(sfLength * filtSIPtr->sRate);
-            gCI.sizeConvolution = 2 * gCI.sizeImpulse - 1;
-            for(gCI.sizeFFT = 1; gCI.sizeFFT < gCI.sizeConvolution;)
-                gCI.sizeFFT <<= 1;
-            gCI.halfSizeFFT = gCI.sizeFFT >> 1;
-            memory = (200000L + (3L * gProcNChans * (sizeof(float) * (gCI.sizeFFT
-                + gCI.sizeImpulse))))/1024L;
-            NumToString(memory,memoryString);
-            GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
-            SetDialogItemText(itemHandle, memoryString);
-            break;
-        case F_LOW_RADIO:
-            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,ON);
-            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            gScaleDivisor = 1.0;
-            break;
-        case F_MED_RADIO:
-            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,ON);
-            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            gScaleDivisor = 16.0;
-            break;
-        case F_HIGH_RADIO:
-            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,OFF);
-            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
-            SetControlValue((ControlHandle)itemHandle,ON);
-            gScaleDivisor = 128.0;
-            break;
-        case F_NORM_BOX:
-            GetDialogItem(gFIRDialog, F_NORM_BOX, &itemType, &itemHandle, &itemRect);
-            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
-            {
-                SetControlValue((ControlHandle)itemHandle,OFF);
-                gNormalize = FALSE;
-            }
-            else
-            {
-                SetControlValue((ControlHandle)itemHandle,ON);
-                gNormalize = TRUE;
-            }
-            break;
-        case F_BRIGHTEN_BOX:
-            GetDialogItem(gFIRDialog, F_BRIGHTEN_BOX, &itemType, &itemHandle, &itemRect);
-            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
-            {
-                SetControlValue((ControlHandle)itemHandle,OFF);
-                gCI.brighten = FALSE;
-            }
-            else
-            {
-                SetControlValue((ControlHandle)itemHandle,ON);
-                gCI.brighten = TRUE;
-            }
-            break;
-        case F_RING_BOX:
-            GetDialogItem(gFIRDialog, F_RING_BOX, &itemType, &itemHandle, &itemRect);
-            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
-            {
-                SetControlValue((ControlHandle)itemHandle,OFF);
-                gCI.ringMod = FALSE;
-                ShowDialogItem(gFIRDialog, F_LOW_RADIO);
-                ShowDialogItem(gFIRDialog, F_MED_RADIO);
-                ShowDialogItem(gFIRDialog, F_HIGH_RADIO);
-                ShowDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
-            }
-            else
-            {
-                SetControlValue((ControlHandle)itemHandle,ON);
-                gCI.ringMod = TRUE;
-                HideDialogItem(gFIRDialog, F_LOW_RADIO);
-                HideDialogItem(gFIRDialog, F_MED_RADIO);
-                HideDialogItem(gFIRDialog, F_HIGH_RADIO);
-                HideDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
-            }
-            break;
+//            GetDialogItem(gFIRDialog,F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
+//            GetDialogItemText(itemHandle,sfLengthString);
+//            StringToFix(sfLengthString, &sfLengthNew);
+//            if(sfLengthNew > sfLengthMax)
+//            {
+//                FixToString(sfLength, sfLengthString);
+//                GetDialogItem(gFIRDialog,F_FILTLENGTH_FIELD, &itemType, &itemHandle, &itemRect);
+//                SetDialogItemText(itemHandle,sfLengthString);
+//            }
+//            else
+//                sfLength = sfLengthNew;
+//            gCI.sizeImpulse = (long)(sfLength * filtSIPtr->sRate);
+//            gCI.sizeConvolution = 2 * gCI.sizeImpulse - 1;
+//            for(gCI.sizeFFT = 1; gCI.sizeFFT < gCI.sizeConvolution;)
+//                gCI.sizeFFT <<= 1;
+//            gCI.halfSizeFFT = gCI.sizeFFT >> 1;
+//            memory = (200000L + (3L * gProcNChans * (sizeof(float) * (gCI.sizeFFT
+//                + gCI.sizeImpulse))))/1024L;
+//            NumToString(memory,memoryString);
+//            GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
+//            SetDialogItemText(itemHandle, memoryString);
+//            break;
+//        case F_LOW_RADIO:
+//            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,ON);
+//            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            gScaleDivisor = 1.0;
+//            break;
+//        case F_MED_RADIO:
+//            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,ON);
+//            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            gScaleDivisor = 16.0;
+//            break;
+//        case F_HIGH_RADIO:
+//            GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,OFF);
+//            GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
+//            SetControlValue((ControlHandle)itemHandle,ON);
+//            gScaleDivisor = 128.0;
+//            break;
+//        case F_NORM_BOX:
+//            GetDialogItem(gFIRDialog, F_NORM_BOX, &itemType, &itemHandle, &itemRect);
+//            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
+//            {
+//                SetControlValue((ControlHandle)itemHandle,OFF);
+//                gNormalize = FALSE;
+//            }
+//            else
+//            {
+//                SetControlValue((ControlHandle)itemHandle,ON);
+//                gNormalize = TRUE;
+//            }
+//            break;
+//        case F_BRIGHTEN_BOX:
+//            GetDialogItem(gFIRDialog, F_BRIGHTEN_BOX, &itemType, &itemHandle, &itemRect);
+//            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
+//            {
+//                SetControlValue((ControlHandle)itemHandle,OFF);
+//                gCI.brighten = FALSE;
+//            }
+//            else
+//            {
+//                SetControlValue((ControlHandle)itemHandle,ON);
+//                gCI.brighten = TRUE;
+//            }
+//            break;
+//        case F_RING_BOX:
+//            GetDialogItem(gFIRDialog, F_RING_BOX, &itemType, &itemHandle, &itemRect);
+//            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
+//            {
+//                SetControlValue((ControlHandle)itemHandle,OFF);
+//                gCI.ringMod = FALSE;
+//                ShowDialogItem(gFIRDialog, F_LOW_RADIO);
+//                ShowDialogItem(gFIRDialog, F_MED_RADIO);
+//                ShowDialogItem(gFIRDialog, F_HIGH_RADIO);
+//                ShowDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
+//            }
+//            else
+//            {
+//                SetControlValue((ControlHandle)itemHandle,ON);
+//                gCI.ringMod = TRUE;
+//                HideDialogItem(gFIRDialog, F_LOW_RADIO);
+//                HideDialogItem(gFIRDialog, F_MED_RADIO);
+//                HideDialogItem(gFIRDialog, F_HIGH_RADIO);
+//                HideDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
+//            }
+//            break;
         case F_WINDOW_MENU:
-            GetDialogItem(gFIRDialog, F_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
-            gCI.windowType = GetControlValue((ControlHandle)itemHandle);
-            if(gCI.windowType != RECTANGLE)
-                gCI.windowImpulse = TRUE;
-            else
-                gCI.windowImpulse = FALSE;
+//            GetDialogItem(gFIRDialog, F_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
+//            gCI.windowType = GetControlValue((ControlHandle)itemHandle);
+//            if(gCI.windowType != RECTANGLE)
+//                gCI.windowImpulse = TRUE;
+//            else
+//                gCI.windowImpulse = FALSE;
             break;
         case F_MOVING_BOX:
-            GetDialogItem(gFIRDialog, F_MOVING_BOX, &itemType, &itemHandle, &itemRect);
-            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
-            {
-                SetControlValue((ControlHandle)itemHandle,OFF);
-                gCI.moving = FALSE;
-            } else
-            {
-                SetControlValue((ControlHandle)itemHandle,ON);
-                gCI.moving = TRUE;
-            }
-            break;
+//            GetDialogItem(gFIRDialog, F_MOVING_BOX, &itemType, &itemHandle, &itemRect);
+//            if(GetControlValue((ControlHandle)itemHandle) == TRUE)
+//            {
+//                SetControlValue((ControlHandle)itemHandle,OFF);
+//                gCI.moving = FALSE;
+//            } else
+//            {
+//                SetControlValue((ControlHandle)itemHandle,ON);
+//                gCI.moving = TRUE;
+//            }
+//            break;
         case F_CANCEL_BUTTON:
-#if TARGET_API_MAC_CARBON == 1
-            myWI = (WindInfoPtr)GetWRefCon(GetDialogWindow(gFIRDialog));
-#else
-            myWI = (WindInfoPtr)GetWRefCon(gFIRDialog);
-#endif
-            RemovePtr((Ptr)myWI);
-            DisposeDialog(gFIRDialog);
-            gFIRDialog = nil;
-            gProcessDisabled = gProcessEnabled = NO_PROCESS;
-            inSIPtr = nil;
-            MenuUpdate();
-            break;
+//#if TARGET_API_MAC_CARBON == 1
+//            myWI = (WindInfoPtr)GetWRefCon(GetDialogWindow(gFIRDialog));
+//#else
+//            myWI = (WindInfoPtr)GetWRefCon(gFIRDialog);
+//#endif
+//            RemovePtr((Ptr)myWI);
+//            DisposeDialog(gFIRDialog);
+//            gFIRDialog = nil;
+//            gProcessDisabled = gProcessEnabled = NO_PROCESS;
+//            inSIPtr = nil;
+//            MenuUpdate();
+//            break;
         case F_PROCESS_BUTTON:
             if(okToOK)
             {
@@ -373,7 +373,7 @@ HandleFIRDialogEvent(short itemHit)
  */
 //short
 //InitFIRProcess(void)
-//{    
+//{
 //    long     n;
 //    Str255    errStr, err2Str;
 //    float    tmpFloat, filtLength, inLength;
@@ -381,9 +381,9 @@ HandleFIRDialogEvent(short itemHit)
 ///*    Initialize variables and then blocks for convolution, gCI.sizeImpulse will have been
 //    initialized already by HandleFIRDialog, gCI.sizeConvolution is twice as big minus one
 //    as the impulse so that the full convolution is done (otherwise output is just as long as
-//    input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for 
+//    input), gCI.sizeFFT (FFT length) is the first power of 2 >= gCI.sizeConvolution for
 //    convenient calculation */
-//    
+//
 //    gNumberBlocks = 0;
 //    inLength = (float)inSIPtr->numBytes/(inSIPtr->nChans * inSIPtr->frameSize);
 //    filtLength = (float)filtSIPtr->numBytes/(filtSIPtr->nChans * filtSIPtr->frameSize);
@@ -418,7 +418,7 @@ HandleFIRDialogEvent(short itemHit)
 //    outSIPtr->sRate = inSIPtr->sRate;
 //    outSIPtr->nChans = gProcNChans;
 //    outSIPtr->numBytes = 0;
-//    
+//
 //    if(CreateSoundFile(&outSIPtr, SOUND_CUST_DIALOG) == -1)
 //    {
 //        gProcessDisabled = NO_PROCESS;
@@ -449,7 +449,7 @@ HandleFIRDialogEvent(short itemHit)
 ///*    Initialize overlap    */
 //    for(n = 0; n <(gCI.sizeImpulse - 1); n++)
 //        overlapLeft[n] = 0.0;
-//    
+//
 //    if(gProcNChans == STEREO)
 //    {
 //        /*    Initialize overlap Right    */

@@ -19,7 +19,7 @@ public:
     bool setAmplitudeScale (float scale);
     bool setNormalise (bool flag);
     bool setBrighten (bool flag);
-    bool setRingModulate (bool flag);
+//    bool setRingModulate (bool flag);
     bool setMoving (bool flag);
 
 private:
@@ -27,6 +27,7 @@ private:
     bool allocateBuffers();
     bool initFIRProcess();
     bool convolveBlock();
+    bool updateNumChans();
     
     bool soundInfoIsValid (std::shared_ptr<SoundInfo> file);
     
@@ -37,17 +38,19 @@ private:
     long numBlocks = { 0 };
     float amplitudeScale = { 1.0f };
     bool normalise = { false };
-    
+    float filtLengthMax = { 0.0f };
+    float filtLength = { 0.0f };
+
     long sizeImpulse = { 0 }; // in samples
     long sizeConvolution = { 0 }; // in samples
     long sizeFFT = { 4096 };
     long halfSizeFFT = { 2048 };
     long incWin = { 0 };
-    long windowType = { legacy::HAMMING };
+    long windowType = { legacy::RECTANGLE };
     long binPosition = { 0 };
     long binHeight = { 0 };
     bool moving  = { false };
-    bool ringMod = { false };
+//    bool ringMod = { false };
     bool windowImpulse = { false };
     bool binaural = { false };
     bool brighten = { false };

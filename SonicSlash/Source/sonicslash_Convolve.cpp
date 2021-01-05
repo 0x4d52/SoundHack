@@ -6,14 +6,48 @@ using namespace legacy;
 
 Convolve::Convolve() {}
     
+bool Convolve::updateNumChans()
+{
+    if (! soundInfoIsValid (filtSIPtr))
+        return false;
+
+    if (! soundInfoIsValid (inSIPtr))
+        return false;
+
+    if (inSIPtr->nChans == STEREO || filtSIPtr->nChans == STEREO)
+        numChans = STEREO;
+    else
+        numChans = MONO;
+    
+    return true;
+}
+    
 bool Convolve::openInputFile (const File& file)
 {
+    // need to implement opening the file and converting to a SoundInfo
+    // and store in inSIPtr
+
+    /// then..
     
+    return updateNumChans();
 }
 
 bool Convolve::openFilterFile (const File& file)
 {
+    // need to implement opening the file and converting to a SoundInfo
+    // and store in filtSIPtr
     
+    // then...
+    
+    if (! soundInfoIsValid (filtSIPtr))
+        return false;
+
+    filtLengthMax = filtSIPtr->numBytes / (filtSIPtr->nChans * filtSIPtr->sRate * filtSIPtr->frameSize);
+
+    if (! setFilterLength (filtLengthMax))
+        jassertfalse;
+    
+    return updateNumChans();
 }
 
 bool Convolve::openOutputFile (const File& file)
@@ -21,20 +55,24 @@ bool Convolve::openOutputFile (const File& file)
     
 }
 
-bool Convolve::setWindowType (long windowType)
+bool Convolve::setWindowType (long type)
 {
-    
+    windowType = juce::jlimit (WINDOWTYPE_MIN, WINDOWTYPE_MAX, type);
+    windowImpulse = windowType != RECTANGLE;
+    return true;
 }
 
 bool Convolve::setFilterLength (float length)
 {
-    /// need to limit if the length is larger than the filterlength
-    
     if (! soundInfoIsValid (filtSIPtr))
         return false;
     
+    jassert (filtLengthMax > 0.0f);
+    
     if (length <= 0.0f)
         return false;
+    
+    length = juce::jmin (length, filtLengthMax);
     
     sizeImpulse = (long) (length * filtSIPtr->sRate);
     sizeConvolution = 2 * sizeImpulse - 1;
@@ -43,33 +81,38 @@ bool Convolve::setFilterLength (float length)
         sizeFFT <<= 1;
 
     halfSizeFFT = sizeFFT >> 1;
-
+    
     return true;
 }
 
 bool Convolve::setAmplitudeScale (float scale)
 {
-    
+    amplitudeScale = scale;
+    return true;
 }
 
 bool Convolve::setNormalise (bool flag)
 {
-    
+    normalise = flag;
+    return true;
 }
 
 bool Convolve::setBrighten (bool flag)
 {
-    
+    brighten = flag;
+    return true;
 }
 
-bool Convolve::setRingModulate (bool flag)
-{
-    
-}
+//bool Convolve::setRingModulate (bool flag)
+//{
+//    ringMod = flag;
+//    return true;
+//}
 
 bool Convolve::setMoving (bool flag)
 {
-    
+    moving = flag;
+    return true;
 }
     
 void Convolve::initBuffers()
@@ -92,15 +135,23 @@ bool Convolve::allocateBuffers()
     if (filtSIPtr == nullptr)
         return false;
     
-    if (ringMod && sizeConvolution <= 0)
-        return false;
+//    if (ringMod)
+//    {
+//        if (sizeConvolution <= 0)
+//            return false;
+//        
+//        if (windowImpulse)
+//            allocateBuffer (window, sizeConvolution);
+//    }
+//    else
+    {
+        if (sizeImpulse <= 0)
+            return false;
+        
+        if (windowImpulse)
+            allocateBuffer (window, sizeImpulse);
+    }
     
-    if (! ringMod && sizeImpulse <= 0)
-        return false;
-
-    if (windowImpulse)
-        allocateBuffer (window, ringMod ? sizeConvolution : sizeImpulse);
-
     allocateBuffer (displaySpectrum, halfSizeFFT + 1);
     allocateBuffer (impulseLeft, sizeFFT);
     
