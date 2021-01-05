@@ -15,7 +15,7 @@ public:
     bool openFilterFile (const File& file);
     bool openOutputFile (const File& file);
     bool setWindowType (long windowType);
-    bool setFilterLength (long length);
+    bool setFilterLength (float length);
     bool setAmplitudeScale (float scale);
     bool setNormalise (bool flag);
     bool setBrighten (bool flag);
@@ -27,6 +27,9 @@ private:
     bool allocateBuffers();
     bool initFIRProcess();
     bool convolveBlock();
+    
+    bool soundInfoIsValid (std::shared_ptr<SoundInfo> file);
+    
     void brightenFFT (float cartSpectrum[], long halfSizeFFT);
 
     //==========================================================================

@@ -26,9 +26,25 @@ bool Convolve::setWindowType (long windowType)
     
 }
 
-bool Convolve::setFilterLength (long length)
+bool Convolve::setFilterLength (float length)
 {
+    /// need to limit if the length is larger than the filterlength
     
+    if (! soundInfoIsValid (filtSIPtr))
+        return false;
+    
+    if (length <= 0.0f)
+        return false;
+    
+    sizeImpulse = (long) (length * filtSIPtr->sRate);
+    sizeConvolution = 2 * sizeImpulse - 1;
+    
+    for (sizeFFT = 1; sizeFFT < sizeConvolution;)
+        sizeFFT <<= 1;
+
+    halfSizeFFT = sizeFFT >> 1;
+
+    return true;
 }
 
 bool Convolve::setAmplitudeScale (float scale)
@@ -114,38 +130,36 @@ bool Convolve::allocateBuffers()
 
     return true;
 }
+    
+bool Convolve::soundInfoIsValid (std::shared_ptr<SoundInfo> file)
+{
+    if (file == nullptr)
+        return false;
+    
+    if (file->numBytes <= 0)
+        return false;
+    
+    if (file->nChans <= 0)
+        return false;
+    
+    if (file->frameSize <= 0)
+        return false;
+    
+    if (file->sRate < 1000.0)
+        return false;
+
+    return true;
+}
 
 bool Convolve::initFIRProcess()
 {
     numBlocks = 0;
     
-    {
-        if (inSIPtr == nullptr)
-            return false;
-        
-        if (inSIPtr->numBytes <= 0)
-            return false;
-        
-        if (inSIPtr->nChans <= 0)
-            return false;
-        
-        if (inSIPtr->frameSize <= 0)
-            return false;
-    }
+    if (! soundInfoIsValid (inSIPtr))
+        return false;
     
-    {
-        if (filtSIPtr == nullptr)
-            return false;
-        
-        if (filtSIPtr->numBytes <= 0)
-            return false;
-        
-        if (filtSIPtr->nChans <= 0)
-            return false;
-        
-        if (filtSIPtr->frameSize <= 0)
-            return false;
-    }
+    if (! soundInfoIsValid (filtSIPtr))
+        return false;
     
     if (outSIPtr == nullptr) // changed logic to assume the output is already created too
         return false;
