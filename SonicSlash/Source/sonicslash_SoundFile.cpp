@@ -2,6 +2,28 @@
 
 namespace sonicslash {
 
+//==============================================================================
+
+bool SoundInfo::open (const File& fileToOpen)
+{
+    file = juce::File();
+    reader.reset();
+    
+    juce::AudioFormatManager manager;
+    manager.registerBasicFormats();
+    
+    reader.reset (manager.createReaderFor (fileToOpen));
+    
+    if (reader == nullptr)
+        return false;
+    
+    file = fileToOpen;
+    
+    return true;
+}
+    
+//==============================================================================
+
 namespace legacy {
 
 namespace SoundFile {

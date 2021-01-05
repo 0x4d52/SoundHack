@@ -4,6 +4,25 @@
 
 namespace sonicslash {
 
+//==============================================================================
+
+class SoundInfo
+{
+public:
+    SoundInfo() = default;
+    
+    bool open (const File& file);
+    
+private:
+    
+    //==========================================================================
+
+    juce::File file;
+    std::unique_ptr<juce::AudioFormatReader> reader;
+};
+    
+//==============================================================================
+    
 namespace legacy {
 
 struct SoundInfoLegacy
