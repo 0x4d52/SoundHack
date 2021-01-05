@@ -51,132 +51,132 @@ static ConvolveInfo gCI;
 
 //float                 *impulseLeft, *inputLeft, *outputLeft, *overlapLeft, *impulseRight,
 //                    *inputRight, *outputRight, *overlapRight, *Window;
-void
-HandleFIRDialog(void)
-{
-    short    itemType;
-    Rect    itemRect, dialogRect;
-    Handle    itemHandle;
-    WindInfo    *theWindInfo;
-
-
-    gFIRDialog = GetNewDialog(FIR_DLOG,NIL_POINTER,(WindowRef)MOVE_TO_FRONT);
-
-    theWindInfo = (WindInfo *)NewPtr(sizeof(WindInfo));
-    theWindInfo->windType = PROCWIND;
-    theWindInfo->structPtr = (Ptr)FIR_DLOG;
-
-#if TARGET_API_MAC_CARBON == 1
-    SetWRefCon(GetDialogWindow(gFIRDialog), (long)theWindInfo);
-#else
-    SetWRefCon(gFIRDialog, (long)theWindInfo);
-#endif
-
-    gProcessDisabled = UTIL_PROCESS;
-    // Rename Display MENUs
-    SetMenuItemText(gSigDispMenu, DISP_INPUT_ITEM, "\pInput");
-    SetMenuItemText(gSpectDispMenu, DISP_INPUT_ITEM, "\pInput");
-    SetMenuItemText(gSonoDispMenu, DISP_INPUT_ITEM, "\pInput");
-    SetMenuItemText(gSigDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
-    SetMenuItemText(gSpectDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
-    SetMenuItemText(gSonoDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
-    SetMenuItemText(gSigDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
-    SetMenuItemText(gSpectDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
-    SetMenuItemText(gSonoDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
-
-    EnableItem(gSigDispMenu, DISP_INPUT_ITEM);
-    EnableItem(gSpectDispMenu, DISP_INPUT_ITEM);
-    EnableItem(gSonoDispMenu, DISP_INPUT_ITEM);
-    EnableItem(gSigDispMenu, DISP_AUX_ITEM);
-    EnableItem(gSpectDispMenu, DISP_AUX_ITEM);
-    EnableItem(gSonoDispMenu, DISP_AUX_ITEM);
-    EnableItem(gSigDispMenu, DISP_OUTPUT_ITEM);
-    EnableItem(gSpectDispMenu, DISP_OUTPUT_ITEM);
-    EnableItem(gSonoDispMenu, DISP_OUTPUT_ITEM);
-
-    MenuUpdate();
-
-    /* Initialize Variables */
-    gCI.binaural = FALSE;
-
-    if(filtSIPtr != nil)
-        filtSIPtr = nil;
-
-    /* Initialize dialog */
-#if TARGET_API_MAC_CARBON == 1
-    SetPort(GetDialogPort(gFIRDialog));
-#else
-    SetPort((GrafPtr)gFIRDialog);
-#endif
-
-    GetDialogItem(gFIRDialog, F_PROCESS_BUTTON, &itemType, &itemHandle, &itemRect);
-    HiliteControl((ControlHandle)itemHandle, 255);
-    GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
-    SetDialogItemText(itemHandle, "\p");
-
-    gNormalize = FALSE;
-    GetDialogItem(gFIRDialog, F_NORM_BOX, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle,OFF);
-
-    GetDialogItem(gFIRDialog, F_BRIGHTEN_BOX, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle,gCI.brighten);
-
-    GetDialogItem(gFIRDialog, F_MOVING_BOX, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle, gCI.moving);
-
-    GetDialogItem(gFIRDialog, F_RING_BOX, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle, gCI.ringMod);
-
-    gScaleDivisor = 128.0;
-    GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle,OFF);
-    GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle,OFF);
-    GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle,ON);
-
-    GetDialogItem(gFIRDialog, F_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
-    SetControlValue((ControlHandle)itemHandle, gCI.windowType);
-
-    ShowDialogItem(gFIRDialog, F_NORM_BOX);
-    ShowDialogItem(gFIRDialog, F_LOW_RADIO);
-    ShowDialogItem(gFIRDialog, F_MED_RADIO);
-    ShowDialogItem(gFIRDialog, F_HIGH_RADIO);
-    if(gCI.ringMod)
-        HideDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
-    else
-        ShowDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
-    HideDialogItem(gFIRDialog, F_FILTLENGTH_FIELD);
-#if TARGET_API_MAC_CARBON == 1
-    GetPortBounds(GetWindowPort(GetDialogWindow(gFIRDialog)), &dialogRect);
-    ShowWindow(GetDialogWindow(gFIRDialog));
-    SelectWindow(GetDialogWindow(gFIRDialog));
-#else
-    dialogRect = gFIRDialog->portRect;
-    ShowWindow(gFIRDialog);
-    SelectWindow(gFIRDialog);
-#endif
+//void
+//HandleFIRDialog(void)
+//{
+//    short    itemType;
+//    Rect    itemRect, dialogRect;
+//    Handle    itemHandle;
+//    WindInfo    *theWindInfo;
+//
+//
+//    gFIRDialog = GetNewDialog(FIR_DLOG,NIL_POINTER,(WindowRef)MOVE_TO_FRONT);
+//
+//    theWindInfo = (WindInfo *)NewPtr(sizeof(WindInfo));
+//    theWindInfo->windType = PROCWIND;
+//    theWindInfo->structPtr = (Ptr)FIR_DLOG;
+//
+//#if TARGET_API_MAC_CARBON == 1
+//    SetWRefCon(GetDialogWindow(gFIRDialog), (long)theWindInfo);
+//#else
+//    SetWRefCon(gFIRDialog, (long)theWindInfo);
+//#endif
+//
+//    gProcessDisabled = UTIL_PROCESS;
+//    // Rename Display MENUs
+//    SetMenuItemText(gSigDispMenu, DISP_INPUT_ITEM, "\pInput");
+//    SetMenuItemText(gSpectDispMenu, DISP_INPUT_ITEM, "\pInput");
+//    SetMenuItemText(gSonoDispMenu, DISP_INPUT_ITEM, "\pInput");
+//    SetMenuItemText(gSigDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
+//    SetMenuItemText(gSpectDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
+//    SetMenuItemText(gSonoDispMenu, DISP_AUX_ITEM, "\pImpulse Response");
+//    SetMenuItemText(gSigDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
+//    SetMenuItemText(gSpectDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
+//    SetMenuItemText(gSonoDispMenu, DISP_OUTPUT_ITEM, "\pOutput");
+//
+//    EnableItem(gSigDispMenu, DISP_INPUT_ITEM);
+//    EnableItem(gSpectDispMenu, DISP_INPUT_ITEM);
+//    EnableItem(gSonoDispMenu, DISP_INPUT_ITEM);
+//    EnableItem(gSigDispMenu, DISP_AUX_ITEM);
+//    EnableItem(gSpectDispMenu, DISP_AUX_ITEM);
+//    EnableItem(gSonoDispMenu, DISP_AUX_ITEM);
+//    EnableItem(gSigDispMenu, DISP_OUTPUT_ITEM);
+//    EnableItem(gSpectDispMenu, DISP_OUTPUT_ITEM);
+//    EnableItem(gSonoDispMenu, DISP_OUTPUT_ITEM);
+//
+//    MenuUpdate();
+//
+//    /* Initialize Variables */
+//    gCI.binaural = FALSE;
+//
+//    if(filtSIPtr != nil)
+//        filtSIPtr = nil;
+//
+//    /* Initialize dialog */
+//#if TARGET_API_MAC_CARBON == 1
+//    SetPort(GetDialogPort(gFIRDialog));
+//#else
+//    SetPort((GrafPtr)gFIRDialog);
+//#endif
+//
+//    GetDialogItem(gFIRDialog, F_PROCESS_BUTTON, &itemType, &itemHandle, &itemRect);
+//    HiliteControl((ControlHandle)itemHandle, 255);
+//    GetDialogItem(gFIRDialog, F_MEMORY_FIELD, &itemType, &itemHandle, &itemRect);
+//    SetDialogItemText(itemHandle, "\p");
+//
+//    gNormalize = FALSE;
+//    GetDialogItem(gFIRDialog, F_NORM_BOX, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle,OFF);
+//
+//    GetDialogItem(gFIRDialog, F_BRIGHTEN_BOX, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle,gCI.brighten);
+//
+//    GetDialogItem(gFIRDialog, F_MOVING_BOX, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle, gCI.moving);
+//
+//    GetDialogItem(gFIRDialog, F_RING_BOX, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle, gCI.ringMod);
+//
+//    gScaleDivisor = 128.0;
+//    GetDialogItem(gFIRDialog, F_LOW_RADIO, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle,OFF);
+//    GetDialogItem(gFIRDialog, F_MED_RADIO, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle,OFF);
+//    GetDialogItem(gFIRDialog, F_HIGH_RADIO, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle,ON);
+//
+//    GetDialogItem(gFIRDialog, F_WINDOW_MENU, &itemType, &itemHandle, &itemRect);
+//    SetControlValue((ControlHandle)itemHandle, gCI.windowType);
+//
+//    ShowDialogItem(gFIRDialog, F_NORM_BOX);
+//    ShowDialogItem(gFIRDialog, F_LOW_RADIO);
+//    ShowDialogItem(gFIRDialog, F_MED_RADIO);
+//    ShowDialogItem(gFIRDialog, F_HIGH_RADIO);
+//    if(gCI.ringMod)
+//        HideDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
+//    else
+//        ShowDialogItem(gFIRDialog, F_BRIGHTEN_BOX);
+//    HideDialogItem(gFIRDialog, F_FILTLENGTH_FIELD);
+//#if TARGET_API_MAC_CARBON == 1
+//    GetPortBounds(GetWindowPort(GetDialogWindow(gFIRDialog)), &dialogRect);
+//    ShowWindow(GetDialogWindow(gFIRDialog));
+//    SelectWindow(GetDialogWindow(gFIRDialog));
+//#else
+//    dialogRect = gFIRDialog->portRect;
+//    ShowWindow(gFIRDialog);
+//    SelectWindow(gFIRDialog);
+//#endif
 
 }
 
 void
 HandleFIRDialogEvent(short itemHit)
 {
-    static double    sfLengthMax, sfLength, sfLengthNew;
-    long    memory;
-    short    itemType;
-
-    Handle    itemHandle;
-    Rect    itemRect;
-    Str255    sfLengthString, memoryString;
-    WindInfo    *myWI;
-    Boolean    okToOK;
-
-    if(filtSIPtr == nil)
-        okToOK = FALSE;
-    else
-        okToOK = TRUE;
-    switch(itemHit)
+//    static double    sfLengthMax, sfLength, sfLengthNew;
+//    long    memory;
+//    short    itemType;
+//
+//    Handle    itemHandle;
+//    Rect    itemRect;
+//    Str255    sfLengthString, memoryString;
+//    WindInfo    *myWI;
+//    Boolean    okToOK;
+//
+//    if(filtSIPtr == nil)
+//        okToOK = FALSE;
+//    else
+//        okToOK = TRUE;
+//    switch(itemHit)
     {
         case F_FILTOPEN_BUTTON:
 //            if(OpenSoundFile(nilFSSpec, FALSE) != -1)
@@ -345,21 +345,21 @@ HandleFIRDialogEvent(short itemHit)
 //            MenuUpdate();
 //            break;
         case F_PROCESS_BUTTON:
-            if(okToOK)
-            {
-#if TARGET_API_MAC_CARBON == 1
-                myWI = (WindInfoPtr)GetWRefCon(GetDialogWindow(gFIRDialog));
-#else
-                myWI = (WindInfoPtr)GetWRefCon(gFIRDialog);
-#endif
-                RemovePtr((Ptr)myWI);
-                DisposeDialog(gFIRDialog);
-                gFIRDialog = nil;
-                if(gCI.ringMod)
-                    InitRingModProcess();
-                else
-                    InitFIRProcess();
-            }
+//            if(okToOK)
+//            {
+//#if TARGET_API_MAC_CARBON == 1
+//                myWI = (WindInfoPtr)GetWRefCon(GetDialogWindow(gFIRDialog));
+//#else
+//                myWI = (WindInfoPtr)GetWRefCon(gFIRDialog);
+//#endif
+//                RemovePtr((Ptr)myWI);
+//                DisposeDialog(gFIRDialog);
+//                gFIRDialog = nil;
+//                if(gCI.ringMod)
+//                    InitRingModProcess();
+//                else
+//                    InitFIRProcess();
+//            }
             break;
     }
 }

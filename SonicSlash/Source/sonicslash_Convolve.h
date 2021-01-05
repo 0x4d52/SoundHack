@@ -6,6 +6,8 @@
 
 namespace sonicslash {
     
+// ringmod is disabled for now since it's implemented separately in the legacy code
+    
 class Convolve
 {
 public:
