@@ -31,7 +31,7 @@ private:
     bool convolveBlock();
     bool updateNumChans();
     
-    bool soundInfoIsValid (std::shared_ptr<SoundInfo> file);
+    bool soundInfoIsValid (std::shared_ptr<SoundInfoType> file);
     
     void brightenFFT (float cartSpectrum[], long halfSizeFFT);
 
@@ -68,9 +68,9 @@ private:
     Buffer window;
     Buffer displaySpectrum;
 
-    std::shared_ptr<SoundInfo> inSIPtr;
-    std::shared_ptr<SoundInfo> filtSIPtr;
-    std::shared_ptr<SoundInfo> outSIPtr;
+    std::shared_ptr<SoundInfoType> inSIPtr;
+    std::shared_ptr<SoundInfoType> filtSIPtr;
+    std::shared_ptr<SoundInfoType> outSIPtr;
 };
 
 } // namespace sonicslash

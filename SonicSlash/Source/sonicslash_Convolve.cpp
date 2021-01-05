@@ -182,7 +182,7 @@ bool Convolve::allocateBuffers()
     return true;
 }
     
-bool Convolve::soundInfoIsValid (std::shared_ptr<SoundInfo> file)
+bool Convolve::soundInfoIsValid (std::shared_ptr<SoundInfoLegacy> file)
 {
     if (file == nullptr)
         return false;

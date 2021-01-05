@@ -76,7 +76,7 @@ private:
     Buffer indexR;
     Buffer sineTable;
     
-    std::shared_ptr<SoundInfo> inSIPtr;
+    std::shared_ptr<SoundInfoType> inSIPtr;
 };
     
 } // namespace sonicslash
