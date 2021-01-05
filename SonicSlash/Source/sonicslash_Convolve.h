@@ -11,6 +11,17 @@ class Convolve
 public:
     Convolve();
     
+    bool openInputFile (const File& file);
+    bool openFilterFile (const File& file);
+    bool openOutputFile (const File& file);
+    bool setWindowType (long windowType);
+    bool setFilterLength (long length);
+    bool setAmplitudeScale (float scale);
+    bool setNormalise (bool flag);
+    bool setBrighten (bool flag);
+    bool setRingModulate (bool flag);
+    bool setMoving (bool flag);
+
 private:
     void initBuffers();
     bool allocateBuffers();
@@ -21,20 +32,22 @@ private:
     //==========================================================================
     long numChans = { 2 };
     long numBlocks = { 0 };
+    float amplitudeScale = { 1.0f };
+    bool normalise = { false };
     
     long sizeImpulse = { 0 }; // in samples
     long sizeConvolution = { 0 }; // in samples
     long sizeFFT = { 4096 };
     long halfSizeFFT = { 2048 };
-    long incWin;
+    long incWin = { 0 };
     long windowType = { legacy::HAMMING };
-    long binPosition;
-    long binHeight;
-    short moving;
+    long binPosition = { 0 };
+    long binHeight = { 0 };
+    bool moving  = { false };
     bool ringMod = { false };
     bool windowImpulse = { false };
-    short binaural;
-    short brighten;
+    bool binaural = { false };
+    bool brighten = { false };
 
     Buffer impulseLeft;
     Buffer inputLeft;

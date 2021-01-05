@@ -4,7 +4,54 @@ namespace sonicslash {
     
 using namespace legacy;
 
-Convolve::Convolve()
+Convolve::Convolve() {}
+    
+bool Convolve::openInputFile (const File& file)
+{
+    
+}
+
+bool Convolve::openFilterFile (const File& file)
+{
+    
+}
+
+bool Convolve::openOutputFile (const File& file)
+{
+    
+}
+
+bool Convolve::setWindowType (long windowType)
+{
+    
+}
+
+bool Convolve::setFilterLength (long length)
+{
+    
+}
+
+bool Convolve::setAmplitudeScale (float scale)
+{
+    
+}
+
+bool Convolve::setNormalise (bool flag)
+{
+    
+}
+
+bool Convolve::setBrighten (bool flag)
+{
+    
+}
+
+bool Convolve::setRingModulate (bool flag)
+{
+    
+}
+
+bool Convolve::setMoving (bool flag)
 {
     
 }
