@@ -1,6 +1,7 @@
 #include "MainComponent.h"
 
 #include "sonicslash_SoundFile.h"
+#include "sonicslash_SoundFileReader.h"
 
 namespace sonicslash {
 
@@ -13,7 +14,7 @@ MainComponent::MainComponent()
     if (! inputFile.existsAsFile())
         return;
     
-    SoundInfo inputInfo;
+    SoundInfoReader inputInfo;
     inputInfo.open (inputFile);
 }
 

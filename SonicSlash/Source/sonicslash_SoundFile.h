@@ -10,15 +10,14 @@ class SoundInfo
 {
 public:
     SoundInfo() = default;
+    virtual ~SoundInfo() = default;
     
-    bool open (const File& file);
+    virtual bool open (const File& file) = 0;
+    virtual bool isWriter() const = 0;
     
-private:
-    
+protected:
     //==========================================================================
-
     juce::File file;
-    std::unique_ptr<juce::AudioFormatReader> reader;
 };
     
 //==============================================================================
