@@ -2,13 +2,12 @@
 
 #include "sonicslash_SoundFile.h"
 #include "sonicslash_SoundFileReader.h"
+#include "sonicslash_SoundFileWriter.h"
 
 namespace sonicslash {
 
-MainComponent::MainComponent()
+static void testFileRead()
 {
-    setSize (600, 400);
-    
     File inputFile ("~/Desktop/sonicslash/beat.wav");
     
     if (! inputFile.existsAsFile())
@@ -16,6 +15,30 @@ MainComponent::MainComponent()
     
     SoundInfoReader inputInfo;
     inputInfo.open (inputFile);
+}
+    
+static void testFileWrite()
+{
+    File outpuFile ("~/Desktop/sonicslash/out.wav");
+    
+    if (outpuFile.existsAsFile())
+    {
+        outpuFile.moveToTrash();
+        
+        while (outpuFile.existsAsFile())
+            Thread::sleep (1);
+    }
+    
+    SoundInfoWriter outputInfo;
+    outputInfo.open (outpuFile);
+}
+    
+MainComponent::MainComponent()
+{
+    setSize (600, 400);
+    
+    testFileRead();
+    testFileWrite();
 }
 
 MainComponent::~MainComponent()

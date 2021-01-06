@@ -4,7 +4,25 @@ namespace sonicslash {
 
 //==============================================================================
 
+bool SoundInfo::setPreferredFormat (SoundFormat format)
+{
+    if (format.sampleRateToUse < 1000.0)
+        return false;
     
+    if (format.numberOfChannels < 1 || format.numberOfChannels > 2)
+        return false;
+    
+    switch (format.bitsPerSample)
+    {
+        case 16: break;
+        case 24: break;
+        default: return false;
+    }
+    
+    preferredFormat = format;
+    return true;
+}
+
 //==============================================================================
 
 namespace legacy {

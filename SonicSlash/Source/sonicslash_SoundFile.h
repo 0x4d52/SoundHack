@@ -6,11 +6,23 @@ namespace sonicslash {
 
 //==============================================================================
 
+struct SoundFormat
+{
+    double sampleRateToUse        = { 48000.0 };
+    unsigned int numberOfChannels = { 2 };
+    int bitsPerSample             = { 24 };
+};
+    
+//==============================================================================
+    
 class SoundInfo
 {
 public:
     SoundInfo() = default;
     virtual ~SoundInfo() = default;
+    
+    bool setPreferredFormat (SoundFormat format);
+    SoundFormat getPreferredFormat() const { return preferredFormat; }
     
     virtual bool open (const File& file) = 0;
     virtual bool isWriter() const = 0;
@@ -18,6 +30,7 @@ public:
 protected:
     //==========================================================================
     juce::File file;
+    SoundFormat preferredFormat;
 };
     
 //==============================================================================

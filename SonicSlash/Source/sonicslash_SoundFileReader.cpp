@@ -17,6 +17,10 @@ bool SoundInfoReader::open (const File& fileToOpen)
     
     file = fileToOpen;
     
+    preferredFormat.sampleRateToUse  = reader->sampleRate;
+    preferredFormat.numberOfChannels = reader->numChannels;
+    preferredFormat.bitsPerSample    = reader->bitsPerSample;
+
     return true;
 }
 
