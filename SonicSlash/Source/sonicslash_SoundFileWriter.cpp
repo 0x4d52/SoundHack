@@ -40,4 +40,30 @@ bool SoundInfoWriter::open (const File& fileToOpen)
     return true;
 }
     
+long SoundInfoWriter::writeStereo (long numSamples, float blockL[], float blockR[])
+{
+    if (writer == nullptr)
+        return -1;
+    
+    float* ptrs[] = { blockL, blockR };
+    
+    if (writer->writeFromFloatArrays (ptrs, 2, static_cast<int> (numSamples)))
+        return numSamples;
+    
+    return -1;
+}
+    
+long SoundInfoWriter::writeMono (long numSamples, float block[])
+{
+    if (writer == nullptr)
+        return -1;
+
+    float* ptrs[] = { block };
+    
+    if (writer->writeFromFloatArrays (ptrs, 1, static_cast<int> (numSamples)))
+        return numSamples;
+
+    return -1;
+}
+    
 } // namespace sonicslash

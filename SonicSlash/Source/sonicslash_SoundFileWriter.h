@@ -13,6 +13,9 @@ public:
     bool open (const File& file) override;
     bool isWriter() const override { return true; }
     
+    long writeStereo (long numSamples, float blockL[], float blockR[]) override;
+    long writeMono (long numSamples, float block[]) override;
+    
 private:
     
     //==========================================================================
