@@ -5,20 +5,6 @@
               headerPath="../../Source">
   <MAINGROUP id="iraBm6" name="SonicSlash">
     <GROUP id="{29970870-4461-FD5E-2322-FC7237A058EB}" name="Source">
-      <FILE id="GEv8le" name="sonicslash_Convolve.cpp" compile="1" resource="0"
-            file="Source/sonicslash_Convolve.cpp"/>
-      <FILE id="ITqa1i" name="sonicslash_Convolve.h" compile="0" resource="0"
-            file="Source/sonicslash_Convolve.h"/>
-      <FILE id="LRMOYh" name="sonicslash_PhaseVocoder.cpp" compile="1" resource="0"
-            file="Source/sonicslash_PhaseVocoder.cpp"/>
-      <FILE id="AP58YZ" name="sonicslash_PhaseVocoder.h" compile="0" resource="0"
-            file="Source/sonicslash_PhaseVocoder.h"/>
-      <FILE id="YSNhxy" name="sonicslash_SoundFile.cpp" compile="1" resource="0"
-            file="Source/sonicslash_SoundFile.cpp"/>
-      <FILE id="XgFJkF" name="sonicslash_SoundFile.h" compile="0" resource="0"
-            file="Source/sonicslash_SoundFile.h"/>
-      <FILE id="Tjjl3o" name="sonicslash_common.h" compile="0" resource="0"
-            file="Source/sonicslash_common.h"/>
       <GROUP id="{80242920-45FD-41ED-A0DD-BDC12769C5D6}" name="Legacy">
         <GROUP id="{ECCC692E-3CDA-0703-EB14-6EB472AFEBED}" name="Math">
           <FILE id="RswBGl" name="FFT.cpp" compile="1" resource="0" file="../Math/FFT.cpp"/>
@@ -174,9 +160,31 @@
         </GROUP>
       </GROUP>
       <FILE id="KiWN2c" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <FILE id="pJgz8z" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="rO10rX" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
+      <FILE id="pJgz8z" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="Tjjl3o" name="sonicslash_common.h" compile="0" resource="0"
+            file="Source/sonicslash_common.h"/>
+      <FILE id="GEv8le" name="sonicslash_Convolve.cpp" compile="1" resource="0"
+            file="Source/sonicslash_Convolve.cpp"/>
+      <FILE id="ITqa1i" name="sonicslash_Convolve.h" compile="0" resource="0"
+            file="Source/sonicslash_Convolve.h"/>
+      <FILE id="LRMOYh" name="sonicslash_PhaseVocoder.cpp" compile="1" resource="0"
+            file="Source/sonicslash_PhaseVocoder.cpp"/>
+      <FILE id="AP58YZ" name="sonicslash_PhaseVocoder.h" compile="0" resource="0"
+            file="Source/sonicslash_PhaseVocoder.h"/>
+      <FILE id="YSNhxy" name="sonicslash_SoundFile.cpp" compile="1" resource="0"
+            file="Source/sonicslash_SoundFile.cpp"/>
+      <FILE id="XgFJkF" name="sonicslash_SoundFile.h" compile="0" resource="0"
+            file="Source/sonicslash_SoundFile.h"/>
+      <FILE id="asFJtK" name="sonicslash_SoundFileReader.cpp" compile="1"
+            resource="0" file="Source/sonicslash_SoundFileReader.cpp"/>
+      <FILE id="rtXJ1E" name="sonicslash_SoundFileReader.h" compile="0" resource="0"
+            file="Source/sonicslash_SoundFileReader.h"/>
+      <FILE id="icdlEc" name="sonicslash_SoundFileWriter.cpp" compile="1"
+            resource="0" file="Source/sonicslash_SoundFileWriter.cpp"/>
+      <FILE id="Ji8VWQ" name="sonicslash_SoundFileWriter.h" compile="0" resource="0"
+            file="Source/sonicslash_SoundFileWriter.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
