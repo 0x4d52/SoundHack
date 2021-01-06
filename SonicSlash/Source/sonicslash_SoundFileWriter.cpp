@@ -36,6 +36,7 @@ bool SoundInfoWriter::open (const File& fileToOpen)
         return false;
     
     file = fileToOpen;
+    samplesWritten = 0;
     
     return true;
 }
@@ -48,6 +49,22 @@ bool SoundInfoWriter::isValid() const
     return true;
 }
     
+int64 SoundInfoWriter::getLengthInSamples() const
+{
+    if (! isValid())
+        return -1;
+    
+    return samplesWritten;
+}
+    
+double SoundInfoWriter::getSampleRate() const
+{
+    if (! isValid())
+        return -1.0;
+
+    return writer->getSampleRate();
+}
+    
 long SoundInfoWriter::writeStereo (long numSamples, float blockL[], float blockR[])
 {
     if (writer == nullptr)
@@ -56,7 +73,10 @@ long SoundInfoWriter::writeStereo (long numSamples, float blockL[], float blockR
     float* ptrs[] = { blockL, blockR };
     
     if (writer->writeFromFloatArrays (ptrs, 2, static_cast<int> (numSamples)))
+    {
+        samplesWritten += numSamples;
         return numSamples;
+    }
     
     return -1;
 }
@@ -69,7 +89,10 @@ long SoundInfoWriter::writeMono (long numSamples, float block[])
     float* ptrs[] = { block };
     
     if (writer->writeFromFloatArrays (ptrs, 1, static_cast<int> (numSamples)))
+    {
+        samplesWritten += numSamples;
         return numSamples;
+    }
 
     return -1;
 }

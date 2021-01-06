@@ -23,10 +23,13 @@ public:
     
     bool setPreferredFormat (SoundFormat format);
     SoundFormat getPreferredFormat() const { return preferredFormat; }
+    double getDuration() const;
     
     virtual bool open (const File& file) = 0;
     virtual bool isWriter() const = 0;
     virtual bool isValid() const = 0;
+    virtual int64 getLengthInSamples() const = 0;
+    virtual double getSampleRate() const = 0;
 
     virtual long readStereo (long numSamples, float blockL[], float blockR[])  { ignoreUnused (numSamples, blockL, blockR); return -1; }
     virtual long readMono (long numSamples, float block[])                     { ignoreUnused (numSamples, block); return -1; }

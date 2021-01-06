@@ -22,6 +22,17 @@ bool SoundInfo::setPreferredFormat (SoundFormat format)
     preferredFormat = format;
     return true;
 }
+    
+double SoundInfo::getDuration() const
+{
+    if (! isValid())
+        return -1.0;
+    
+    const auto sampleRate = getSampleRate();
+    jassert (sampleRate > 0.0); // shouldn't happen
+    
+    return getLengthInSamples() / sampleRate;
+}
 
 //==============================================================================
 

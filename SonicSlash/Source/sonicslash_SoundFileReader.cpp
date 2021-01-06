@@ -44,6 +44,22 @@ bool SoundInfoReader::isValid() const
     return true;
 }
     
+int64 SoundInfoReader::getLengthInSamples() const
+{
+    if (! isValid())
+        return -1;
+    
+    return reader->lengthInSamples;
+}
+    
+double SoundInfoReader::getSampleRate() const
+{
+    if (! isValid())
+        return -1.0;
+
+    return reader->sampleRate;
+}
+    
 long SoundInfoReader::readStereo (long numSamples, float blockL[], float blockR[])
 {
     if (reader == nullptr)

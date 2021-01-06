@@ -14,7 +14,9 @@ public:
     bool isWriter() const override { return false; }
     
     bool isValid() const override;
-    
+    int64 getLengthInSamples() const override;
+    double getSampleRate() const override;
+
     long readStereo (long numSamples, float blockL[], float blockR[]) override;
     long readMono (long numSamples, float block[]) override;
     
