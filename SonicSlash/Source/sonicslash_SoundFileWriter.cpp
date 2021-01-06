@@ -7,7 +7,7 @@ bool SoundInfoWriter::open (const File& fileToOpen)
     file = juce::File();
     writer.reset();
     
-    if (fileToOpen.hasFileExtension ("wav"))
+    if (! fileToOpen.hasFileExtension ("wav"))
         return false;
     
     if (fileToOpen.exists())
