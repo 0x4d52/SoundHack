@@ -13,6 +13,8 @@ public:
     bool open (const File& file) override;
     bool isWriter() const override { return false; }
     
+    bool isValid() const override;
+    
     long readStereo (long numSamples, float blockL[], float blockR[]) override;
     long readMono (long numSamples, float block[]) override;
     

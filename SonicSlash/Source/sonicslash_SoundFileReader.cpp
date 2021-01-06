@@ -12,8 +12,11 @@ bool SoundInfoReader::open (const File& fileToOpen)
     
     reader.reset (manager.createReaderFor (fileToOpen));
     
-    if (reader == nullptr)
+    if (! isValid())
+    {
+        reader.reset();
         return false;
+    }
     
     file = fileToOpen;
     
@@ -21,6 +24,23 @@ bool SoundInfoReader::open (const File& fileToOpen)
     preferredFormat.numberOfChannels = reader->numChannels;
     preferredFormat.bitsPerSample    = reader->bitsPerSample;
 
+    return true;
+}
+    
+bool SoundInfoReader::isValid() const
+{
+    if (reader == nullptr)
+        return false;
+    
+    if (reader->numChannels < 1 || reader->numChannels > 2)
+        return false;
+    
+    if (reader->sampleRate < 1000.0)
+        return false;
+    
+    if (reader->lengthInSamples <= 0)
+        return false;
+    
     return true;
 }
     

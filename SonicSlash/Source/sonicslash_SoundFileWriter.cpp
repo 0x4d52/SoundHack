@@ -40,6 +40,14 @@ bool SoundInfoWriter::open (const File& fileToOpen)
     return true;
 }
     
+bool SoundInfoWriter::isValid() const
+{
+    if (writer == nullptr)
+        return false;
+    
+    return true;
+}
+    
 long SoundInfoWriter::writeStereo (long numSamples, float blockL[], float blockR[])
 {
     if (writer == nullptr)
