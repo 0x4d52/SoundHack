@@ -27,6 +27,11 @@ public:
     virtual bool open (const File& file) = 0;
     virtual bool isWriter() const = 0;
     
+    virtual long readStereo (long numSamples, float blockL[], float blockR[])  { ignoreUnused (numSamples, blockL, blockR); return -1; }
+    virtual long readMono (long numSamples, float block[])                     { ignoreUnused (numSamples, block); return -1; }
+    virtual long writeStereo (long numSamples, float blockL[], float blockR[]) { ignoreUnused (numSamples, blockL, blockR); return -1; }
+    virtual long writeMono (long numSamples, float block[])                    { ignoreUnused (numSamples, block); return -1; }
+    
 protected:
     //==========================================================================
     juce::File file;

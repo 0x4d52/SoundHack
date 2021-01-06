@@ -22,15 +22,20 @@ bool SoundInfoWriter::open (const File& fileToOpen)
             Thread::sleep (1);
     }
     
-    WavAudioFormat wavFormat;
-    wavFormat.cr
+    if (auto *const outputStream = fileToOpen.createOutputStream())
+    {
+        WavAudioFormat wavFormat;
+        
+        writer.reset (wavFormat.createWriterFor (outputStream,
+                                                 preferredFormat.sampleRateToUse,
+                                                 preferredFormat.numberOfChannels,
+                                                 preferredFormat.bitsPerSample, {}, 0));
+    }
+
+    if (writer == nullptr)
+        return false;
     
-//    reader.reset (manager.createReaderFor (fileToOpen));
-//    
-//    if (reader == nullptr)
-//        return false;
-//    
-//    file = fileToOpen;
+    file = fileToOpen;
     
     return true;
 }
